@@ -68,8 +68,10 @@ def create_app():
 
     # Register authentication routes
     from app.routes.auth import auth_bp
-    app.register_blueprint(auth_bp)
     from app.routes.product import product_bp
+    from app.routes.review import review_bp
+    app.register_blueprint(auth_bp)
     app.register_blueprint(product_bp)
+    app.register_blueprint(review_bp)
 
     return app
