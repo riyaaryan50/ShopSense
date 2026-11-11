@@ -48,23 +48,28 @@ def create_app():
             "project": "ShopSense AI"
         })
 
+    
     @app.route("/api/db-health", methods=["GET"])
     def database_health():
         try:
             with db.engine.connect() as connection:
-                connection.execute(text("SELECT 1"))
+                result = connection.execute(text("SELECT 1"))
+                value = result.scalar()
 
             return jsonify({
                 "database": "connected",
-                "status": "healthy"
+                "status": "healthy",
+                "test_result": value
             }), 200
 
-        except Exception:
+        except Exception as e:
             app.logger.exception("Database connection failed")
             return jsonify({
                 "database": "disconnected",
-                "status": "error"
+                "status": "error",
+                "error": str(e)
             }), 500
+
 
     # Register authentication routes
     from app.routes.auth import auth_bp
