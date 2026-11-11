@@ -52,7 +52,8 @@ function Login() {
 
       storage.setItem("access_token", data.access_token);
       storage.setItem("user", JSON.stringify(data.user));
-
+      console.log("Logged-in user:", data.user);
+      window.dispatchEvent(new Event("auth-changed"));
       alert("Login successful!");
 
       navigate("/");

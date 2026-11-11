@@ -60,6 +60,20 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [personalizedProducts, setPersonalizedProducts] = useState([]);
+  const [recommendationLoading, setRecommendationLoading] = useState(false);
+  const [recommendationError, setRecommendationError] = useState("");
+  const [loggedInUser, setLoggedInUser] = useState(() => {
+    try {
+      const user =
+        localStorage.getItem("user") ||
+        sessionStorage.getItem("user");
+
+      return user ? JSON.parse(user) : null;
+    } catch {
+      return null;
+    }
+  });
 
   const { addToCart, wishlist, toggleWishlist } = useCart();
 
@@ -100,6 +114,128 @@ function Home() {
 
     fetchProducts();
   }, []);
+
+const fetchPersonalizedRecommendations = async (user) => {
+  if (!user?.id) {
+    setPersonalizedProducts([]);
+    setRecommendationError("");
+    return;
+  }
+
+  const token =
+    localStorage.getItem("access_token") ||
+    sessionStorage.getItem("access_token");
+
+  if (!token) {
+    setPersonalizedProducts([]);
+    return;
+  }
+
+  try {
+    setRecommendationLoading(true);
+    setRecommendationError("");
+
+    console.log(
+      "Calling recommendation API for user:",
+      user.id
+    );
+
+    const response = await fetch(
+      `http://127.0.0.1:5001/api/personalized/${user.id}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "Unable to fetch recommendations."
+      );
+    }
+
+    const recommendations = (data.recommendations || []).map(
+      (product) => ({
+        ...product,
+        image:
+          localProductImages[product.name] ||
+          product.image_url ||
+          "",
+      })
+    );
+
+    setPersonalizedProducts(recommendations);
+
+  } catch (error) {
+    console.error("Personalized recommendation error:", error);
+    setRecommendationError(error.message);
+  } finally {
+    setRecommendationLoading(false);
+  }
+};
+
+// Fetch recommendations and respond to login/logout
+
+// Fetch recommendations and respond to login/logout/cart/wishlist changes
+  useEffect(() => {
+    // Initial recommendation fetch
+    fetchPersonalizedRecommendations(loggedInUser);
+
+    // Handle login/logout
+    const handleAuthChange = () => {
+      try {
+        const user =
+          localStorage.getItem("user") ||
+          sessionStorage.getItem("user");
+
+        const parsedUser = user ? JSON.parse(user) : null;
+
+        setLoggedInUser(parsedUser);
+      } catch {
+        setLoggedInUser(null);
+      }
+    };
+
+  // Handle cart and wishlist changes
+    const handleRecommendationRefresh = () => {
+      console.log("Recommendation refresh event received!");
+      const user =
+        localStorage.getItem("user") ||
+        sessionStorage.getItem("user");
+
+      const currentUser = user ? JSON.parse(user) : null;
+
+      if (currentUser?.id) {
+        console.log(
+          "Refreshing recommendations for user:",
+          currentUser.id
+        );
+        fetchPersonalizedRecommendations(currentUser);
+      }
+    };
+
+    window.addEventListener("auth-changed", handleAuthChange);
+
+    window.addEventListener(
+      "recommendations-updated",
+      handleRecommendationRefresh
+    );
+
+    return () => {
+      window.removeEventListener("auth-changed", handleAuthChange);
+
+      window.removeEventListener(
+        "recommendations-updated",
+        handleRecommendationRefresh
+      );
+    };
+  }, [loggedInUser?.id]);
+
+
 
   // Search and category filtering
   const filteredProducts = products.filter((product) => {
@@ -273,6 +409,115 @@ function Home() {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* Personalized Recommendations */}
+        <section className="mb-16">
+          <div className="mb-7">
+            <p className="text-purple-600 font-semibold text-sm">
+              POWERED BY TF-IDF + COSINE SIMILARITY
+            </p>
+
+            <h2 className="text-3xl font-bold mt-2">
+              Recommended For You
+            </h2>
+
+            <p className="text-gray-500 mt-2">
+              Products selected based on your shopping interests.
+            </p>
+          </div>
+
+          {!loggedInUser && (
+            <div className="bg-white rounded-2xl p-8 text-center">
+              <Sparkles size={35} className="mx-auto text-purple-500 mb-3" />
+              <h3 className="font-bold text-xl">
+                Log in to see personalized recommendations
+              </h3>
+              <Link
+                to="/login"
+                className="inline-block mt-4 bg-purple-600 text-white px-6 py-3 rounded-xl"
+              >
+                Login
+              </Link>
+            </div>
+          )}
+
+          {loggedInUser && recommendationLoading && (
+            <div className="bg-white rounded-2xl p-8 text-center text-purple-600">
+              Finding products you may like...
+            </div>
+          )}
+
+          {loggedInUser && recommendationError && (
+            <div className="bg-white rounded-2xl p-8 text-center">
+              <p className="text-red-500">{recommendationError}</p>
+              <button
+                onClick={() =>
+                    fetchPersonalizedRecommendations(loggedInUser)
+                }
+                className="mt-4 bg-purple-600 text-white px-5 py-2 rounded-xl"
+              >
+                Try Again
+              </button>
+              </div>
+            )}
+
+            {loggedInUser &&
+              !recommendationLoading &&
+              !recommendationError &&
+              personalizedProducts.length === 0 && (
+                <div className="bg-white rounded-2xl p-8 text-center">
+                  <p className="text-gray-600">
+                    Explore products, add items to your cart or wishlist,
+                    and we'll personalize your recommendations.
+                  </p>
+                </div>
+            )}
+
+            {loggedInUser &&
+              !recommendationLoading &&
+              personalizedProducts.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+                  {personalizedProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition"
+                    >
+                      <Link to={`/product/${product.id}`}>
+                        {product.image ? (
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-full h-44 object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-44 bg-purple-50 flex items-center justify-center">
+                            <ShoppingCart size={40} className="text-purple-400" />
+                          </div>
+                        )}
+
+                        <div className="p-4">
+                          <p className="text-purple-600 text-xs font-semibold uppercase">
+                            {product.category}
+                          </p>
+
+                          <h3 className="font-bold mt-2">
+                            {product.name}
+                          </h3>
+
+                          <p className="text-sm text-gray-500 mt-2 line-clamp-2">
+                            {product.description}
+                          </p>
+
+                          <p className="font-bold text-lg mt-3">
+                            ₹{Number(product.price).toLocaleString("en-IN")}
+                          </p>
+                        </div>
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              )}
         </section>
 
         {/* Categories */}

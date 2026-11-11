@@ -3,6 +3,7 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
 } from "react";
 
 const CartContext = createContext();
@@ -20,7 +21,7 @@ async function apiRequest(url, options = {}) {
   const token = getToken();
 
   if (!token) {
-    throw new Error("Please log in to use your cart.");
+    throw new Error("Please log in to continue.");
   }
 
   const response = await fetch(url, {
@@ -35,7 +36,9 @@ async function apiRequest(url, options = {}) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Something went wrong.");
+    throw new Error(
+      data.error || data.message || "Something went wrong."
+    );
   }
 
   return data;
@@ -45,27 +48,33 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
-  // Fetch saved cart from Flask backend
+  // Fetch product details
+  const fetchProducts = async () => {
+    const response = await fetch(`${API_URL}/products/`);
+
+    if (!response.ok) {
+      throw new Error("Unable to fetch product details.");
+    }
+
+    const data = await response.json();
+
+    return Array.isArray(data) ? data : data.products || [];
+  };
+
+  // =========================
+  // CART FUNCTIONS
+  // =========================
+
   const refreshCart = async () => {
+    if (!getToken()) {
+      setCart([]);
+      return [];
+    }
+
     try {
       const data = await apiRequest(`${API_URL}/cart/`);
+      const products = await fetchProducts();
 
-      // Fetch product details for images and categories
-      const productResponse = await fetch(
-        `${API_URL}/products/`
-      );
-
-      if (!productResponse.ok) {
-        throw new Error("Unable to fetch product details.");
-      }
-
-      const productData = await productResponse.json();
-
-      const products = Array.isArray(productData)
-        ? productData
-        : productData.products || [];
-
-      // Convert backend cart items into frontend format
       const updatedCart = (data.items || []).map((item) => {
         const product = products.find(
           (p) => Number(p.id) === Number(item.product_id)
@@ -84,7 +93,6 @@ export function CartProvider({ children }) {
       });
 
       setCart(updatedCart);
-
       return updatedCart;
     } catch (error) {
       console.error("Error fetching cart:", error.message);
@@ -92,7 +100,7 @@ export function CartProvider({ children }) {
     }
   };
 
-  // Add product to backend cart
+
   const addToCart = async (product) => {
     try {
       await apiRequest(`${API_URL}/cart/`, {
@@ -104,13 +112,19 @@ export function CartProvider({ children }) {
       });
 
       await refreshCart();
+
+      // Notify homepage to refresh personalized recommendations
+      window.dispatchEvent(
+        new Event("recommendations-updated")
+      );
+
     } catch (error) {
       console.error("Error adding product:", error.message);
       alert(error.message);
     }
   };
 
-  // Update product quantity
+
   const updateQuantity = async (cartItemId, change) => {
     try {
       const item = cart.find(
@@ -140,7 +154,6 @@ export function CartProvider({ children }) {
     }
   };
 
-  // Remove product from backend cart
   const removeFromCart = async (cartItemId) => {
     try {
       await apiRequest(`${API_URL}/cart/${cartItemId}`, {
@@ -154,22 +167,101 @@ export function CartProvider({ children }) {
     }
   };
 
-  // Existing wishlist functionality
-  const toggleWishlist = (product) => {
-    setWishlist((prevWishlist) => {
-      const exists = prevWishlist.some(
-        (item) => item.id === product.id
-      );
+  // =========================
+  // WISHLIST FUNCTIONS
+  // =========================
 
-      if (exists) {
-        return prevWishlist.filter(
-          (item) => item.id !== product.id
-        );
+  const refreshWishlist = async () => {
+    if (!getToken()) {
+      setWishlist([]);
+      return [];
+    }
+
+    try {
+      const data = await apiRequest(`${API_URL}/wishlist/`);
+      const products = await fetchProducts();
+
+      const updatedWishlist = (data.wishlist || [])
+        .map((item) => {
+          const product = products.find(
+            (p) => Number(p.id) === Number(item.product_id)
+          );
+
+          if (!product) return null;
+
+          return {
+            ...product,
+            wishlist_item_id: item.wishlist_item_id,
+          };
+        })
+        .filter(Boolean);
+
+      setWishlist(updatedWishlist);
+      return updatedWishlist;
+    } catch (error) {
+      console.error("Error fetching wishlist:", error.message);
+      return null;
+    }
+  };
+
+  const toggleWishlist = async (product) => {
+    try {
+      if (!getToken()) {
+        alert("Please log in to use your wishlist.");
+        return;
       }
 
-      return [...prevWishlist, product];
-    });
+      const existingItem = wishlist.find(
+        (item) => Number(item.id) === Number(product.id)
+      );
+
+      if (existingItem) {
+        await apiRequest(
+          `${API_URL}/wishlist/${existingItem.wishlist_item_id}`,
+          { method: "DELETE" }
+        );
+      } else {
+        await apiRequest(`${API_URL}/wishlist/`, {
+          method: "POST",
+          body: JSON.stringify({
+            product_id: product.id,
+          }),
+        });
+      }
+
+      await refreshWishlist();
+      window.dispatchEvent(
+        new Event("recommendations-updated")
+      );
+    } catch (error) {
+      console.error("Wishlist error:", error.message);
+      alert(error.message);
+    }
   };
+
+  // =========================
+  // AUTHENTICATION SYNC
+  // =========================
+
+  useEffect(() => {
+    const syncUserData = () => {
+      if (getToken()) {
+        refreshCart();
+        refreshWishlist();
+      } else {
+        setCart([]);
+        setWishlist([]);
+      }
+    };
+
+    syncUserData();
+
+    window.addEventListener("auth-changed", syncUserData);
+
+    return () => {
+      window.removeEventListener("auth-changed", syncUserData);
+    };
+  }, []);
 
   return (
     <CartContext.Provider
@@ -181,6 +273,7 @@ export function CartProvider({ children }) {
         removeFromCart,
         toggleWishlist,
         refreshCart,
+        refreshWishlist,
       }}
     >
       {children}
