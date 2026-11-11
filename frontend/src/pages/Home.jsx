@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Search,
@@ -7,11 +7,11 @@ import {
   Heart,
   Sparkles,
   ArrowRight,
-  Star,
   Headphones,
-  Watch,
   Shirt,
-  Laptop,
+  Dumbbell,
+  BookOpen,
+  House,
   Bot,
 } from "lucide-react";
 
@@ -19,89 +19,95 @@ import Navbar from "../components/Navbar";
 import { useCart } from "../context/CartContext";
 import { logInteraction } from "../services/interactionService";
 
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    category: "Electronics",
-    price: 2499,
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600",
-    description: "Premium sound with comfortable wireless listening.",
-  },
-  {
-    id: 2,
-    name: "Smart Watch",
-    category: "Electronics",
-    price: 3999,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600",
-    description: "Track your fitness and stay connected.",
-  },
-  {
-    id: 3,
-    name: "Running Shoes",
-    category: "Fashion",
-    price: 2999,
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600",
-    description: "Lightweight shoes for everyday comfort.",
-  },
-  {
-    id: 4,
-    name: "Travel Backpack",
-    category: "Accessories",
-    price: 1499,
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600",
-    description: "A stylish backpack for your daily essentials.",
-  },
-  {
-    id: 5,
-    name: "Bluetooth Speaker",
-    category: "Electronics",
-    price: 1999,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600",
-    description: "Enjoy powerful sound wherever you go.",
-  },
-  {
-    id: 6,
-    name: "Classic Sunglasses",
-    category: "Fashion",
-    price: 1299,
-    rating: 4.4,
-    image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600",
-    description: "A timeless style for sunny days.",
-  },
-  {
-    id: 7,
-    name: "Laptop",
-    category: "Electronics",
-    price: 54999,
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600",
-    description: "Powerful performance for work and creativity.",
-  },
-];
+const API_URL = "http://127.0.0.1:5000/api/products/";
+
+// Local product images stored in frontend/public/images/
+const localProductImages = {
+  "Mechanical Keyboard": "/images/mechanical-keyboard.jpg",
+  "Wireless Mouse": "/images/wireless-mouse.jpg",
+  "Cotton T-Shirt": "/images/cotton-tshirt.jpg",
+  "Table Lamp": "/images/table-lamp.jpg",
+  "Non Stick Cookware Set": "/images/non-stick-cookware-set.jpg",
+  "Mixer Grinder": "/images/mixer-grinder.jpg",
+  "The Alchemist": "/images/the-alchemist.jpg",
+  "Cricket Bat": "/images/cricket-bat.jpg",
+  "Electric Kettle": "/images/electric-kettle.jpg",
+  "Leather Backpack": "/images/leather-backpack.jpg",
+  "Smartphone": "/images/smartphone.jpg",
+  "Atomic Habits": "/images/atomic-habits.jpg",
+  "Rich Dad Poor Dad": "/images/rich-dad-poor-dad.jpg",
+  "Yoga Mat": "/images/yoga-mat.jpg",
+  "Denim Jeans": "/images/denim-jeans.jpg",
+  "Football": "/images/football.jpg",
+  "Wireless Headphones": "/images/wireless-headphones.jpg",
+  "Dumbbell Set": "/images/dumbbell-set.jpg",
+  "Smart Watch": "/images/smart-watch.jpg",
+  "Running Shoes": "/images/running-shoes.jpg",
+};
 
 const categories = [
   { name: "All", icon: Sparkles },
   { name: "Electronics", icon: Headphones },
   { name: "Fashion", icon: Shirt },
-  { name: "Accessories", icon: Watch },
+  { name: "Home & Kitchen", icon: House },
+  { name: "Sports", icon: Dumbbell },
+  { name: "Books", icon: BookOpen },
 ];
 
 function Home() {
+  const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const { addToCart, wishlist, toggleWishlist } = useCart();
 
+  // Fetch products from Flask backend
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await fetch(API_URL);
+
+        if (!response.ok) {
+          throw new Error("Unable to fetch products.");
+        }
+
+        const data = await response.json();
+
+        // Connect backend products with local images
+        const formattedProducts = data.map((product) => ({
+          ...product,
+          image:
+            localProductImages[product.name] ||
+            product.image_url ||
+            "",
+        }));
+
+        setProducts(formattedProducts);
+      } catch (err) {
+        console.error("Product fetching error:", err);
+        setError(
+          "Could not load products. Please check whether the backend is running."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Search and category filtering
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    const query = searchQuery.toLowerCase();
+
+    const matchesSearch =
+      product.name.toLowerCase().includes(query) ||
+      (product.description || "").toLowerCase().includes(query);
 
     const matchesCategory =
       selectedCategory === "All" ||
@@ -176,7 +182,9 @@ function Home() {
 
             <div className="flex gap-8 mt-10">
               <div>
-                <h3 className="text-2xl font-bold">500+</h3>
+                <h3 className="text-2xl font-bold">
+                  {products.length}
+                </h3>
                 <p className="text-sm text-gray-500">Products</p>
               </div>
 
@@ -199,11 +207,20 @@ function Home() {
           <div className="relative">
             <div className="absolute inset-5 bg-purple-300 blur-3xl opacity-30 rounded-full" />
 
-            <img
-              src="https://images.unsplash.com/photo-1607082349566-187342175e2f?w=1000"
-              alt="Online shopping"
-              className="relative w-full h-[350px] md:h-[480px] object-cover rounded-3xl shadow-xl"
-            />
+            <div className="relative w-full h-[350px] md:h-[480px] bg-gradient-to-br from-purple-200 to-indigo-200 rounded-3xl shadow-xl flex items-center justify-center overflow-hidden">
+              <div className="text-center">
+                <ShoppingCart
+                  size={100}
+                  className="mx-auto text-purple-600"
+                />
+                <p className="text-purple-800 font-bold text-2xl mt-5">
+                  ShopSense AI
+                </p>
+                <p className="text-purple-700 mt-2">
+                  Smart Shopping Experience
+                </p>
+              </div>
+            </div>
 
             <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-4 shadow-lg">
               <div className="flex items-center gap-3">
@@ -270,7 +287,7 @@ function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {categories.map((category) => {
               const Icon = category.icon;
 
@@ -284,20 +301,20 @@ function Home() {
                       behavior: "smooth",
                     });
                   }}
-                  className={`p-6 rounded-2xl border text-left transition ${
+                  className={`p-5 rounded-2xl border text-left transition ${
                     selectedCategory === category.name
                       ? "bg-purple-600 text-white border-purple-600"
                       : "bg-white border-gray-100 hover:border-purple-300"
                   }`}
                 >
-                  <Icon size={28} className="mb-4" />
+                  <Icon size={26} className="mb-4" />
 
-                  <h3 className="font-bold">
+                  <h3 className="font-bold text-sm">
                     {category.name}
                   </h3>
 
                   <p
-                    className={`text-sm mt-1 ${
+                    className={`text-xs mt-1 ${
                       selectedCategory === category.name
                         ? "text-purple-100"
                         : "text-gray-400"
@@ -343,6 +360,7 @@ function Home() {
             </div>
           </div>
 
+          {/* Category Filters */}
           <div className="flex flex-wrap gap-2 mb-8">
             {categories.map((category) => (
               <button
@@ -359,7 +377,30 @@ function Home() {
             ))}
           </div>
 
-          {filteredProducts.length === 0 ? (
+          {/* Loading State */}
+          {loading && (
+            <div className="bg-white rounded-2xl p-12 text-center">
+              <p className="text-purple-600 font-semibold">
+                Loading products...
+              </p>
+            </div>
+          )}
+
+          {/* Error State */}
+          {!loading && error && (
+            <div className="bg-white rounded-2xl p-12 text-center">
+              <p className="text-red-500 font-medium">{error}</p>
+              <button
+                onClick={() => window.location.reload()}
+                className="mt-4 bg-purple-600 text-white px-6 py-2 rounded-xl"
+              >
+                Try Again
+              </button>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {!loading && !error && filteredProducts.length === 0 && (
             <div className="bg-white rounded-2xl p-12 text-center">
               <Search
                 size={35}
@@ -374,91 +415,102 @@ function Home() {
                 Try another search or category.
               </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filteredProducts.map((product) => {
-                const isWishlisted = wishlist.some(
-                  (item) => item.id === product.id
-                );
+          )}
 
-                return (
-                  <div
-                    key={product.id}
-                    className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition group"
-                  >
-                    <div className="relative bg-gray-50">
-                      <Link to={`/product/${product.id}`}>
-                        <img
-                          src={product.image}
-                          alt={product.name}
-                          className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
-                        />
-                      </Link>
+          {/* Product Cards */}
+          {!loading && !error && filteredProducts.length > 0 && (
+            <>
+              <p className="text-sm text-gray-500 mb-5">
+                Showing {filteredProducts.length} of {products.length} products
+              </p>
 
-                      <button
-                        onClick={() => handleWishlist(product)}
-                        className="absolute top-4 right-4 bg-white rounded-full p-3 shadow-md"
-                        aria-label="Toggle wishlist"
-                      >
-                        <Heart
-                          size={19}
-                          className={
-                            isWishlisted
-                              ? "fill-red-500 text-red-500"
-                              : "text-gray-600"
-                          }
-                        />
-                      </button>
-                    </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {filteredProducts.map((product) => {
+                  const isWishlisted = wishlist.some(
+                    (item) => item.id === product.id
+                  );
 
-                    <div className="p-5">
-                      <p className="text-purple-600 text-xs font-semibold uppercase tracking-wide">
-                        {product.category}
-                      </p>
-
-                      <Link to={`/product/${product.id}`}>
-                        <h3 className="font-bold text-lg mt-2 hover:text-purple-600">
-                          {product.name}
-                        </h3>
-                      </Link>
-
-                      <p className="text-sm text-gray-500 mt-2">
-                        {product.description}
-                      </p>
-
-                      <div className="flex items-center gap-1 mt-3 text-sm">
-                        <Star
-                          size={15}
-                          className="fill-yellow-400 text-yellow-400"
-                        />
-
-                        <span className="font-semibold">
-                          {product.rating}
-                        </span>
-
-                        <span className="text-gray-400">
-                          (Demo rating)
-                        </span>
-                      </div>
-
-                      <div className="flex justify-between items-center mt-5">
-                        <span className="text-xl font-bold">
-                          ₹{product.price.toLocaleString("en-IN")}
-                        </span>
+                  return (
+                    <div
+                      key={product.id}
+                      className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition group"
+                    >
+                      <div className="relative bg-gray-50">
+                        <Link to={`/product/${product.id}`}>
+                          {product.image ? (
+                            <img
+                              src={product.image}
+                              alt={product.name}
+                              onError={(e) => {
+                                e.currentTarget.onerror = null;
+                                e.currentTarget.style.display = "none";
+                              }}
+                              className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
+                            />
+                          ) : (
+                            <div className="w-full h-56 flex items-center justify-center bg-purple-50 text-purple-400">
+                              <ShoppingCart size={45} />
+                            </div>
+                          )}
+                        </Link>
 
                         <button
-                          onClick={() => handleAddToCart(product)}
-                          className="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-xl"
-                          aria-label="Add to cart"
+                          onClick={() => handleWishlist(product)}
+                          className="absolute top-4 right-4 bg-white rounded-full p-3 shadow-md"
+                          aria-label="Toggle wishlist"
                         >
-                          <ShoppingCart size={19} />
+                          <Heart
+                            size={19}
+                            className={
+                              isWishlisted
+                                ? "fill-red-500 text-red-500"
+                                : "text-gray-600"
+                            }
+                          />
                         </button>
                       </div>
+
+                      <div className="p-5">
+                        <p className="text-purple-600 text-xs font-semibold uppercase tracking-wide">
+                          {product.category}
+                        </p>
+
+                        <Link to={`/product/${product.id}`}>
+                          <h3 className="font-bold text-lg mt-2 hover:text-purple-600">
+                            {product.name}
+                          </h3>
+                        </Link>
+
+                        <p className="text-sm text-gray-500 mt-2">
+                          {product.description}
+                        </p>
+
+                        <p className="text-xs text-gray-400 mt-3">
+                          {product.stock > 0
+                            ? `${product.stock} in stock`
+                            : "Out of stock"}
+                        </p>
+
+                        <div className="flex justify-between items-center mt-5">
+                          <span className="text-xl font-bold">
+                            ₹{Number(product.price).toLocaleString("en-IN")}
+                          </span>
+
+                          <button
+                            onClick={() => handleAddToCart(product)}
+                            disabled={product.stock <= 0}
+                            className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white p-3 rounded-xl"
+                            aria-label="Add to cart"
+                          >
+                            <ShoppingCart size={19} />
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            </>
           )}
         </section>
       </main>

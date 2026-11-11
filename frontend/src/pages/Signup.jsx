@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Sparkles,
   User,
@@ -21,20 +21,66 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSignup = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      setError("Passwords do not match!");
       return;
     }
 
-    if (password.length < 6) {
-      alert("Password must contain at least 6 characters.");
+    if (password.length < 8) {
+      setError("Password must contain at least 8 characters.");
       return;
     }
 
-    alert("Signup authentication will be connected soon!");
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/auth/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.trim(),
+            email: email.trim(),
+            password: password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Registration failed.");
+      }
+
+      setSuccess("Registration successful! Redirecting to Login...");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+
+    } catch (err) {
+      setError(
+        err.message === "Failed to fetch"
+          ? "Cannot connect to the server. Please check if the backend is running."
+          : err.message
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,7 +136,6 @@ function Signup() {
 
       {/* Right Side */}
       <div className="flex items-center justify-center px-6 py-12">
-
         <div className="w-full max-w-md">
 
           <Link to="/" className="lg:hidden flex items-center gap-2 mb-10">
@@ -179,7 +224,7 @@ function Signup() {
                 <input
                   type={showPassword ? "text" : "password"}
                   required
-                  minLength={6}
+                  minLength={8}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Create a password"
@@ -227,11 +272,25 @@ function Signup() {
               </div>
             </div>
 
+            {error && (
+              <p className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+                {error}
+              </p>
+            )}
+
+            {success && (
+              <p className="text-green-700 text-sm bg-green-50 p-3 rounded-lg">
+                {success}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
+              disabled={loading}
+              className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
             >
-              Create Account <ArrowRight size={19} />
+              {loading ? "Creating Account..." : "Create Account"}
+              {!loading && <ArrowRight size={19} />}
             </button>
 
           </form>

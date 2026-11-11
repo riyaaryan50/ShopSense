@@ -16,13 +16,55 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    alert("Login authentication will be connected soon!");
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:5000/api/auth/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email.trim(),
+            password: password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed. Please try again.");
+      }
+
+      // Store JWT and user details
+      const storage = rememberMe ? localStorage : sessionStorage;
+
+      storage.setItem("access_token", data.access_token);
+      storage.setItem("user", JSON.stringify(data.user));
+
+      alert("Login successful!");
+
+      navigate("/");
+    } catch (err) {
+      setError(
+        err.message === "Failed to fetch"
+          ? "Cannot connect to the server. Please check if the backend is running."
+          : err.message
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,9 +80,7 @@ function Login() {
           <div className="bg-white/20 p-3 rounded-xl">
             <Sparkles size={27} />
           </div>
-          <span className="text-2xl font-bold">
-            ShopSense AI
-          </span>
+          <span className="text-2xl font-bold">ShopSense AI</span>
         </Link>
 
         <div className="relative max-w-lg">
@@ -80,7 +120,6 @@ function Login() {
 
       {/* Right Side */}
       <div className="flex items-center justify-center px-6 py-12">
-
         <div className="w-full max-w-md">
 
           <Link to="/" className="lg:hidden flex items-center gap-2 mb-12">
@@ -181,11 +220,19 @@ function Login() {
               </button>
             </div>
 
+            {error && (
+              <p className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
+                {error}
+              </p>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
+              disabled={loading}
+              className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
             >
-              Login <ArrowRight size={19} />
+              {loading ? "Logging in..." : "Login"}
+              {!loading && <ArrowRight size={19} />}
             </button>
 
           </form>

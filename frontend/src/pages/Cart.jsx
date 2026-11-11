@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import {
@@ -13,10 +14,15 @@ import {
 } from "lucide-react";
 
 function Cart() {
-  const { cart, removeFromCart, updateQuantity } = useCart();
+  const { cart, removeFromCart, updateQuantity, refreshCart } = useCart();
+
+  // Load cart from Flask backend whenever this page opens
+  useEffect(() => {
+    refreshCart();
+  }, []);
 
   const totalAmount = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
+    (total, item) => total + Number(item.price) * item.quantity,
     0
   );
 
@@ -103,11 +109,17 @@ function Cart() {
 
                   {/* Product Image */}
                   <div className="bg-purple-50 rounded-xl p-2 shrink-0">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full sm:w-28 h-36 sm:h-28 object-contain rounded-lg"
-                    />
+                    {item.image ? (
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-full sm:w-28 h-36 sm:h-28 object-contain rounded-lg"
+                      />
+                    ) : (
+                      <div className="w-full sm:w-28 h-36 sm:h-28 flex items-center justify-center">
+                        <ShoppingBag size={40} className="text-purple-300" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Product Information */}
@@ -122,7 +134,7 @@ function Cart() {
                     </h3>
 
                     <p className="text-purple-600 font-bold text-lg mt-2">
-                      ₹{item.price.toLocaleString("en-IN")}
+                      ₹{Number(item.price).toLocaleString("en-IN")}
                     </p>
 
                     {/* Quantity Controls */}
@@ -168,7 +180,7 @@ function Cart() {
                       </p>
 
                       <p className="font-bold text-gray-900 text-lg mt-1">
-                        ₹{(item.price * item.quantity).toLocaleString("en-IN")}
+                        ₹{(Number(item.price) * item.quantity).toLocaleString("en-IN")}
                       </p>
                     </div>
 
