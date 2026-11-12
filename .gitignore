@@ -15,3 +15,9 @@ node_modules/
 
 # Frontend build files
 frontend/dist/
+
+# Local user interaction data
+recommendation_model/interactions.csv
+
+# Backup files
+recommendation_model/recommender_backup.py

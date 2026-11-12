@@ -21,37 +21,17 @@ import { logInteraction } from "../services/interactionService";
 
 const API_URL = "http://127.0.0.1:5000/api/products/";
 
-// Local product images stored in frontend/public/images/
-const localProductImages = {
-  "Mechanical Keyboard": "/images/mechanical-keyboard.jpg",
-  "Wireless Mouse": "/images/wireless-mouse.jpg",
-  "Cotton T-Shirt": "/images/cotton-tshirt.jpg",
-  "Table Lamp": "/images/table-lamp.jpg",
-  "Non Stick Cookware Set": "/images/non-stick-cookware-set.jpg",
-  "Mixer Grinder": "/images/mixer-grinder.jpg",
-  "The Alchemist": "/images/the-alchemist.jpg",
-  "Cricket Bat": "/images/cricket-bat.jpg",
-  "Electric Kettle": "/images/electric-kettle.jpg",
-  "Leather Backpack": "/images/leather-backpack.jpg",
-  "Smartphone": "/images/smartphone.jpg",
-  "Atomic Habits": "/images/atomic-habits.jpg",
-  "Rich Dad Poor Dad": "/images/rich-dad-poor-dad.jpg",
-  "Yoga Mat": "/images/yoga-mat.jpg",
-  "Denim Jeans": "/images/denim-jeans.jpg",
-  "Football": "/images/football.jpg",
-  "Wireless Headphones": "/images/wireless-headphones.jpg",
-  "Dumbbell Set": "/images/dumbbell-set.jpg",
-  "Smart Watch": "/images/smart-watch.jpg",
-  "Running Shoes": "/images/running-shoes.jpg",
-};
-
 const categories = [
   { name: "All", icon: Sparkles },
-  { name: "Electronics", icon: Headphones },
-  { name: "Fashion", icon: Shirt },
-  { name: "Home & Kitchen", icon: House },
-  { name: "Sports", icon: Dumbbell },
-  { name: "Books", icon: BookOpen },
+  { name: "Laptops", icon: Bot },
+  { name: "Tablets", icon: BookOpen },
+  { name: "Smartphones", icon: Headphones },
+  { name: "Audio", icon: Headphones },
+  { name: "Computer Accessories", icon: House },
+  { name: "Study Essentials", icon: BookOpen },
+  { name: "Hostel Essentials", icon: House },
+  { name: "Backpacks", icon: Shirt },
+  { name: "Storage & Data", icon: Dumbbell },
 ];
 
 function Home() {
@@ -95,10 +75,7 @@ function Home() {
         // Connect backend products with local images
         const formattedProducts = data.map((product) => ({
           ...product,
-          image:
-            localProductImages[product.name] ||
-            product.image_url ||
-            "",
+          image: product.image_url || "",
         }));
 
         setProducts(formattedProducts);
@@ -161,10 +138,7 @@ const fetchPersonalizedRecommendations = async (user) => {
     const recommendations = (data.recommendations || []).map(
       (product) => ({
         ...product,
-        image:
-          localProductImages[product.name] ||
-          product.image_url ||
-          "",
+        image: product.image_url || "",
       })
     );
 
@@ -720,20 +694,22 @@ const fetchPersonalizedRecommendations = async (user) => {
                           {product.category}
                         </p>
 
+                        {product.brand && (
+                          <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
+                        )}
+
                         <Link to={`/product/${product.id}`}>
                           <h3 className="font-bold text-lg mt-2 hover:text-purple-600">
                             {product.name}
                           </h3>
                         </Link>
 
-                        <p className="text-sm text-gray-500 mt-2">
+                        <p className="text-sm text-gray-500 mt-2 line-clamp-3">
                           {product.description}
                         </p>
 
                         <p className="text-xs text-gray-400 mt-3">
-                          {product.stock > 0
-                            ? `${product.stock} in stock`
-                            : "Out of stock"}
+                          Check seller availability before purchase
                         </p>
 
                         <div className="flex justify-between items-center mt-5">

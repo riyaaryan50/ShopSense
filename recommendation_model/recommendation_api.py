@@ -112,10 +112,21 @@ def personalized_recommendations(user_id):
 
     try:
 
+        weight_mode = request.args.get(
+            "weight_mode",
+            default="fuzzy"
+        ).lower()
+
+        if weight_mode not in ("fixed", "fuzzy"):
+            return jsonify({
+                "error": "weight_mode must be 'fixed' or 'fuzzy'"
+            }), 400
+
         recommendations = recommender.recommend_for_user(
             user_id=user_id,
             token=token.split(" ", 1)[1],
-            top_n=5
+            top_n=5,
+            weight_mode=weight_mode
         )
 
         return jsonify({

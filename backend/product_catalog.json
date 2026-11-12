@@ -1,0 +1,510 @@
+[
+  {
+    "id": 2,
+    "name": "Lenovo IdeaPad Slim 3 15AMN8 (82XQ01S3IN)",
+    "brand": "Lenovo",
+    "category": "Laptops",
+    "price": 60490,
+    "description": "A practical everyday laptop for college coursework, online classes, coding practice and document work. The Ryzen 3 7320U processor and 8GB LPDDR5 memory handle common student workloads, while the 512GB NVMe SSD keeps boot times and file access responsive. Its 15.6-inch Full HD anti-glare screen gives room for split-screen notes and research. This configuration has soldered memory, so choose the RAM capacity carefully before purchase.",
+    "image_url": "https://download.lenovo.com/images/ProdImageLaptops/ideapad_slim3.jpg",
+    "marketplace": "Lenovo India",
+    "product_url": "https://www.lenovo.com/in/en/p/laptops/ideapad/ideapad-s-series/ideapad-slim-3-gen-8-15-inch-amd/82xq01s3in",
+    "marketplace_links": {
+      "Lenovo India": "https://www.lenovo.com/in/en/p/laptops/ideapad/ideapad-s-series/ideapad-slim-3-gen-8-15-inch-amd/82xq01s3in",
+      "Bajaj Finserv": "https://www.bajajfinserv.in/bmall/lenovo-ideapad-slim-3-amd-ryzen-3-8-gb-ram-512-gb-ssd-win-11-15-6-inch-laptop-arctic-grey-82xq01s3in/p/29185"
+    },
+    "specifications": {
+      "model": "82XQ01S3IN / 15AMN8",
+      "processor": "AMD Ryzen 3 7320U, 4 cores / 8 threads",
+      "memory": "8GB LPDDR5-5500 (soldered; not upgradeable)",
+      "storage": "512GB M.2 PCIe NVMe SSD",
+      "display": "15.6-inch Full HD (1920 × 1080), anti-glare",
+      "graphics": "Integrated AMD Radeon 610M",
+      "operating_system": "Windows 11 Home",
+      "battery": "47Wh",
+      "wireless": "Wi-Fi 6, Bluetooth",
+      "weight": "Approx. 1.62kg",
+      "price_note": "Indicative retailer price snapshot; confirm the live price and selected configuration before checkout."
+    }
+  },
+  {
+    "id": 3,
+    "name": "HP 15s (15-fc0029AU, Ryzen 5)",
+    "brand": "HP",
+    "category": "Laptops",
+    "price": 59980,
+    "description": "A thin-and-light 15.6-inch laptop suited to assignments, browsing, video lectures, spreadsheets and beginner programming. The AMD Ryzen 5 7520U processor is paired with 8GB LPDDR5 memory and a 512GB SSD. The Full HD anti-glare panel is comfortable for everyday study, and Windows 11 with Microsoft Office support makes it useful for common college tasks. Check the exact SKU and RAM configuration on the seller page before ordering.",
+    "image_url": "https://lsmedia.linker-cdn.net/266980/2023/12264293.jpg?height=1125&width=1200",
+    "marketplace": "Flipkart",
+    "product_url": "https://www.flipkart.com/hp-15s-amd-ryzen-5-quad-core-7520u-8-gb-512-gb-ssd-windows-11-home-15-fc0029au-thin-light-laptop/p/itm33d61a12623b2",
+    "marketplace_links": {
+      "Flipkart": "https://www.flipkart.com/hp-15s-amd-ryzen-5-quad-core-7520u-8-gb-512-gb-ssd-windows-11-home-15-fc0029au-thin-light-laptop/p/itm33d61a12623b2",
+      "HP India": "https://www.hp.com/in-en/shop/"
+    },
+    "specifications": {
+      "model": "15-fc0029AU",
+      "processor": "AMD Ryzen 5 7520U, 4 cores",
+      "memory": "8GB LPDDR5",
+      "storage": "512GB SSD",
+      "display": "15.6-inch Full HD (1920 × 1080), anti-glare",
+      "graphics": "Integrated AMD Radeon Graphics",
+      "operating_system": "Windows 11 Home",
+      "battery": "3-cell, 41Wh (configuration dependent)",
+      "weight": "Approx. 1.69kg",
+      "price_note": "Flipkart listing price captured as an indicative snapshot; offers and seller may change."
+    }
+  },
+  {
+    "id": 4,
+    "name": "Samsung Galaxy Tab A9 Wi-Fi (4GB/64GB, SM-X110)",
+    "brand": "Samsung",
+    "category": "Tablets",
+    "price": 11099,
+    "description": "A compact Android tablet for reading PDFs, attending online classes, watching recorded lectures and taking notes with a compatible third-party stylus. The 8.7-inch display is easy to carry between classrooms and hostel rooms. Its expandable storage is useful for keeping lecture videos and study files offline. This is the Wi-Fi 4GB/64GB configuration; verify the model code because LTE and memory variants are sold separately.",
+    "image_url": "https://storage.alifshop.tj/media/images/alifshop/20039/planshet-samsung-galaxy-tab-a9-4-64-gb-seryy-9907-1703675122598.png",
+    "marketplace": "Amazon India",
+    "product_url": "https://www.amazon.in/Samsung-Galaxy-Tab-A9-Expandable/dp/B0CJ37223B",
+    "marketplace_links": {
+      "Amazon India": "https://www.amazon.in/Samsung-Galaxy-Tab-A9-Expandable/dp/B0CJ37223B",
+      "JioMart": "https://www.jiomart.com/product/samsung-galaxy-tab-a9-2210-cm-87-inch-display-grayram-4-gb-rom-64-gb-expandable-wi-fi4g-tablet-gray-mi951f-19647073"
+    },
+    "specifications": {
+      "model": "SM-X110 (Wi-Fi)",
+      "display": "8.7-inch TFT, 1340 × 800",
+      "processor": "MediaTek Helio G99",
+      "memory": "4GB RAM",
+      "storage": "64GB internal; microSD expansion supported",
+      "rear_camera": "8MP",
+      "front_camera": "2MP",
+      "battery": "5100mAh",
+      "operating_system": "Android (version may vary by update)",
+      "audio": "Dual speakers with Dolby Atmos",
+      "price_note": "Indicative JioMart/Amazon price snapshot; confirm storage and Wi-Fi/LTE variant."
+    }
+  },
+  {
+    "id": 5,
+    "name": "Samsung Galaxy Tab S9 FE Wi-Fi (6GB/128GB)",
+    "brand": "Samsung",
+    "category": "Tablets",
+    "price": 44999,
+    "description": "A more capable study tablet for handwritten notes, PDF annotation, presentations and multitasking. The included S Pen makes it suitable for marking lecture slides and sketching diagrams without buying a separate stylus. Its 10.9-inch 90Hz display, Exynos processor and IP68-rated design make it a versatile option for students who want a tablet for both study and entertainment. Confirm whether the listing is Wi-Fi or 5G and check the RAM/storage variant.",
+    "image_url": "https://cdn.shopify.com/s/files/1/0630/5362/7541/files/SM-X510NZAEEUB_2.jpg?v=1739536057",
+    "marketplace": "Smart Electronics",
+    "product_url": "https://smart-electronics.in/product/samsung-galaxy-tab-s9-fe-wi-fi-6gb-ram-128gb-storage-10-9-inches-exynos-1380-octa-core-2-4-ghz-processor-8000-mah-battery-with-45w-fast-charging-gray/",
+    "marketplace_links": {
+      "Smart Electronics": "https://smart-electronics.in/product/samsung-galaxy-tab-s9-fe-wi-fi-6gb-ram-128gb-storage-10-9-inches-exynos-1380-octa-core-2-4-ghz-processor-8000-mah-battery-with-45w-fast-charging-gray/",
+      "Samsung India": "https://www.samsung.com/in/tablets/"
+    },
+    "specifications": {
+      "model": "Galaxy Tab S9 FE Wi-Fi",
+      "display": "10.9-inch, 2304 × 1440, 90Hz",
+      "processor": "Samsung Exynos 1380",
+      "memory": "6GB RAM",
+      "storage": "128GB internal; microSD expansion supported",
+      "stylus": "S Pen included",
+      "durability": "IP68 water and dust resistance",
+      "battery": "8000mAh",
+      "charging": "45W wired charging support (charger availability varies)",
+      "price_note": "Retailer price snapshot; verify seller, warranty and exact Wi-Fi/5G variant."
+    }
+  },
+  {
+    "id": 6,
+    "name": "Samsung Galaxy M36 5G (6GB/128GB)",
+    "brand": "Samsung",
+    "category": "Smartphones",
+    "price": 21999,
+    "description": "A 5G smartphone for students who need a daily device for calls, learning apps, document scanning, video lectures and photography. It combines a 6.7-inch Full HD+ Super AMOLED display with a 120Hz refresh rate and an Exynos 1380 processor. Samsung lists a 50MP main camera with OIS, a 5000mAh battery and long-term Android/security update support. Charger is sold separately on many retail packages.",
+    "image_url": "https://cdn.jiostore.online/v2/jmd-asp/jdprod/wrkr/products/pictures/item/free/original/samsung/494793576/0/hUetpXPxDD-JKxck3Eerr-Samsung-M36-494793576-i-1.jpg",
+    "marketplace": "Samsung India",
+    "product_url": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m36-5g-velvet-black-128gb-sm-m366bzkdins/buy/",
+    "marketplace_links": {
+      "Samsung India": "https://www.samsung.com/in/smartphones/galaxy-m/galaxy-m36-5g-velvet-black-128gb-sm-m366bzkdins/buy/",
+      "Reliance Digital": "https://www.reliancedigital.in/product/samsung-m36-5g-256-gb-8-gb-ram-orange-mobile-phone-mpqw4v-10129072"
+    },
+    "specifications": {
+      "model": "Galaxy M36 5G (SM-M366B)",
+      "display": "6.7-inch FHD+ Super AMOLED, 120Hz",
+      "processor": "Samsung Exynos 1380",
+      "memory": "6GB RAM (also sold in 8GB variants)",
+      "storage": "128GB (256GB variant also available)",
+      "rear_camera": "50MP OIS + 8MP ultra-wide + 2MP macro",
+      "front_camera": "13MP",
+      "battery": "5000mAh",
+      "charging": "25W wired charging support",
+      "software_support": "Up to 6 generations of Android OS upgrades and 6 years of security updates (Samsung launch specification)",
+      "price_note": "Samsung India launch/current listing price is variant-dependent; confirm the selected configuration."
+    }
+  },
+  {
+    "id": 7,
+    "name": "Sony WH-CH520 Wireless On-Ear Headphones",
+    "brand": "Sony",
+    "category": "Audio",
+    "price": 2990,
+    "description": "Lightweight wireless on-ear headphones for recorded lectures, online meetings, music and focused study sessions. Sony specifies up to 50 hours of battery life, USB-C charging and multipoint connection so the headphones can switch between two paired devices. The built-in microphone supports calls, while the compact swivel design makes them easy to carry in a backpack.",
+    "image_url": "https://jpckemang.id/assets/img/products/WH-CH520_BLUE_WEB_11.jpg",
+    "marketplace": "Zepto",
+    "product_url": "https://www.zepto.com/pn/sony-wh-ch520-wireless-headphones-white-with-mic/pvid/71a9d678-edbc-48a1-b7cc-edf01ef9c03b",
+    "marketplace_links": {
+      "Zepto": "https://www.zepto.com/pn/sony-wh-ch520-wireless-headphones-white-with-mic/pvid/71a9d678-edbc-48a1-b7cc-edf01ef9c03b",
+      "Sony India": "https://www.sony.co.in/electronics/headband-headphones/wh-ch520"
+    },
+    "specifications": {
+      "model": "WH-CH520",
+      "type": "Wireless on-ear headphones",
+      "driver_unit": "30mm",
+      "connectivity": "Bluetooth 5.2; multipoint connection",
+      "battery_life": "Up to 50 hours (manufacturer claim; usage dependent)",
+      "charging": "USB Type-C; quick charging supported",
+      "microphone": "Built-in microphone for calls",
+      "weight": "Approx. 147g",
+      "price_note": "Retailer price snapshot; colour and seller availability may vary."
+    }
+  },
+  {
+    "id": 8,
+    "name": "boAt Rockerz 430 Wireless Headphones",
+    "brand": "boAt",
+    "category": "Audio",
+    "price": 1499,
+    "description": "An affordable over-ear wireless headset for students who listen to lectures, attend online classes and want music playback between study sessions. The Rockerz 430 listing highlights 40mm audio drivers, BEAST Mode and up to 40 hours of playback. The cushioned earcups and adjustable headband are intended for everyday use. Check the exact colour and current bundle on the official boAt listing.",
+    "image_url": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto/NI_CATALOG/IMAGES/ciw/2026/2/20/e4e20f8e-7254-4613-921c-9edcd995a3a4_3F22X1WA65_MN_19022026.png",
+    "marketplace": "boAt",
+    "product_url": "https://www.boat-lifestyle.com/products/rockerz-430-headphone",
+    "marketplace_links": {
+      "boAt Official": "https://www.boat-lifestyle.com/products/rockerz-430-headphone"
+    },
+    "specifications": {
+      "model": "Rockerz 430",
+      "driver_size": "40mm",
+      "connectivity": "Bluetooth wireless",
+      "playback_time": "Up to 40 hours (listing claim; usage dependent)",
+      "audio_mode": "BEAST Mode / low-latency mode (as listed)",
+      "microphone": "Built-in microphone",
+      "design": "Over-ear cushioned earcups; adjustable headband",
+      "price_note": "Official store listing price snapshot; offers may change."
+    }
+  },
+  {
+    "id": 9,
+    "name": "Logitech MK270R Wireless Keyboard and Mouse Combo",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 1795,
+    "description": "A full-size wireless keyboard and mouse set for students who work at a desk, write reports or use a laptop with an external monitor. Both devices connect through one compact 2.4GHz USB receiver, reducing cable clutter. The keyboard includes a numeric keypad and dedicated media keys, while the mouse is compact for everyday navigation. Confirm the regional keyboard layout before ordering.",
+    "image_url": "https://www.jiomart.com/images/product/original/491277064/logitech-mk270r-wireless-keyboard-with-mouse-digital-o491277064-p590040137-1-202512161435.jpeg?im=Resize%3D%28420%2C420%29",
+    "marketplace": "JioMart",
+    "product_url": "https://www.jiomart.com/p/electronics/logitech-mk270r-wireless-keyboard-with-mouse/590040137",
+    "marketplace_links": {
+      "JioMart": "https://www.jiomart.com/p/electronics/logitech-mk270r-wireless-keyboard-with-mouse/590040137",
+      "Logitech India": "https://www.logitech.com/en-in/products/combos/mk270-wireless-keyboard-mouse.920-004536.html"
+    },
+    "specifications": {
+      "model": "MK270R",
+      "connectivity": "2.4GHz wireless USB receiver",
+      "wireless_range": "Up to 10m (environment dependent)",
+      "keyboard": "Full-size layout with numeric keypad and media hotkeys",
+      "mouse": "Compact optical wireless mouse",
+      "power": "Keyboard and mouse use replaceable batteries",
+      "compatibility": "Windows; basic keyboard/mouse functions work with other USB-compatible systems",
+      "price_note": "Indicative marketplace price snapshot; confirm layout and seller."
+    }
+  },
+  {
+    "id": 10,
+    "name": "Logitech M220 Silent Wireless Mouse",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 1099,
+    "description": "A compact, quiet wireless mouse for library desks, shared hostel rooms and everyday laptop use. Logitech's SilentTouch technology reduces clicking noise, and the symmetrical shape works for left- and right-handed users. It uses a small USB nano receiver and an optical sensor for reliable cursor movement. A single AA battery can last up to 18 months under Logitech's stated usage conditions.",
+    "image_url": "https://biuropaczka.pl/media/catalog/product/6/f/6f65b020-9501-499d-be0a-6230a07e9210.jpg",
+    "marketplace": "Logitech India",
+    "product_url": "https://www.logitech.com/en-in/products/mice/m220-silent-wireless-mouse.910-004878.html",
+    "marketplace_links": {
+      "Logitech India": "https://www.logitech.com/en-in/products/mice/m220-silent-wireless-mouse.910-004878.html",
+      "Amazon India": "https://www.amazon.in/s?k=Logitech+M220+Silent+Wireless+Mouse"
+    },
+    "specifications": {
+      "model": "M220 Silent (910-004878)",
+      "sensor": "Optical tracking, 1000 DPI",
+      "connectivity": "2.4GHz USB nano receiver",
+      "wireless_range": "Up to 10m",
+      "battery": "1 × AA; up to 18 months (manufacturer estimate)",
+      "design": "Ambidextrous compact shape",
+      "noise_reduction": "SilentTouch reduces click noise by over 90% (manufacturer claim)",
+      "price_note": "Indicative reference price; verify live seller price and model number."
+    }
+  },
+  {
+    "id": 11,
+    "name": "Casio FX-991EX ClassWiz Scientific Calculator",
+    "brand": "Casio",
+    "category": "Study Essentials",
+    "price": 1495,
+    "description": "A non-programmable scientific calculator designed for engineering, science and mathematics coursework. Its ClassWiz interface supports advanced calculations including matrices, vectors, complex numbers, statistics and spreadsheet-style calculations. The high-resolution natural textbook display helps show expressions in a familiar format. Always check your university or examination rules before purchasing a calculator model.",
+    "image_url": "https://www.casio.com/content/dam/casio/product-info/locales/za/en/calc/product/scientific/F/FX/FX9/fx-991EX/assets/fx-991EX_F.png.transform/main-visual-sp/image.png",
+    "marketplace": "Biblio.com",
+    "product_url": "https://www.biblio.com/book/casio-fx-991ex-classwiz-high-school/d/1733994074",
+    "marketplace_links": {
+      "Biblio listing": "https://www.biblio.com/book/casio-fx-991ex-classwiz-high-school/d/1733994074",
+      "Amazon India search": "https://www.amazon.in/s?k=Casio+fx-991EX+ClassWiz",
+      "Flipkart search": "https://www.flipkart.com/search?q=casio%20fx-991ex"
+    },
+    "specifications": {
+      "model": "fx-991EX ClassWiz",
+      "functions": "552 functions (manufacturer specification)",
+      "display": "High-resolution Natural Textbook Display",
+      "power": "Solar cell with LR44 backup battery",
+      "programmable": "Non-programmable",
+      "calculation_modes": "Complex numbers, matrices, vectors, statistics, equations and calculus functions",
+      "exam_note": "Confirm that this exact model is permitted by your institution/exam board.",
+      "price_note": "Price reference from a marketplace result; FX-991EX availability varies by seller and may be replaced by newer models."
+    }
+  },
+  {
+    "id": 12,
+    "name": "Ambrane Stylo N20 20,000mAh Power Bank",
+    "brand": "Ambrane",
+    "category": "Hostel Essentials",
+    "price": 1899,
+    "description": "A high-capacity power bank for students who spend long hours on campus, travel between home and college or need backup power during outages. The 20,000mAh battery is designed to recharge phones and other USB-powered devices, with USB Type-C input/output and USB-A output ports. LED indicators show the remaining charge. Check the exact output wattage and included cable on the selected variant.",
+    "image_url": "https://img-prd-pim.poorvika.com/cdn-cgi/image/width%3D500%2Cheight%3D500%2Cquality%3D75/product/ambrane-stylo-n20-22-5w-20000-mah-power-bank-black-Spec-02.png",
+    "marketplace": "Ambrane India",
+    "product_url": "https://ambraneindia.com/products/stylo-n20",
+    "marketplace_links": {
+      "Ambrane Official": "https://ambraneindia.com/products/stylo-n20",
+      "Poorvika": "https://www.poorvika.com/ambrane-stylo-n20-22-5w-20000-mah-power-bank-black/p"
+    },
+    "specifications": {
+      "model": "Stylo N20",
+      "capacity": "20,000mAh",
+      "charging_output": "Up to 22.5W (Ambrane Stylo N20 listing; confirm exact variant)",
+      "ports": "USB Type-C and USB-A (port configuration may vary by SKU)",
+      "indicators": "LED battery level indicators",
+      "protection": "Multi-layer charging protection (manufacturer feature)",
+      "travel": "Check airline power-bank carry-on rules before flying",
+      "price_note": "Ambrane official/retailer price snapshot; check exact model, output wattage and included cable."
+    }
+  },
+  {
+    "id": 13,
+    "name": "Philips HD9306/06 1.5L Electric Kettle",
+    "brand": "Philips",
+    "category": "Hostel Essentials",
+    "price": 2039,
+    "description": "A stainless-steel electric kettle for boiling water in a hostel or shared accommodation. The 1.5-litre capacity is useful for preparing tea, coffee and instant meals where permitted by hostel rules. It has an automatic shut-off function and a cordless 360-degree base for convenient lifting and pouring. Check whether your hostel allows personal heating appliances before purchase.",
+    "image_url": "https://cdn.othoba.com/images/thumbs/0697678_philips-15-litrer-electric-kettle-hd9306.webp",
+    "marketplace": "Sangeetha Mobiles",
+    "product_url": "https://www.sangeetha.com/product-details/21926",
+    "marketplace_links": {
+      "Sangeetha Mobiles": "https://www.sangeetha.com/product-details/21926",
+      "Flipkart search": "https://www.flipkart.com/search?q=Philips%20HD9306%20kettle"
+    },
+    "specifications": {
+      "model": "HD9306/06",
+      "capacity": "1.5 litres",
+      "body": "Food-grade stainless steel",
+      "power": "Approx. 1800W (check exact regional SKU label)",
+      "base": "360-degree cordless base",
+      "safety": "Automatic shut-off and boil-dry protection",
+      "use_case": "Boiling water for beverages and instant foods",
+      "price_note": "Retailer price snapshot; availability and plug/warranty terms vary by seller."
+    }
+  },
+  {
+    "id": 14,
+    "name": "Milton Fame Thermosteel Bottle (1000ml)",
+    "brand": "Milton",
+    "category": "Hostel Essentials",
+    "price": 1142,
+    "description": "A reusable insulated bottle for carrying water, tea or coffee to lectures, labs and the library. The double-wall vacuum construction helps retain beverage temperature, while the screw-top lid is designed to be leak-resistant for everyday carrying. The 1-litre size offers a useful balance between capacity and portability. Hand washing is recommended by the manufacturer.",
+    "image_url": "https://cdn.shopclues.com/images/detailed/18117/ectmsfis0047steelplainco1_1432294728.jpg",
+    "marketplace": "Milton India",
+    "product_url": "https://www.milton.in/products/fame-thermosteel-bottle",
+    "marketplace_links": {
+      "Milton Official": "https://www.milton.in/products/fame-thermosteel-bottle",
+      "Amazon India search": "https://www.amazon.in/s?k=Milton+Fame+Thermosteel+Bottle"
+    },
+    "specifications": {
+      "model": "Fame Thermosteel",
+      "capacity": "1000ml variant",
+      "material": "Food-grade stainless steel; double-wall vacuum insulation",
+      "temperature_retention": "Manufacturer claims hot/cold retention up to 24 hours",
+      "lid": "Leak-proof screw cap",
+      "weight": "Approx. 453g for 1000ml variant",
+      "care": "Hand wash; not dishwasher safe",
+      "warranty": "1 year (manufacturer listing)",
+      "price_note": "Milton official product page price snapshot; selected size/colour changes price."
+    }
+  },
+  {
+    "id": 15,
+    "name": "Safari Omega 30L Laptop Backpack with Rain Cover",
+    "brand": "Safari",
+    "category": "Backpacks",
+    "price": 759,
+    "description": "A practical college backpack for carrying notebooks, a laptop, charger, water bottle and daily essentials. The Omega model is listed with a 30-litre capacity, multiple compartments and a rain cover, helping students separate books and accessories during commutes. Padded shoulder straps support everyday carrying. Check the internal laptop sleeve dimensions against your laptop before ordering.",
+    "image_url": "https://www.dailymart4u.in/storage/2024/10/71R9BRd-cTL._SL1500_.jpg",
+    "marketplace": "Amazon India",
+    "product_url": "https://www.amazon.in/Safari-Spacious-Compartment-Backpack-Raincover/dp/B097LC1DJ6",
+    "marketplace_links": {
+      "Amazon India": "https://www.amazon.in/Safari-Spacious-Compartment-Backpack-Raincover/dp/B097LC1DJ6"
+    },
+    "specifications": {
+      "model": "Omega",
+      "capacity": "30 litres (listing specification)",
+      "compartments": "Multiple compartments; 5-compartment listing",
+      "rain_cover": "Included according to listing",
+      "carry": "Padded shoulder straps and top handle",
+      "use_case": "College, commuting and short travel",
+      "price_note": "Amazon listing price snapshot; colour, seller and availability may change."
+    }
+  },
+  {
+    "id": 16,
+    "name": "Wildcraft Hopper Laptop Backpack",
+    "brand": "Wildcraft",
+    "category": "Backpacks",
+    "price": 1599,
+    "description": "A branded everyday backpack for students who carry a laptop, books and accessories between home, hostel and campus. The Hopper design uses a main storage compartment, front utility pocket and padded shoulder straps. Its compact profile is suitable for daily commuting. Confirm laptop sleeve size, capacity and current colour availability on Wildcraft's product page.",
+    "image_url": "https://wildcraft.com/media/catalog/product/2/_/2_156.jpg?width=960",
+    "marketplace": "Wildcraft India",
+    "product_url": "https://wildcraft.com/hopper-laptop-backpack-12152-black",
+    "marketplace_links": {
+      "Wildcraft Official": "https://wildcraft.com/hopper-laptop-backpack-12152-black"
+    },
+    "specifications": {
+      "model": "Hopper Laptop Backpack",
+      "brand_line": "Wildcraft",
+      "storage": "Main compartment plus front utility pocket",
+      "carry": "Padded shoulder straps and top handle",
+      "material": "Synthetic textile (refer to current product page for exact fabric)",
+      "colour": "Black/red accent shown in product image",
+      "price_note": "Indicative catalogue price; verify current product dimensions and laptop compatibility."
+    }
+  },
+  {
+    "id": 17,
+    "name": "Wipro Garnet 6W LED Study Table Lamp",
+    "brand": "Wipro",
+    "category": "Study Essentials",
+    "price": 699,
+    "description": "A compact LED desk lamp for reading textbooks, writing notes and working at a study table. The Garnet model shown is rated at 6W and has a flexible neck so the light can be directed toward the page. The listing describes touch control and multiple brightness levels. It is a useful low-power desk light for hostel rooms and small study spaces.",
+    "image_url": "https://rukmini1.flixcart.com/image/1500/1500/xif0q/table-lamp/t/m/c/6w-table-lamp-reading-lamp-wipro-enriched-transparent-original-imafxrzzuywa5fwh.png?q=70",
+    "marketplace": "Flipkart",
+    "product_url": "https://www.flipkart.com/wipro-6w-study-lamp/p/itm7b8788d33a6ef",
+    "marketplace_links": {
+      "Flipkart": "https://www.flipkart.com/wipro-6w-study-lamp/p/itm7b8788d33a6ef"
+    },
+    "specifications": {
+      "model": "Garnet 6W LED Table Lamp",
+      "power": "6W",
+      "light": "Cool white LED",
+      "controls": "Touch control; multiple dimming levels as listed",
+      "neck": "Flexible/adjustable neck",
+      "material": "ABS plastic (listing specification)",
+      "input_voltage": "220–240V AC",
+      "price_note": "Indicative Flipkart listing price; exact model/brightness controls may vary."
+    }
+  },
+  {
+    "id": 18,
+    "name": "Portronics Power Plate Plus 6-in-1 Power Extender",
+    "brand": "Portronics",
+    "category": "Hostel Essentials",
+    "price": 899,
+    "description": "A compact power extender for a study desk with multiple devices such as a laptop adapter, phone charger and tablet charger. The Power Plate Plus product page describes three universal AC sockets, USB charging ports and individual illuminated switches. Child-safety shutters are provided on the sockets. Check the rated wattage and socket/USB combination on the product page before connecting high-power appliances.",
+    "image_url": "https://www.portronics.com/cdn/shop/files/portronics_power_plate_plus_6-in-1_power_extension_board.jpg?v=1772541826&width=1445",
+    "marketplace": "Portronics",
+    "product_url": "https://www.portronics.com/products/power-plate-plus",
+    "marketplace_links": {
+      "Portronics Official": "https://www.portronics.com/products/power-plate-plus",
+      "Amazon India search": "https://www.amazon.in/s?k=Portronics+Power+Plate+Plus"
+    },
+    "specifications": {
+      "model": "Power Plate Plus",
+      "outlets": "3 universal AC sockets",
+      "USB_ports": "2 USB-A and 1 USB-C (check current revision)",
+      "switches": "Individual illuminated switches",
+      "safety": "Child-safety shutters",
+      "rated_load": "Check product label and official listing before use",
+      "price_note": "Official/marketplace price snapshot; verify revision and rated load."
+    }
+  },
+  {
+    "id": 19,
+    "name": "SanDisk Ultra Flair 128GB USB 3.0 Flash Drive",
+    "brand": "SanDisk",
+    "category": "Storage & Data",
+    "price": 1860,
+    "description": "A portable USB flash drive for moving lecture slides, project files, presentations and documents between computers. The Ultra Flair range uses a metal casing and USB 3.0 interface, with manufacturer-rated read speeds up to 150MB/s on supported devices. Actual transfer speed depends on the host port and file sizes. Keep a second backup of important academic work rather than relying on one pen drive.",
+    "image_url": "https://assets.gadgetandgear.com/upload/product/20191017_1571315079_766928.jpeg",
+    "marketplace": "LT Online Store",
+    "product_url": "https://ltonlinestore.in/sandisk-128gb-ultra-flair-3-0-usb-flash-drive",
+    "marketplace_links": {
+      "LT Online Store": "https://ltonlinestore.in/sandisk-128gb-ultra-flair-3-0-usb-flash-drive",
+      "Amazon India search": "https://www.amazon.in/s?k=SanDisk+Ultra+Flair+128GB"
+    },
+    "specifications": {
+      "model": "Ultra Flair SDCZ73",
+      "capacity": "128GB",
+      "interface": "USB 3.0 / USB 3.1 Gen 1 compatible",
+      "read_speed": "Up to 150MB/s (manufacturer claim; host dependent)",
+      "design": "Metal casing",
+      "compatibility": "USB-A ports; backward compatible with USB 2.0",
+      "price_note": "Retailer price snapshot; verify capacity and model code before checkout."
+    }
+  },
+  {
+    "id": 20,
+    "name": "HP DeskJet Ink Advantage 2335 All-in-One Printer",
+    "brand": "HP",
+    "category": "Study Essentials",
+    "price": 5800,
+    "description": "An entry-level all-in-one inkjet printer for students who regularly print assignments, forms and project reports. It combines printing, scanning and copying in one compact unit and connects to a computer through USB. HP's published specifications list print speeds up to 7.5 pages per minute in black and 5.5 pages per minute in colour under standard test conditions. Ink costs and cartridge availability should be considered before purchase.",
+    "image_url": "https://cdn2.zohoecommerce.com/product-images/61YiN3XTqbL._SL1500_.jpg/453927000031814593/600x600?storefront_domain=www.pinekart.com",
+    "marketplace": "Popular Computer",
+    "product_url": "https://www.popularcomputer.in/product/hp-deskjet-ink-advantage-2335-all-in-one-printer/",
+    "marketplace_links": {
+      "Popular Computer": "https://www.popularcomputer.in/product/hp-deskjet-ink-advantage-2335-all-in-one-printer/",
+      "Amazon India search": "https://www.amazon.in/s?k=HP+DeskJet+Ink+Advantage+2335"
+    },
+    "specifications": {
+      "model": "DeskJet Ink Advantage 2335",
+      "functions": "Print, scan and copy",
+      "print_technology": "Thermal inkjet",
+      "black_print_speed": "Up to 7.5 ppm (ISO, approximate published specification)",
+      "colour_print_speed": "Up to 5.5 ppm (ISO, approximate published specification)",
+      "connectivity": "USB 2.0",
+      "paper_input": "Up to 60 sheets (listing specification)",
+      "price_note": "Retailer price snapshot; verify cartridge bundle and warranty."
+    }
+  },
+  {
+    "id": 21,
+    "name": "Portronics Modesk 200 Adjustable Mobile Stand",
+    "brand": "Portronics",
+    "category": "Study Essentials",
+    "price": 129,
+    "description": "A foldable desktop phone stand for keeping a smartphone upright during online lectures, video calls and study timers. The Modesk 200 has an adjustable viewing angle and a compact fold-flat design, making it easy to keep in a pencil case or laptop bag. Its non-slip contact points help hold a phone steady on a desk. The listing specifies compatibility with phones up to approximately 7 inches.",
+    "image_url": "https://www.jiomart.com/images/product/original/rv4cbcr5ip/portronics-modesk-200-universal-mobile-phone-stand-for-desktop-table-for-all-device-size-upto-7-inch-product-images-orv4cbcr5ip-p593213323-0-202207282141.jpg?im=Resize%3D%281000%2C1000%29",
+    "marketplace": "JioMart",
+    "product_url": "https://www.jiomart.com/p/electronics/portronics-modesk-200-universal-mobile-phone-stand-for-desktop-table-for-all-device-size-upto-7-inch/593213323",
+    "marketplace_links": {
+      "JioMart": "https://www.jiomart.com/p/electronics/portronics-modesk-200-universal-mobile-phone-stand-for-desktop-table-for-all-device-size-upto-7-inch/593213323",
+      "Portronics": "https://www.portronics.com/"
+    },
+    "specifications": {
+      "model": "Modesk 200",
+      "supported_device_size": "Up to 7 inches (listing specification)",
+      "design": "Foldable desktop stand",
+      "adjustment": "Adjustable viewing angle",
+      "material": "ABS plastic",
+      "weight": "Approx. 122g (listing specification)",
+      "use_case": "Video lectures, calls and desk viewing",
+      "price_note": "Marketplace price snapshot; colour and seller availability may vary."
+    }
+  }
+]

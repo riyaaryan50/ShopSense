@@ -27,7 +27,26 @@ class Product(db.Model):
     category = db.Column(db.String(100))
     price = db.Column(db.Numeric(10, 2), nullable=False)
     stock = db.Column(db.Integer, default=0)
+
+    # Product image
     image_url = db.Column(db.Text)
+
+    # Brand information
+    brand = db.Column(db.String(120))
+
+    # Pricing information
+    original_price = db.Column(db.Numeric(10, 2))
+
+    # Marketplace information
+    marketplace = db.Column(db.String(80))
+    product_url = db.Column(db.Text)
+
+    # Multiple marketplace purchase links
+    marketplace_links = db.Column(db.JSON, default=dict)
+
+    # Technical specifications
+    specifications = db.Column(db.JSON, default=dict)
+
     created_at = db.Column(
         db.DateTime(timezone=True),
         default=lambda: datetime.now(timezone.utc)

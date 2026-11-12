@@ -20,28 +20,7 @@ import { useCart } from "../context/CartContext";
 import { logInteraction } from "../services/interactionService";
 import { getProducts } from "../services/productService";
 
-const localProductImages = {
-  "Mechanical Keyboard": "/images/mechanical-keyboard.jpg",
-  "Wireless Mouse": "/images/wireless-mouse.jpg",
-  "Cotton T-Shirt": "/images/cotton-tshirt.jpg",
-  "Table Lamp": "/images/table-lamp.jpg",
-  "Non Stick Cookware Set": "/images/non-stick-cookware-set.jpg",
-  "Mixer Grinder": "/images/mixer-grinder.jpg",
-  "The Alchemist": "/images/the-alchemist.jpg",
-  "Cricket Bat": "/images/cricket-bat.jpg",
-  "Electric Kettle": "/images/electric-kettle.jpg",
-  "Leather Backpack": "/images/leather-backpack.jpg",
-  "Smartphone": "/images/smartphone.jpg",
-  "Atomic Habits": "/images/atomic-habits.jpg",
-  "Rich Dad Poor Dad": "/images/rich-dad-poor-dad.jpg",
-  "Yoga Mat": "/images/yoga-mat.jpg",
-  "Denim Jeans": "/images/denim-jeans.jpg",
-  "Football": "/images/football.jpg",
-  "Wireless Headphones": "/images/wireless-headphones.jpg",
-  "Dumbbell Set": "/images/dumbbell-set.jpg",
-  "Smart Watch": "/images/smart-watch.jpg",
-  "Running Shoes": "/images/running-shoes.jpg",
-};
+
 
 function ProductDetails() {
   const { id } = useParams();
@@ -69,10 +48,7 @@ function ProductDetails() {
 
         const formattedProducts = data.map((item) => ({
           ...item,
-          image:
-            localProductImages[item.name] ||
-            item.image_url ||
-            "",
+          image: item.image_url || "",
         }));
 
         setProducts(formattedProducts);
@@ -110,10 +86,7 @@ function ProductDetails() {
           data.recommendations || []
         ).map((item) => ({
           ...item,
-          image:
-            localProductImages[item.name] ||
-            item.image_url ||
-            "",
+          image: item.image_url || "",
         }));
 
         setRecommendedProducts(formattedRecommendations);
@@ -226,16 +199,6 @@ function ProductDetails() {
 
   const productPrice = Number(product.price) || 0;
 
-  const priceComparisons = [
-    { store: "Amazon", price: productPrice },
-    { store: "Flipkart", price: Math.round(productPrice * 1.08) },
-    { store: "Myntra", price: Math.round(productPrice * 1.12) },
-  ];
-
-  const lowestPrice = Math.min(
-    ...priceComparisons.map((item) => item.price)
-  );
-
   return (
     <div className="min-h-screen bg-[#f8f8fc] text-gray-900">
       <main className="max-w-7xl mx-auto px-5 md:px-8 py-10">
@@ -285,6 +248,12 @@ function ProductDetails() {
               {product.name}
             </h1>
 
+            {product.brand && (
+              <p className="text-gray-500 mt-2">
+                Brand: <strong>{product.brand}</strong>
+              </p>
+            )}
+
             <div className="flex items-center gap-2 mt-4">
               <Star className="text-gray-300" size={19} />
               <span className="text-gray-400 text-sm">
@@ -296,14 +265,54 @@ function ProductDetails() {
               {product.description || "No product description available."}
             </p>
 
-            <h2 className="text-3xl font-bold mt-7">
-              ₹{productPrice.toLocaleString("en-IN")}
-            </h2>
 
-            <p className="text-sm text-green-600 mt-2">
-              {Number(product.stock) > 0
-                ? `${product.stock} units available`
-                : "Stock information unavailable"}
+            {product.specifications &&
+              Object.keys(product.specifications).length > 0 && (
+                <div className="mt-7">
+                  <h3 className="text-xl font-bold mb-4">
+                    Product Specifications
+                  </h3>
+
+                  <div className="border rounded-xl divide-y">
+                    {Object.entries(product.specifications).map(
+                      ([key, value]) => (
+                        <div
+                          key={key}
+                          className="flex justify-between gap-4 p-4 text-sm"
+                        >
+                          <span className="text-gray-500 capitalize">
+                            {key.replace(/_/g, " ")}
+                          </span>
+                          <span className="font-semibold text-right">
+                            {String(value)}
+                          </span>
+                        </div>
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+
+
+            <div className="flex items-center gap-3 mt-7">
+              <h2 className="text-3xl font-bold">
+                ₹{productPrice.toLocaleString("en-IN")}
+              </h2>
+
+              {product.original_price &&
+                Number(product.original_price) > productPrice && (
+                  <span className="text-gray-400 line-through">
+                    ₹{Number(product.original_price).toLocaleString("en-IN")}
+                  </span>
+                )}
+              </div>
+
+            <p className="text-sm text-gray-500 mt-2">
+              Seller availability is confirmed on the marketplace listing.
+            </p>
+
+            <p className="text-xs text-gray-500 mt-2">
+              Listed price is indicative. Final price, seller, delivery and availability are confirmed by the marketplace at checkout.
             </p>
 
             <div className="flex flex-wrap gap-4 mt-8">
@@ -331,6 +340,125 @@ function ProductDetails() {
                 />
               </button>
             </div>
+
+            {product.product_url && (
+              <a
+                href={product.product_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-semibold flex justify-center items-center gap-2"
+              >
+                Buy Now on {product.marketplace || "Marketplace"}
+                <span>↗</span>
+              </a>
+            )}
+
+
+{product.marketplace_links &&
+  Object.entries(product.marketplace_links).length > 0 && (() => {
+    const allLinks = Object.entries(product.marketplace_links)
+      .filter(([store, url]) =>
+        typeof url === "string" &&
+        /^https?:\/\//i.test(url)
+      );
+
+    // Remove duplicate URLs
+    const uniqueLinks = allLinks.filter(
+      ([store, url], index, arr) =>
+        arr.findIndex(
+          ([, existingUrl]) => existingUrl === url
+        ) === index
+    );
+
+    const officialLinks = uniqueLinks.filter(([store]) =>
+      /official/i.test(store)
+    );
+
+    const searchLinks = uniqueLinks.filter(([store]) =>
+      /search/i.test(store)
+    );
+
+    const verifiedLinks = uniqueLinks.filter(([store]) =>
+      /exact listing/i.test(store)
+    );
+
+    const otherLinks = uniqueLinks.filter(([store]) =>
+      !/official|search|exact listing/i.test(store)
+    );
+
+    const renderLinks = (title, links, description) => {
+      if (!links.length) return null;
+
+      return (
+        <div className="mb-5">
+          <h4 className="font-bold text-gray-800 mb-3">
+            {title}
+          </h4>
+
+          <div className="grid sm:grid-cols-2 gap-3">
+            {links.map(([store, url]) => (
+              <a
+                key={store}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between gap-2 rounded-xl border border-gray-200 p-3 hover:border-purple-400 hover:bg-purple-50 transition"
+              >
+                <span className="font-semibold text-sm text-gray-700">
+                  {store.replace(/(official|exact listing|search)/ig, "").trim()}
+                </span>
+                <span className="text-purple-600 text-sm">
+                  Visit ↗
+                </span>
+              </a>
+            ))}
+          </div>
+
+          <p className="text-xs text-gray-400 mt-2">
+            {description}
+          </p>
+        </div>
+      );
+    };
+
+    return (
+      <div className="mt-6 rounded-2xl border border-gray-200 bg-white p-5">
+        <h3 className="text-xl font-bold text-gray-900 mb-5">
+          Compare Purchasing Options
+        </h3>
+
+        {renderLinks(
+          "Official Brand Stores",
+          officialLinks,
+          "Manufacturer websites and official brand stores."
+        )}
+
+        {renderLinks(
+          "Exact Product Listings",
+          verifiedLinks,
+          "Listings labelled as exact matches. Confirm model and configuration before purchasing."
+        )}
+
+        {renderLinks(
+          "Other Retailer Links",
+          otherLinks,
+          "Check the seller, exact model and product availability."
+        )}
+
+        {renderLinks(
+          "Explore More Marketplaces",
+          searchLinks,
+          "These links open marketplace searches, not confirmed product listings."
+        )}
+
+        <div className="border-t pt-4 text-xs text-gray-500">
+          Prices, stock, delivery and seller terms may change.
+          Always verify the exact product configuration before payment.
+        </div>
+      </div>
+    );
+  })()}
+
 
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="flex gap-3 items-center">
@@ -548,68 +676,6 @@ function ProductDetails() {
               complaints after NLP integration.
             </p>
           </div>
-        </section>
-
-        {/* Price Comparison */}
-        <section className="mt-14 bg-white rounded-3xl p-6 md:p-10 shadow-sm">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="bg-indigo-100 text-indigo-600 p-3 rounded-xl">
-              <TrendingDown size={25} />
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold">
-                Compare Prices
-              </h2>
-              <p className="text-gray-500 text-sm">
-                Compare this product across shopping platforms.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 rounded-xl p-4 mt-7 text-sm">
-            Demo comparison only. Prices are illustrative and
-            are not live or verified seller offers.
-          </div>
-
-          <div className="overflow-x-auto mt-7">
-            <table className="w-full text-left min-w-[500px]">
-              <thead>
-                <tr className="border-b text-gray-500 text-sm">
-                  <th className="py-4">Shopping Website</th>
-                  <th className="py-4">Price</th>
-                  <th className="py-4">Status</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {priceComparisons.map((item) => (
-                  <tr key={item.store} className="border-b border-gray-100">
-                    <td className="py-5 font-semibold">{item.store}</td>
-                    <td className="py-5 font-bold text-lg">
-                      ₹{item.price.toLocaleString("en-IN")}
-                    </td>
-                    <td className="py-5">
-                      {item.price === lowestPrice ? (
-                        <span className="bg-green-100 text-green-700 px-3 py-2 rounded-full text-xs font-semibold">
-                          Lowest demo price
-                        </span>
-                      ) : (
-                        <span className="text-gray-400 text-sm">
-                          Demo price
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <p className="text-xs text-gray-400 mt-5">
-            Real product matching, seller links and live prices
-            will be integrated using verified listings or permitted APIs.
-          </p>
         </section>
 
         {/* Bottom Section */}

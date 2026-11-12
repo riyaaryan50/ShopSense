@@ -2,7 +2,7 @@
 import requests
 import pandas as pd
 import numpy as np
-
+from fuzzy_weights import calculate_adaptive_event_weights
 from collections import defaultdict
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -402,7 +402,13 @@ class ProductRecommender:
     # PERSONALIZED RECOMMENDATIONS
     # ==========================================
 
-    def recommend_for_user(self, user_id, token, top_n=5):
+    def recommend_for_user(
+    self,
+    user_id,
+    token,
+    top_n=5,
+    weight_mode="fuzzy"
+    ):
         """
         Generate personalized recommendations using:
 
@@ -472,6 +478,31 @@ class ProductRecommender:
             return []
 
         # ======================================
+        # SELECT INTERACTION WEIGHTING MODE
+        # ======================================
+
+        if weight_mode == "fuzzy":
+
+            event_weights = calculate_adaptive_event_weights(
+                interactions
+            )
+
+        elif weight_mode == "fixed":
+
+            event_weights = EVENT_WEIGHTS.copy()
+
+        else:
+
+            raise ValueError(
+                "Invalid weight mode. Use 'fixed' or 'fuzzy'."
+            )
+
+        print(
+            f"{weight_mode.upper()} weights for user {user_id}:",
+            event_weights
+        )
+
+        # ======================================
         # BUILD PRODUCT ID INDEX
         # ======================================
 
@@ -517,7 +548,7 @@ class ProductRecommender:
 
             for event_type, count in event_counts.items():
 
-                base_weight = EVENT_WEIGHTS[event_type]
+                base_weight = event_weights[event_type]
 
                 # Repeated interactions receive
                 # diminishing additional influence.
