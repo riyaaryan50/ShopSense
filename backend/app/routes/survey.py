@@ -13,6 +13,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from app.ai_clients import ServiceUnavailable, call, nlp_url
 from app.extensions import db
+from app.cache import invalidate_recs
 from app.models import CartItem, Interaction, Product, SurveyResponse
 from app.routes.product import product_to_dict
 
@@ -122,9 +123,11 @@ def save_survey():
     except (ValueError, TypeError) as error:
         return jsonify({"error": str(error)}), 400
 
-    response = SurveyResponse(user_id=int(get_jwt_identity()), answers=answers)
+    user_id = int(get_jwt_identity())
+    response = SurveyResponse(user_id=user_id, answers=answers)
     db.session.add(response)
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Survey saved",

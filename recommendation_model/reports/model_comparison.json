@@ -1,0 +1,59 @@
+{
+  "Popularity": {
+    "hr@10": 0.9473684210526315,
+    "ndcg@10": 0.37293626958927295,
+    "mrr": 0.2043650793650794,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 0.0
+  },
+  "SVD (Surprise)": {
+    "hr@10": 0.9473684210526315,
+    "ndcg@10": 0.4117350395475299,
+    "mrr": 0.25002278423331054,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 0.002
+  },
+  "Content-based (TF-IDF)": {
+    "hr@10": 0.9473684210526315,
+    "ndcg@10": 0.5763274805859793,
+    "mrr": 0.4647243107769423,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 0.012
+  },
+  "NCF (NeuMF)": {
+    "hr@10": 1.0,
+    "ndcg@10": 0.568814912302814,
+    "mrr": 0.4344193817878028,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 2.532
+  },
+  "Hybrid (0.3 SVD + 0.3 CB + 0.4 NCF)": {
+    "hr@10": 0.8947368421052632,
+    "ndcg@10": 0.5585481080258625,
+    "mrr": 0.4598598769651402,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 2.546
+  },
+  "Hybrid tuned (0.1 SVD + 0.5 CB + 0.4 NCF)": {
+    "hr@10": 0.8947368421052632,
+    "ndcg@10": 0.5569351806507825,
+    "mrr": 0.4577067669172931,
+    "users": 19,
+    "candidates_per_user": 7.7,
+    "train_seconds": 2.546,
+    "tuned_on_validation": {
+      "weights": {
+        "svd": 0.1,
+        "content": 0.5,
+        "ncf": 0.4
+      },
+      "validation_ndcg@10": 0.5740488964322608,
+      "validation_users": 19
+    }
+  }
+}

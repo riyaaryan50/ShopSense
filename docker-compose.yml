@@ -34,6 +34,7 @@ services:
       NLP_SERVICE_URL: http://nlp:5002
       CB_SERVICE_URL: http://recommendation:5001
       ML_SERVICE_URL: ${ML_SERVICE_URL:-}
+      REDIS_URL: redis://redis:6379/0
       DATA_DIR: /data
     # Seeding is idempotent: creates tables, demo users, synthetic reviews, CSV exports.
     command: sh -c "python -m scripts.seed_demo_data && gunicorn -w 2 --threads 4 -b 0.0.0.0:5000 run:app"
@@ -43,6 +44,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_started
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health')"]
       interval: 5s

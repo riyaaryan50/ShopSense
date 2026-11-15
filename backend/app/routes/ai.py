@@ -15,6 +15,7 @@ from flask_jwt_extended import get_jwt_identity, jwt_required
 from sqlalchemy import func
 
 from app.ai_clients import ServiceUnavailable, call, cb_url, ml_url, nlp_url
+from app import cache
 from app.extensions import db
 from app.models import Interaction, Product, Review
 from app.routes.product import keyword_filter, product_to_dict
@@ -283,11 +284,25 @@ def _token():
     return header.split(" ", 1)[1] if header.startswith("Bearer ") else ""
 
 
+CACHED_LIMIT = 50
+
+
+def cached_recommendations(user_id, limit):
+    """Blended recommendations, served from the user:{id}:recs cache when fresh."""
+    payload = cache.get_recs(user_id)
+    cached = payload is not None
+    if not cached:
+        payload = blended_recommendations(user_id, _token(), CACHED_LIMIT)
+        cache.set_recs(user_id, payload)
+    return {**payload, "recommendations": payload["recommendations"][:limit],
+            "cached": cached, "cache_backend": cache.BACKEND}
+
+
 @ai_bp.route("/recommendations/me", methods=["GET"])
 @jwt_required()
 def my_recommendations():
     user_id = int(get_jwt_identity())
-    return jsonify(blended_recommendations(user_id, _token(), _limit())), 200
+    return jsonify(cached_recommendations(user_id, _limit())), 200
 
 
 @ai_bp.route("/recommendations/<int:user_id>", methods=["GET"])
@@ -295,4 +310,4 @@ def my_recommendations():
 def user_recommendations(user_id):
     if user_id != int(get_jwt_identity()):
         return jsonify({"error": "You can only view your own recommendations"}), 403
-    return jsonify(blended_recommendations(user_id, _token(), _limit())), 200
+    return jsonify(cached_recommendations(user_id, _limit())), 200

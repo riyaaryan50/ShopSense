@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
+from app.cache import invalidate_recs
 from app.models import WishlistItem, Product
 
 wishlist_bp = Blueprint(
@@ -74,6 +75,7 @@ def add_to_wishlist():
 
     db.session.add(wishlist_item)
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Product added to wishlist successfully",
@@ -122,6 +124,7 @@ def remove_from_wishlist(wishlist_item_id):
 
     db.session.delete(wishlist_item)
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Product removed from wishlist successfully"

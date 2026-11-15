@@ -3,4 +3,4 @@ numpy
 scikit-learn
 requests
 Flask
-flask-cors
+flask-corsscikit-surprise

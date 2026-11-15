@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
+from app.cache import invalidate_recs
 from app.models import Interaction, Product
 
 interaction_bp = Blueprint(
@@ -94,6 +95,7 @@ def record_interaction():
 
     db.session.add(interaction)
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Interaction recorded successfully",

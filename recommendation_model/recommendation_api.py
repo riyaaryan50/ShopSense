@@ -281,6 +281,45 @@ def collaborative_recommendations(user_id):
 # RUN SERVER
 # ==========================================
 
+# ==========================================
+# SURPRISE SVD COLLABORATIVE FILTERING (sprint plan endpoints)
+# ==========================================
+# Optional: needs `scikit-surprise` and surprise_svd.pkl
+# (train with `python -m recommendation_model.surprise_svd` from the repo root).
+
+try:
+    from surprise_svd import load as load_surprise_model
+    surprise_model = load_surprise_model()
+    print("Surprise SVD model loaded successfully.")
+except Exception as error:  # library or model file missing
+    surprise_model = None
+    print("Surprise SVD model unavailable:", error)
+
+
+@app.route("/collab/recommend/<int:user_id>", methods=["GET"])
+def collab_recommend(user_id):
+    if surprise_model is None:
+        return jsonify({"error": "Surprise SVD model is not available"}), 503
+    top_n = request.args.get("limit", default=10, type=int)
+    algorithm, items = surprise_model.recommend(user_id, top_n=max(1, min(top_n, 50)))
+    return jsonify({
+        "user_id": user_id,
+        "algorithm": "Surprise SVD" if algorithm == "svd" else "Popularity fallback (cold start)",
+        "recommendations": items,
+    }), 200
+
+
+@app.route("/collab/predict/<int:user_id>/<int:product_id>", methods=["GET"])
+def collab_predict(user_id, product_id):
+    if surprise_model is None:
+        return jsonify({"error": "Surprise SVD model is not available"}), 503
+    return jsonify({
+        "user_id": user_id,
+        "product_id": product_id,
+        "predicted_rating": round(surprise_model.predict(user_id, product_id), 4),
+    }), 200
+
+
 if __name__ == "__main__":
 
     app.run(

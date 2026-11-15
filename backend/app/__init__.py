@@ -7,7 +7,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from sqlalchemy import text
 
-from app.extensions import db, jwt
+from app.extensions import db, jwt, migrate
 
 
 def create_app():
@@ -33,6 +33,9 @@ def create_app():
 
     db.init_app(app)
     jwt.init_app(app)
+    # Alembic migrations (flask db upgrade). Lives in backend/alembic because
+    # backend/migrations/ already holds the original hand-written SQL scripts.
+    migrate.init_app(app, db, directory=str(Path(__file__).resolve().parent.parent / "alembic"))
     CORS(app)
 
     @app.route("/", methods=["GET"])

@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
+from app.cache import invalidate_recs
 from app.models import CartItem, Product
 
 cart_bp = Blueprint(
@@ -91,6 +92,8 @@ def add_to_cart():
 
     db.session.commit()
 
+    invalidate_recs(user_id)
+
     return jsonify({
         "message": "Product added to cart successfully",
         "cart_item": cart_item_to_dict(cart_item)
@@ -169,6 +172,7 @@ def update_cart_item(cart_item_id):
 
     cart_item.quantity = quantity
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Cart quantity updated successfully",
@@ -193,6 +197,7 @@ def remove_from_cart(cart_item_id):
 
     db.session.delete(cart_item)
     db.session.commit()
+    invalidate_recs(user_id)
 
     return jsonify({
         "message": "Product removed from cart successfully"

@@ -17,6 +17,7 @@ os.environ["JWT_SECRET_KEY"] = "test-secret-key-that-is-long-enough-for-hs256"
 
 from app import create_app  # noqa: E402
 from app import ai_clients  # noqa: E402
+from app import cache  # noqa: E402
 from app.extensions import db  # noqa: E402
 from app.models import Interaction, Product, Review, User  # noqa: E402
 from app.routes import ai as ai_routes  # noqa: E402
@@ -39,6 +40,8 @@ def app(monkeypatch):
     monkeypatch.setattr(ai_routes, "call", service_down)
     monkeypatch.setattr(survey_routes, "call", service_down)
     monkeypatch.setattr(ai_clients, "call", service_down)
+    # Fresh databases reuse user IDs, so start every test with an empty cache.
+    monkeypatch.setattr(cache, "_backend", cache._MemoryCache())
     application = create_app()
     application.testing = True
     with application.app_context():
@@ -189,3 +192,16 @@ def test_similar_products_category_fallback(client):
     data = client.get("/api/similar/1").get_json()
     assert data["source"] == "same-category fallback"
     assert [p["id"] for p in data["recommendations"]] == [2]
+
+
+def test_recommendations_cached_and_invalidated_on_change(client):
+    token = login(client)["access_token"]
+    first = client.get("/api/recommendations/me", headers=auth(token)).get_json()
+    second = client.get("/api/recommendations/me", headers=auth(token)).get_json()
+    assert first["cached"] is False and second["cached"] is True
+    assert second["recommendations"] == first["recommendations"]
+    # Taking the survey must invalidate the cached list.
+    client.post("/api/survey/", headers=auth(token), json={"answers": {"interests": ["Laptops"]}})
+    third = client.get("/api/recommendations/me", headers=auth(token)).get_json()
+    assert third["cached"] is False
+    assert "survey" in third["sources_used"]
