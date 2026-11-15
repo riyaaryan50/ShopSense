@@ -39,9 +39,32 @@ def ml_url():
     return _url("ML_SERVICE_URL", "")
 
 
+# name -> WSGI (Flask) app. When a service URL is "inproc://<name>" the call is
+# dispatched to that app in the same process (used by the Vercel deployment,
+# where every service runs inside one serverless function).
+INPROCESS_APPS = {}
+
+
+def _call_inprocess(method, name, path, **kwargs):
+    target = INPROCESS_APPS.get(name)
+    if target is None:
+        raise ServiceUnavailable(f"in-process service '{name}' not registered")
+    response = target.test_client().open(
+        path, method=method, json=kwargs.get("json"),
+        query_string=kwargs.get("params"), headers=kwargs.get("headers"))
+    if response.status_code >= 500:
+        raise ServiceUnavailable(f"inproc://{name}{path} returned {response.status_code}")
+    data = response.get_json(silent=True)
+    if data is None:
+        raise ServiceUnavailable("invalid JSON from in-process service")
+    return response.status_code, data
+
+
 def call(method, base, path, timeout=TIMEOUT, **kwargs):
     if not base:
         raise ServiceUnavailable("service URL not configured")
+    if base.startswith("inproc://"):
+        return _call_inprocess(method, base[len("inproc://"):], path, **kwargs)
     try:
         response = _http.request(method, f"{base}{path}", timeout=timeout, **kwargs)
     except requests.RequestException as error:

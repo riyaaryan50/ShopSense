@@ -1,5 +1,7 @@
 
-const API_URL = "http://127.0.0.1:5000/api/interactions/";
+import { API_URL as API_BASE } from "../config";
+
+const API_URL = `${API_BASE}/interactions/`;
 
 function getToken() {
   return (

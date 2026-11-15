@@ -1,11 +1,15 @@
 // Service URLs. Override with VITE_API_URL / VITE_NLP_URL in frontend/.env
 export const API_URL =
-  import.meta.env.VITE_API_URL || "http://127.0.0.1:5000/api";
+  import.meta.env.VITE_API_URL ?? "http://127.0.0.1:5000/api";
 
 // Member 4's NLP service: semantic search, review sentiment and the chatbot
 // WebSocket (Socket.IO namespace /chat).
 export const NLP_URL =
-  import.meta.env.VITE_NLP_URL || "http://127.0.0.1:5002";
+  import.meta.env.VITE_NLP_URL ?? "http://127.0.0.1:5002";
+
+// "rest" skips the WebSocket (serverless hosts such as Vercel cannot keep
+// sockets open); the chatbot then uses POST /api/nlp/chat.
+export const CHAT_TRANSPORT = import.meta.env.VITE_CHAT_TRANSPORT || "websocket";
 
 export function getToken() {
   return (

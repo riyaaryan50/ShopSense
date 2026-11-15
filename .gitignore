@@ -35,3 +35,8 @@ backend/instance/
 nlp-service/artifacts/*
 !nlp-service/artifacts/.gitignore
 .pytest_cache/
+
+# Public frontend build settings (no secrets)
+!frontend/.env.production
+
+.vercel

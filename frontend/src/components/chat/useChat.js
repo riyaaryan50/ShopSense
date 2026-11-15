@@ -1,7 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 
-import { NLP_URL, getCurrentUser, getToken } from "../../config";
+import { CHAT_TRANSPORT, NLP_URL, getCurrentUser, getToken } from "../../config";
+
+const REST_ONLY = CHAT_TRANSPORT === "rest";
+
+const GREETING = {
+  type: "text",
+  text: "Hi! I'm the ShopSense AI assistant. Ask me to find, recommend or compare products, or what customers think about one.",
+  suggestions: [
+    "Find wireless headphones under 3000",
+    "Recommend something for me",
+    "Compare Galaxy Tab A9 and Tab S9 FE",
+    "What do people say about the HP printer?",
+  ],
+};
 
 let nextId = 1;
 const makeId = () => nextId++;
@@ -11,7 +24,9 @@ const makeId = () => nextId++;
  * Falls back to the REST endpoint POST /api/nlp/chat if the socket is down.
  */
 export default function useChat() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(() =>
+    REST_ONLY ? [{ id: makeId(), sender: "bot", data: GREETING }] : []
+  );
   const [connected, setConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const socketRef = useRef(null);
@@ -23,6 +38,7 @@ export default function useChat() {
   }, []);
 
   useEffect(() => {
+    if (REST_ONLY) return undefined;
     const socket = io(`${NLP_URL}/chat`, {
       transports: ["websocket", "polling"],
       reconnectionAttempts: 5,
@@ -43,11 +59,7 @@ export default function useChat() {
               {
                 id: makeId(),
                 sender: "bot",
-                data: {
-                  type: "text",
-                  text: "Hi! I'm the ShopSense AI assistant (offline mode – using the REST API). Ask me to find, recommend or compare products.",
-                  suggestions: ["Find wireless headphones under 3000", "Recommend something for me"],
-                },
+                data: GREETING,
               },
             ]
       );
@@ -102,5 +114,5 @@ export default function useChat() {
     [addBotMessage]
   );
 
-  return { messages, send, connected, typing };
+  return { messages, send, connected, typing, transport: REST_ONLY ? "rest" : "websocket" };
 }

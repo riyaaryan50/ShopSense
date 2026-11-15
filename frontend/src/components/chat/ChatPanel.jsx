@@ -13,7 +13,7 @@ const STARTERS = [
 
 /** Full chat UI used by both the floating widget and the /chatbot page. */
 function ChatPanel({ heightClass = "h-[460px]", onNavigate }) {
-  const { messages, send, connected, typing } = useChat();
+  const { messages, send, connected, typing, transport } = useChat();
   const [input, setInput] = useState("");
   const bottomRef = useRef(null);
 
@@ -34,8 +34,16 @@ function ChatPanel({ heightClass = "h-[460px]", onNavigate }) {
   return (
     <div className="flex flex-col">
       <div className="flex items-center justify-end gap-2 border-b border-violet-50 bg-white px-4 py-1.5 text-[11px] text-gray-500">
-        <span className={`h-2 w-2 rounded-full ${connected ? "bg-green-500" : "bg-amber-400"}`} />
-        {connected ? "Live (WebSocket)" : "Connecting… (REST fallback)"}
+        <span
+          className={`h-2 w-2 rounded-full ${
+            connected || transport === "rest" ? "bg-green-500" : "bg-amber-400"
+          }`}
+        />
+        {transport === "rest"
+          ? "Online (REST)"
+          : connected
+            ? "Live (WebSocket)"
+            : "Connecting… (REST fallback)"}
       </div>
 
       <div className={`${heightClass} space-y-4 overflow-y-auto bg-slate-50 p-4`}>

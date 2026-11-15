@@ -28,6 +28,14 @@ import { API_URL as API_BASE, getToken } from "../config";
 
 const API_URL = `${API_BASE}/products/`;
 const MIN_SEMANTIC_SCORE = 0.2;
+const PAGE_SIZE = 8;
+
+const SORTERS = {
+  relevance: null,
+  price_asc: (a, b) => Number(a.price) - Number(b.price),
+  price_desc: (a, b) => Number(b.price) - Number(a.price),
+  name: (a, b) => a.name.localeCompare(b.name),
+};
 
 const categories = [
   { name: "All", icon: Sparkles },
@@ -53,6 +61,8 @@ function Home() {
   const [recommendationError, setRecommendationError] = useState("");
   const [recommendationMeta, setRecommendationMeta] = useState(null);
   const [semanticResults, setSemanticResults] = useState(null);
+  const [sortBy, setSortBy] = useState("relevance");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loggedInUser, setLoggedInUser] = useState(() => {
     try {
       const user =
@@ -225,7 +235,7 @@ useEffect(() => {
   const semanticActive =
     semanticResults && semanticResults.query === searchQuery.trim();
 
-  const filteredProducts = semanticActive
+  const matchedProducts = semanticActive
     ? semanticResults.results
         .filter((item) =>
           semanticResults.engine === "keyword-fallback" ||
@@ -244,6 +254,11 @@ useEffect(() => {
           (product.description || "").toLowerCase().includes(query);
         return matchesSearch && matchesCategory(product);
       });
+
+  const filteredProducts = SORTERS[sortBy]
+    ? [...matchedProducts].sort(SORTERS[sortBy])
+    : matchedProducts;
+  const visibleProducts = filteredProducts.slice(0, visibleCount);
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -662,8 +677,9 @@ useEffect(() => {
           {/* Product Cards */}
           {!loading && !error && filteredProducts.length > 0 && (
             <>
-              <p className="text-sm text-gray-500 mb-5 flex flex-wrap items-center gap-2">
-                Showing {filteredProducts.length} of {products.length} products
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm text-gray-500 flex flex-wrap items-center gap-2">
+                Showing {visibleProducts.length} of {filteredProducts.length} products
                 {semanticActive && (
                   <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 text-purple-700 px-3 py-1 text-xs font-semibold">
                     <Sparkles size={13} />
@@ -674,8 +690,23 @@ useEffect(() => {
                 )}
               </p>
 
+              <label className="flex items-center gap-2 text-sm text-gray-600">
+                Sort by
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-purple-500"
+                >
+                  <option value="relevance">{semanticActive ? "Relevance" : "Featured"}</option>
+                  <option value="price_asc">Price: low to high</option>
+                  <option value="price_desc">Price: high to low</option>
+                  <option value="name">Name</option>
+                </select>
+              </label>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {filteredProducts.map((product) => {
+                {visibleProducts.map((product) => {
                   const isWishlisted = wishlist.some(
                     (item) => item.id === product.id
                   );
@@ -768,6 +799,17 @@ useEffect(() => {
                   );
                 })}
               </div>
+
+              {visibleProducts.length < filteredProducts.length && (
+                <div className="mt-10 text-center">
+                  <button
+                    onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
+                    className="rounded-xl border border-purple-200 bg-white px-8 py-3 font-semibold text-purple-700 hover:bg-purple-50"
+                  >
+                    Load More ({filteredProducts.length - visibleProducts.length} more)
+                  </button>
+                </div>
+              )}
             </>
           )}
         </section>

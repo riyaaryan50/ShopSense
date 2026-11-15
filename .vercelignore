@@ -1,0 +1,15 @@
+.venv
+**/node_modules
+frontend/dist
+docs
+**/*.db
+**/.env
+backend/instance
+backend/tests
+nlp-service/tests
+nlp-service/artifacts
+nlp-service/reports
+nlp-service/benchmarks
+recommendation_model/*.pth
+**/__pycache__
+**/.pytest_cache

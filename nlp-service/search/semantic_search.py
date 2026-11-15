@@ -15,13 +15,43 @@ import logging
 import threading
 import time
 
-import faiss
 import numpy as np
+
+try:
+    import faiss
+except ImportError:  # e.g. serverless builds with a tight size limit
+    faiss = None
 
 import config
 from common.text_cleaning import clean_text, product_text
 
 log = logging.getLogger(__name__)
+
+
+class NumpyIndexFlatIP:
+    """Exact drop-in for faiss.IndexFlatIP (same results; fine for small catalogues)."""
+
+    def __init__(self, dim):
+        self.vectors = np.zeros((0, dim), dtype="float32")
+
+    @property
+    def ntotal(self):
+        return self.vectors.shape[0]
+
+    def add(self, vectors):
+        self.vectors = np.vstack([self.vectors, vectors.astype("float32")])
+
+    def search(self, queries, k):
+        scores = queries @ self.vectors.T
+        order = np.argsort(-scores, axis=1)[:, :k]
+        return np.take_along_axis(scores, order, axis=1), order
+
+    def reconstruct_n(self, start, n):
+        return self.vectors[start:start + n]
+
+
+def new_flat_ip_index(dim):
+    return faiss.IndexFlatIP(dim) if faiss is not None else NumpyIndexFlatIP(dim)
 
 
 # ---------------------------------------------------------------------- #
@@ -130,7 +160,7 @@ class SemanticSearchIndex:
             if vectors is None:
                 vectors = self.embedder.encode(texts)
 
-            index = faiss.IndexFlatIP(vectors.shape[1])
+            index = new_flat_ip_index(vectors.shape[1])
             index.add(vectors)
 
             self.index = index
@@ -153,6 +183,8 @@ class SemanticSearchIndex:
                 self.artifact_dir / "index_meta.json")
 
     def _save(self, fingerprint):
+        if faiss is None:
+            return
         self.artifact_dir.mkdir(parents=True, exist_ok=True)
         index_path, meta_path = self._paths()
         faiss.write_index(self.index, str(index_path))
@@ -166,7 +198,7 @@ class SemanticSearchIndex:
 
     def _load_cached(self, fingerprint, expected):
         index_path, meta_path = self._paths()
-        if not (index_path.exists() and meta_path.exists()):
+        if faiss is None or not (index_path.exists() and meta_path.exists()):
             return None
         try:
             meta = json.loads(meta_path.read_text())

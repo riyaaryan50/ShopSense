@@ -11,6 +11,7 @@ import {
   ArrowRight,
   ShoppingBag,
 } from "lucide-react";
+import { API_URL } from "../config";
 
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +47,7 @@ function Signup() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/auth/register",
+        `${API_URL}/auth/register`,
         {
           method: "POST",
           headers: {
