@@ -11,8 +11,10 @@ import InteractionHistory from "./pages/InteractionHistory";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Chatbot from "./pages/Chatbot";
+import Survey from "./pages/Survey";
 
 import Footer from "./components/Footer";
+import ChatWidget from "./components/chat/ChatWidget";
 
 function App() {
   return (
@@ -27,8 +29,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/chatbot" element={<Chatbot />} />
+          <Route path="/survey" element={<Survey />} />
         </Routes>
 
+        <ChatWidget />
         <Footer />
       </BrowserRouter>
     </CartProvider>

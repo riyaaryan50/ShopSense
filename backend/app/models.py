@@ -148,3 +148,21 @@ class WishlistItem(db.Model):
             name="unique_user_wishlist_product"
         ),
     )
+
+
+# 7. SURVEY RESPONSES TABLE
+# Onboarding preference survey. Answers are stored as JSON so the
+# questionnaire can evolve without schema migrations. The latest row per
+# user is used for survey-based (cold-start) recommendations.
+class SurveyResponse(db.Model):
+    __tablename__ = "survey_responses"
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(
+        db.Integer, db.ForeignKey("users.id"), nullable=False, index=True
+    )
+    answers = db.Column(db.JSON, nullable=False, default=dict)
+    created_at = db.Column(
+        db.DateTime(timezone=True),
+        default=lambda: datetime.now(timezone.utc)
+    )

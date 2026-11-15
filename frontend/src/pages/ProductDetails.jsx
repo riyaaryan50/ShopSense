@@ -9,9 +9,6 @@ import {
   ShieldCheck,
   Truck,
   Star,
-  ThumbsUp,
-  ThumbsDown,
-  TrendingDown,
   MessageSquare,
   Package,
 } from "lucide-react";
@@ -19,6 +16,18 @@ import {
 import { useCart } from "../context/CartContext";
 import { logInteraction } from "../services/interactionService";
 import { getProducts } from "../services/productService";
+import {
+  getReviewSummary,
+  getSimilarProducts,
+  submitReview,
+} from "../services/aiService";
+import SentimentSummary from "../components/SentimentSummary";
+
+const SENTIMENT_BADGE = {
+  positive: "bg-green-100 text-green-700",
+  negative: "bg-red-100 text-red-700",
+  neutral: "bg-yellow-100 text-yellow-800",
+};
 
 
 
@@ -32,6 +41,13 @@ function ProductDetails() {
 
   const [recommendedProducts, setRecommendedProducts] = useState([]);
   const [recommendationsLoading, setRecommendationsLoading] = useState(false);
+  const [similarSource, setSimilarSource] = useState("");
+
+  const [reviewSummary, setReviewSummary] = useState(null);
+  const [reviewLoading, setReviewLoading] = useState(true);
+  const [reviewError, setReviewError] = useState("");
+  const [reviewForm, setReviewForm] = useState({ rating: 5, comment: "" });
+  const [reviewMessage, setReviewMessage] = useState("");
 
   // Fetch all products
   useEffect(() => {
@@ -65,22 +81,67 @@ function ProductDetails() {
     fetchProducts();
   }, []);
 
-  // Fetch AI recommendations
+  // Review sentiment summary (Member 4 NLP service via backend proxy)
+  const loadReviewSummary = async () => {
+    try {
+      setReviewLoading(true);
+      setReviewError("");
+      setReviewSummary(await getReviewSummary(id));
+    } catch (err) {
+      setReviewSummary(null);
+      setReviewError(err.message);
+    } finally {
+      setReviewLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    let cancelled = false;
+    getReviewSummary(id)
+      .then((data) => {
+        if (!cancelled) {
+          setReviewSummary(data);
+          setReviewError("");
+        }
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setReviewSummary(null);
+          setReviewError(err.message);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setReviewLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
+
+  const handleSubmitReview = async (event) => {
+    event.preventDefault();
+    setReviewMessage("");
+    try {
+      await submitReview(Number(id), reviewForm.rating, reviewForm.comment);
+      setReviewForm({ rating: 5, comment: "" });
+      setReviewMessage("Thanks! Your review was added and analysed.");
+      await loadReviewSummary();
+    } catch (err) {
+      setReviewMessage(
+        err.status === 401 ? "Please log in to write a review." : err.message
+      );
+    }
+  };
+
+  // Similar products: content-based model, falling back to NLP embeddings
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
         setRecommendationsLoading(true);
         setRecommendedProducts([]);
 
-        const response = await fetch(
-          `http://127.0.0.1:5001/api/recommendations/${id}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Unable to fetch recommendations");
-        }
-
-        const data = await response.json();
+        const data = await getSimilarProducts(id, 5);
+        setSimilarSource(data.source || "");
 
         const formattedRecommendations = (
           data.recommendations || []
@@ -182,21 +243,6 @@ function ProductDetails() {
     );
   }
 
-  const reviewAnalysis = {
-    positive: 85,
-    negative: 10,
-    neutral: 5,
-    likes: [
-      "Good product quality and performance.",
-      "Comfortable for everyday usage.",
-      "Value for money according to customers.",
-    ],
-    complaints: [
-      "Some customers reported minor issues.",
-      "Product availability and delivery experience may vary.",
-    ],
-  };
-
   const productPrice = Number(product.price) || 0;
 
   return (
@@ -255,9 +301,14 @@ function ProductDetails() {
             )}
 
             <div className="flex items-center gap-2 mt-4">
-              <Star className="text-gray-300" size={19} />
-              <span className="text-gray-400 text-sm">
-                Rating not available
+              <Star
+                className={reviewSummary?.average_rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
+                size={19}
+              />
+              <span className="text-gray-500 text-sm">
+                {reviewSummary?.average_rating
+                  ? `${reviewSummary.average_rating} / 5 · ${reviewSummary.total_reviews} reviews`
+                  : "Rating not available"}
               </span>
             </div>
 
@@ -491,7 +542,7 @@ function ProductDetails() {
                 Recommended Products for You
               </h2>
               <p className="text-gray-500 text-sm">
-                AI-powered recommendations based on product similarity.
+                Similar products{similarSource ? ` · ${similarSource}` : ""}.
               </p>
             </div>
           </div>
@@ -557,7 +608,7 @@ function ProductDetails() {
 
         </section>
 
-        {/* AI Review Analysis */}
+        {/* AI Review Analysis (VADER sentiment + TF-IDF themes) */}
         <section className="mt-14 bg-white rounded-3xl p-6 md:p-10 shadow-sm">
           <div className="flex flex-wrap items-center gap-3">
             <div className="bg-purple-100 text-purple-600 p-3 rounded-xl">
@@ -565,117 +616,103 @@ function ProductDetails() {
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold">
-                AI Review Analysis
-              </h2>
+              <h2 className="text-2xl font-bold">AI Review Analysis</h2>
               <p className="text-gray-500 text-sm">
-                Understand customer opinions quickly.
+                Sentiment of every customer review (VADER) and the themes they mention.
               </p>
             </div>
-
-            <span className="ml-auto text-xs bg-yellow-100 text-yellow-800 px-3 py-2 rounded-full">
-              Sample Analysis
-            </span>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 mt-9">
-            <div>
-              <h3 className="font-bold text-lg mb-5">
-                Customer Sentiment
-              </h3>
+          {reviewLoading && (
+            <p className="mt-8 text-gray-500">Analysing reviews…</p>
+          )}
 
-              <div className="text-center mb-6">
-                <h2 className="text-5xl font-bold text-green-600">
-                  {reviewAnalysis.positive}%
-                </h2>
-                <p className="text-gray-500 mt-2">
-                  Positive sentiment (illustrative)
-                </p>
-              </div>
-
-              <div className="flex h-4 rounded-full overflow-hidden">
-                <div
-                  className="bg-green-500"
-                  style={{ width: `${reviewAnalysis.positive}%` }}
-                />
-                <div
-                  className="bg-red-400"
-                  style={{ width: `${reviewAnalysis.negative}%` }}
-                />
-                <div
-                  className="bg-yellow-400"
-                  style={{ width: `${reviewAnalysis.neutral}%` }}
-                />
-              </div>
-
-              <div className="space-y-4 mt-6">
-                {[
-                  { name: "Positive", value: reviewAnalysis.positive, color: "bg-green-500" },
-                  { name: "Negative", value: reviewAnalysis.negative, color: "bg-red-400" },
-                  { name: "Neutral", value: reviewAnalysis.neutral, color: "bg-yellow-400" },
-                ].map((item) => (
-                  <div key={item.name} className="flex justify-between text-sm">
-                    <span className="flex items-center gap-2">
-                      <span className={`w-3 h-3 rounded-full ${item.color}`} />
-                      {item.name}
-                    </span>
-                    <strong>{item.value}%</strong>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-bold text-lg mb-5">
-                Review Insights
-              </h3>
-
-              <div className="bg-green-50 rounded-2xl p-5 mb-5">
-                <h4 className="font-semibold text-green-700 flex items-center gap-2">
-                  <ThumbsUp size={18} />
-                  What Customers Like
-                </h4>
-
-                <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                  {reviewAnalysis.likes.map((item, index) => (
-                    <li key={index} className="flex gap-2">
-                      <span className="text-green-600">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-red-50 rounded-2xl p-5">
-                <h4 className="font-semibold text-red-700 flex items-center gap-2">
-                  <ThumbsDown size={18} />
-                  Common Complaints
-                </h4>
-
-                <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                  {reviewAnalysis.complaints.map((item, index) => (
-                    <li key={index} className="flex gap-2">
-                      <span className="text-red-500">•</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-8 bg-purple-50 rounded-2xl p-5">
-            <div className="flex items-center gap-2 text-purple-700 font-bold">
-              <MessageSquare size={19} />
-              AI Verdict
-            </div>
-
-            <p className="text-gray-600 mt-3 leading-7">
-              This section will summarize real customer reviews
-              and highlight important product advantages and
-              complaints after NLP integration.
+          {!reviewLoading && reviewError && (
+            <p className="mt-8 rounded-xl bg-yellow-50 p-4 text-sm text-yellow-800">
+              Review analysis is unavailable right now ({reviewError}).
             </p>
-          </div>
+          )}
+
+          {!reviewLoading && reviewSummary && (
+            <>
+              <div className="mt-8">
+                <SentimentSummary summary={reviewSummary} />
+              </div>
+
+              <div className="mt-8 bg-purple-50 rounded-2xl p-5">
+                <div className="flex items-center gap-2 text-purple-700 font-bold">
+                  <MessageSquare size={19} />
+                  AI Verdict
+                </div>
+                <p className="text-gray-700 mt-3 leading-7">{reviewSummary.verdict}</p>
+              </div>
+
+              {reviewSummary.reviews?.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="font-bold text-lg mb-4">
+                    Customer Reviews ({reviewSummary.reviews.length})
+                  </h3>
+                  <ul className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+                    {reviewSummary.reviews.map((review) => (
+                      <li key={review.id} className="rounded-xl border border-gray-100 p-4">
+                        <div className="flex flex-wrap items-center gap-2 text-sm">
+                          <span className="text-yellow-500" aria-label={`${review.rating} stars`}>
+                            {"★".repeat(review.rating)}
+                            <span className="text-gray-300">{"★".repeat(5 - review.rating)}</span>
+                          </span>
+                          <span
+                            className={`rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize ${SENTIMENT_BADGE[review.sentiment]}`}
+                          >
+                            {review.sentiment} ({review.compound > 0 ? "+" : ""}{review.compound})
+                          </span>
+                        </div>
+                        <p className="mt-2 text-sm text-gray-600 leading-6">{review.comment}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Write a review */}
+          <form onSubmit={handleSubmitReview} className="mt-8 rounded-2xl border border-gray-200 p-5">
+            <h3 className="font-bold">Write a review</h3>
+            <div className="mt-3 flex items-center gap-1" role="radiogroup" aria-label="Rating">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <button
+                  type="button"
+                  key={value}
+                  role="radio"
+                  aria-checked={reviewForm.rating === value}
+                  aria-label={`${value} star${value > 1 ? "s" : ""}`}
+                  onClick={() => setReviewForm((f) => ({ ...f, rating: value }))}
+                >
+                  <Star
+                    size={24}
+                    className={value <= reviewForm.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
+                  />
+                </button>
+              ))}
+            </div>
+            <textarea
+              value={reviewForm.comment}
+              onChange={(e) => setReviewForm((f) => ({ ...f, comment: e.target.value }))}
+              required
+              rows={3}
+              placeholder="What did you like or dislike?"
+              className="mt-3 w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-purple-500"
+            />
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <button
+                type="submit"
+                className="rounded-xl bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-purple-700"
+              >
+                Submit review
+              </button>
+              {reviewMessage && <p className="text-sm text-gray-600">{reviewMessage}</p>}
+            </div>
+          </form>
         </section>
 
         {/* Bottom Section */}

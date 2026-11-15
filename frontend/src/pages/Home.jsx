@@ -13,13 +13,21 @@ import {
   BookOpen,
   House,
   Bot,
+  ClipboardList,
 } from "lucide-react";
 
 import Navbar from "../components/Navbar";
 import { useCart } from "../context/CartContext";
 import { logInteraction } from "../services/interactionService";
+import {
+  getMyRecommendations,
+  getPopular,
+  semanticSearch,
+} from "../services/aiService";
+import { API_URL as API_BASE, getToken } from "../config";
 
-const API_URL = "http://127.0.0.1:5000/api/products/";
+const API_URL = `${API_BASE}/products/`;
+const MIN_SEMANTIC_SCORE = 0.2;
 
 const categories = [
   { name: "All", icon: Sparkles },
@@ -43,6 +51,8 @@ function Home() {
   const [personalizedProducts, setPersonalizedProducts] = useState([]);
   const [recommendationLoading, setRecommendationLoading] = useState(false);
   const [recommendationError, setRecommendationError] = useState("");
+  const [recommendationMeta, setRecommendationMeta] = useState(null);
+  const [semanticResults, setSemanticResults] = useState(null);
   const [loggedInUser, setLoggedInUser] = useState(() => {
     try {
       const user =
@@ -92,65 +102,61 @@ function Home() {
     fetchProducts();
   }, []);
 
+// Unified recommendations from the backend gateway: blends the content-based
+// model (history), survey answers (NLP semantic match), the hybrid NCF service
+// when deployed, and a popularity baseline. Guests get popular products.
 const fetchPersonalizedRecommendations = async (user) => {
-  if (!user?.id) {
-    setPersonalizedProducts([]);
-    setRecommendationError("");
-    return;
-  }
-
-  const token =
-    localStorage.getItem("access_token") ||
-    sessionStorage.getItem("access_token");
-
-  if (!token) {
-    setPersonalizedProducts([]);
-    return;
-  }
-
   try {
     setRecommendationLoading(true);
     setRecommendationError("");
 
-    console.log(
-      "Calling recommendation API for user:",
-      user.id
-    );
+    const data = user?.id && getToken()
+      ? await getMyRecommendations(5)
+      : await getPopular(5);
 
-    const response = await fetch(
-      `http://127.0.0.1:5001/api/personalized/${user.id}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    setRecommendationMeta({
+      explanation: data.explanation ||
+        "Popular with other shoppers right now. Log in or take the survey for personal picks.",
+      hasSurvey: Boolean(data.has_survey),
+      coldStart: data.cold_start ?? true,
+    });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.error || "Unable to fetch recommendations."
-      );
-    }
-
-    const recommendations = (data.recommendations || []).map(
-      (product) => ({
+    setPersonalizedProducts(
+      (data.recommendations || []).map((product) => ({
         ...product,
         image: product.image_url || "",
-      })
+      }))
     );
-
-    setPersonalizedProducts(recommendations);
-
   } catch (error) {
-    console.error("Personalized recommendation error:", error);
+    console.error("Recommendation error:", error);
     setRecommendationError(error.message);
   } finally {
     setRecommendationLoading(false);
   }
 };
+
+// Semantic search (Member 4 NLP service via the backend proxy).
+useEffect(() => {
+  const query = searchQuery.trim();
+  // Short queries use keyword filtering; stale semantic results are ignored
+  // because `semanticActive` requires the query to match.
+  if (query.length < 3) return;
+  let cancelled = false;
+  const timer = setTimeout(async () => {
+    try {
+      const data = await semanticSearch(query, 12);
+      if (!cancelled) {
+        setSemanticResults({ query, engine: data.engine, results: data.results || [] });
+      }
+    } catch {
+      if (!cancelled) setSemanticResults(null);
+    }
+  }, 350);
+  return () => {
+    cancelled = true;
+    clearTimeout(timer);
+  };
+}, [searchQuery]);
 
 // Fetch recommendations and respond to login/logout
 
@@ -211,20 +217,33 @@ const fetchPersonalizedRecommendations = async (user) => {
 
 
 
-  // Search and category filtering
-  const filteredProducts = products.filter((product) => {
-    const query = searchQuery.toLowerCase();
+  const matchesCategory = (product) =>
+    selectedCategory === "All" || product.category === selectedCategory;
 
-    const matchesSearch =
-      product.name.toLowerCase().includes(query) ||
-      (product.description || "").toLowerCase().includes(query);
+  // Semantic results are used when they belong to the current query;
+  // otherwise fall back to simple keyword filtering.
+  const semanticActive =
+    semanticResults && semanticResults.query === searchQuery.trim();
 
-    const matchesCategory =
-      selectedCategory === "All" ||
-      product.category === selectedCategory;
-
-    return matchesSearch && matchesCategory;
-  });
+  const filteredProducts = semanticActive
+    ? semanticResults.results
+        .filter((item) =>
+          semanticResults.engine === "keyword-fallback" ||
+          (item.score ?? 1) >= MIN_SEMANTIC_SCORE
+        )
+        .map((item) => ({
+          ...(products.find((p) => p.id === item.id) || item),
+          image: item.image_url || "",
+          semanticScore: item.score,
+        }))
+        .filter(matchesCategory)
+    : products.filter((product) => {
+        const query = searchQuery.toLowerCase();
+        const matchesSearch =
+          product.name.toLowerCase().includes(query) ||
+          (product.description || "").toLowerCase().includes(query);
+        return matchesSearch && matchesCategory(product);
+      });
 
   const handleAddToCart = (product) => {
     addToCart(product);
@@ -370,18 +389,22 @@ const fetchPersonalizedRecommendations = async (user) => {
               </h2>
 
               <p className="mt-3 text-purple-100 max-w-xl">
-                ShopSense AI is designed to understand your interests
-                and help you discover relevant products.
+                Answer a 1-minute survey about what you study, how you'll
+                use it and your budget. Our AI matches your answers to every
+                product and keeps learning from what you browse.
               </p>
             </div>
 
-            <div className="bg-white/15 rounded-2xl p-6 min-w-48 text-center">
-              <Sparkles size={36} className="mx-auto mb-2" />
-              <p className="font-bold text-xl">AI Discovery</p>
-              <p className="text-sm text-purple-100">
-                Coming soon
+            <Link
+              to="/survey"
+              className="bg-white text-purple-700 hover:bg-purple-50 rounded-2xl px-7 py-5 min-w-48 text-center shadow-lg transition"
+            >
+              <ClipboardList size={32} className="mx-auto mb-2" />
+              <p className="font-bold text-lg">
+                {recommendationMeta?.hasSurvey ? "Update your survey" : "Take the survey"}
               </p>
-            </div>
+              <p className="text-sm text-purple-500">Get matched picks →</p>
+            </Link>
           </div>
         </section>
 
@@ -389,40 +412,35 @@ const fetchPersonalizedRecommendations = async (user) => {
         <section className="mb-16">
           <div className="mb-7">
             <p className="text-purple-600 font-semibold text-sm">
-              POWERED BY TF-IDF + COSINE SIMILARITY
+              HYBRID AI · BROWSING HISTORY + SURVEY + POPULARITY
             </p>
 
             <h2 className="text-3xl font-bold mt-2">
-              Recommended For You
+              {loggedInUser ? "Recommended For You" : "Trending Now"}
             </h2>
 
             <p className="text-gray-500 mt-2">
-              Products selected based on your shopping interests.
+              {recommendationMeta?.explanation ||
+                "Products selected based on your shopping interests."}
             </p>
+
+            {!loggedInUser && (
+              <p className="text-sm mt-2">
+                <Link to="/login" className="text-purple-600 font-semibold">Log in</Link>
+                {" or "}
+                <Link to="/survey" className="text-purple-600 font-semibold">take the survey</Link>
+                {" for personalised picks."}
+              </p>
+            )}
           </div>
 
-          {!loggedInUser && (
-            <div className="bg-white rounded-2xl p-8 text-center">
-              <Sparkles size={35} className="mx-auto text-purple-500 mb-3" />
-              <h3 className="font-bold text-xl">
-                Log in to see personalized recommendations
-              </h3>
-              <Link
-                to="/login"
-                className="inline-block mt-4 bg-purple-600 text-white px-6 py-3 rounded-xl"
-              >
-                Login
-              </Link>
-            </div>
-          )}
-
-          {loggedInUser && recommendationLoading && (
+          {recommendationLoading && (
             <div className="bg-white rounded-2xl p-8 text-center text-purple-600">
               Finding products you may like...
             </div>
           )}
 
-          {loggedInUser && recommendationError && (
+          {recommendationError && (
             <div className="bg-white rounded-2xl p-8 text-center">
               <p className="text-red-500">{recommendationError}</p>
               <button
@@ -436,8 +454,7 @@ const fetchPersonalizedRecommendations = async (user) => {
               </div>
             )}
 
-            {loggedInUser &&
-              !recommendationLoading &&
+            {!recommendationLoading &&
               !recommendationError &&
               personalizedProducts.length === 0 && (
                 <div className="bg-white rounded-2xl p-8 text-center">
@@ -448,8 +465,7 @@ const fetchPersonalizedRecommendations = async (user) => {
                 </div>
             )}
 
-            {loggedInUser &&
-              !recommendationLoading &&
+            {!recommendationLoading &&
               personalizedProducts.length > 0 && (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
                   {personalizedProducts.map((product) => (
@@ -486,6 +502,13 @@ const fetchPersonalizedRecommendations = async (user) => {
                           <p className="font-bold text-lg mt-3">
                             ₹{Number(product.price).toLocaleString("en-IN")}
                           </p>
+
+                          {product.reason && (
+                            <p className="mt-2 flex items-start gap-1.5 text-xs text-purple-700 bg-purple-50 rounded-lg px-2 py-1.5">
+                              <Sparkles size={13} className="mt-0.5 shrink-0" />
+                              {product.reason}
+                            </p>
+                          )}
                         </div>
                       </Link>
                     </div>
@@ -639,8 +662,16 @@ const fetchPersonalizedRecommendations = async (user) => {
           {/* Product Cards */}
           {!loading && !error && filteredProducts.length > 0 && (
             <>
-              <p className="text-sm text-gray-500 mb-5">
+              <p className="text-sm text-gray-500 mb-5 flex flex-wrap items-center gap-2">
                 Showing {filteredProducts.length} of {products.length} products
+                {semanticActive && (
+                  <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 text-purple-700 px-3 py-1 text-xs font-semibold">
+                    <Sparkles size={13} />
+                    {semanticResults.engine === "keyword-fallback"
+                      ? "Keyword results (AI search offline)"
+                      : `AI semantic search for “${semanticResults.query}”`}
+                  </span>
+                )}
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -698,6 +729,12 @@ const fetchPersonalizedRecommendations = async (user) => {
                           <p className="text-xs text-gray-500 mt-1">{product.brand}</p>
                         )}
 
+                        {product.semanticScore != null && (
+                          <p className="text-[11px] text-purple-600 mt-1 font-medium">
+                            Relevance {Math.round(product.semanticScore * 100)}%
+                          </p>
+                        )}
+
                         <Link to={`/product/${product.id}`}>
                           <h3 className="font-bold text-lg mt-2 hover:text-purple-600">
                             {product.name}
@@ -736,15 +773,7 @@ const fetchPersonalizedRecommendations = async (user) => {
         </section>
       </main>
 
-      {/* Floating AI Chatbot Button */}
-      <Link
-        to="/chatbot"
-        aria-label="Open ShopSense AI Assistant"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-full bg-gradient-to-r from-purple-700 to-indigo-600 px-5 py-4 text-white shadow-xl transition duration-300 hover:scale-105 hover:shadow-2xl"
-      >
-        <Bot size={25} />
-        <span className="font-semibold">Ask AI</span>
-      </Link>
+      {/* The floating AI assistant is rendered globally by <ChatWidget /> */}
     </div>
   );
 }

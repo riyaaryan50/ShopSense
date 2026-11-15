@@ -27,3 +27,11 @@ recommendation_model/interactions.csv
 
 # Backup files
 recommendation_model/recommender_backup.py
+# Local SQLite databases and Flask instance folder
+*.db
+backend/instance/
+
+# NLP service build artifacts (FAISS index, model cache) and local reports
+nlp-service/artifacts/*
+!nlp-service/artifacts/.gitignore
+.pytest_cache/

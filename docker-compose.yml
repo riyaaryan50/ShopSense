@@ -1,0 +1,83 @@
+# ShopSense AI – full stack.   docker compose up --build
+#
+#   frontend        http://localhost:5173   React (Member 1)
+#   backend         http://localhost:5000   Flask REST API + AI gateway (Member 2)
+#   recommendation  http://localhost:5001   content-based + SVD models (Members 1 & 2)
+#   nlp             http://localhost:5002   semantic search, sentiment, chatbot (Member 4)
+#   postgres / redis
+#
+# Member 3's hybrid NCF FastAPI service can be added as "ml" and wired in with
+# ML_SERVICE_URL=http://ml:8000 on the backend.
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: shopsense
+      POSTGRES_PASSWORD: shopsense
+      POSTGRES_DB: shopsense
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U shopsense"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://shopsense:shopsense@postgres:5432/shopsense
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY:-change-me-in-production-please-use-a-long-secret}
+      NLP_SERVICE_URL: http://nlp:5002
+      CB_SERVICE_URL: http://recommendation:5001
+      ML_SERVICE_URL: ${ML_SERVICE_URL:-}
+      DATA_DIR: /data
+    # Seeding is idempotent: creates tables, demo users, synthetic reviews, CSV exports.
+    command: sh -c "python -m scripts.seed_demo_data && gunicorn -w 2 --threads 4 -b 0.0.0.0:5000 run:app"
+    volumes:
+      - ./data:/data
+    ports: ["5000:5000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health')"]
+      interval: 5s
+      retries: 20
+
+  recommendation:
+    build: ./recommendation_model
+    environment:
+      BACKEND_API_URL: http://backend:5000/api
+    ports: ["5001:5001"]
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  nlp:
+    build: ./nlp-service
+    environment:
+      BACKEND_URL: http://backend:5000
+      DATA_DIR: /data
+    volumes:
+      - ./data:/data:ro
+      - nlp_artifacts:/app/artifacts
+    ports: ["5002:5002"]
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    environment:
+      VITE_API_URL: http://localhost:5000/api
+      VITE_NLP_URL: http://localhost:5002
+    ports: ["5173:5173"]
+    depends_on: [backend, nlp]
+
+volumes:
+  pgdata:
+  nlp_artifacts:

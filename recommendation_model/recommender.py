@@ -1,4 +1,5 @@
 
+import os
 import requests
 import pandas as pd
 import numpy as np
@@ -13,7 +14,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 # API CONFIGURATION
 # ==========================================
 
-API_BASE = "http://127.0.0.1:5000/api"
+# Overridable for Docker Compose (e.g. http://backend:5000/api).
+API_BASE = os.getenv("BACKEND_API_URL", "http://127.0.0.1:5000/api")
 
 PRODUCT_API = f"{API_BASE}/products/"
 INTERACTION_API = f"{API_BASE}/interactions/"

@@ -1,6 +1,7 @@
 
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import jwt_required
+from sqlalchemy import or_
 from app.extensions import db
 from app.models import Product
 
@@ -33,14 +34,93 @@ def product_to_dict(product):
     }
 
 
+SORT_OPTIONS = {
+    "price_asc": Product.price.asc(),
+    "price_desc": Product.price.desc(),
+    "name": Product.name.asc(),
+    "newest": Product.created_at.desc(),
+}
+
+
+def keyword_filter(query, text):
+    """Case-insensitive keyword match on name/description/category/brand."""
+    for word in text.split():
+        pattern = f"%{word}%"
+        query = query.filter(or_(
+            Product.name.ilike(pattern),
+            Product.description.ilike(pattern),
+            Product.category.ilike(pattern),
+            Product.brand.ilike(pattern),
+        ))
+    return query
+
+
 # 1. GET ALL PRODUCTS
+# Optional query params: category, q, sort (price_asc|price_desc|name|newest),
+# page + limit. The response stays a plain JSON array (as the frontend
+# expects); the total count is sent in the X-Total-Count header.
 @product_bp.route("/", methods=["GET"])
 def get_products():
-    products = Product.query.all()
+    query = Product.query
 
-    return jsonify([
+    category = request.args.get("category", "").strip()
+    if category and category.lower() != "all":
+        query = query.filter(Product.category == category)
+
+    text = request.args.get("q", "").strip()
+    if text:
+        query = keyword_filter(query, text)
+
+    sort = request.args.get("sort", "").strip()
+    query = query.order_by(SORT_OPTIONS.get(sort, Product.id.asc()))
+
+    total = query.count()
+
+    limit = request.args.get("limit", type=int)
+    page = request.args.get("page", default=1, type=int)
+    if limit:
+        limit = max(1, min(limit, 100))
+        page = max(1, page)
+        query = query.offset((page - 1) * limit).limit(limit)
+
+    response = jsonify([
         product_to_dict(product)
-        for product in products
+        for product in query.all()
+    ])
+    response.headers["X-Total-Count"] = str(total)
+    response.headers["Access-Control-Expose-Headers"] = "X-Total-Count"
+    return response, 200
+
+
+# KEYWORD SEARCH (fallback when the semantic search service is down)
+@product_bp.route("/search", methods=["GET"])
+def search_products():
+    text = request.args.get("q", "").strip()
+
+    if not text:
+        return jsonify({"error": "q is required"}), 400
+
+    products = keyword_filter(Product.query, text).order_by(Product.id).all()
+
+    return jsonify({
+        "query": text,
+        "total": len(products),
+        "results": [product_to_dict(p) for p in products],
+    }), 200
+
+
+# LIST CATEGORIES
+@product_bp.route("/categories", methods=["GET"])
+def list_categories():
+    rows = (
+        db.session.query(Product.category, db.func.count(Product.id))
+        .group_by(Product.category)
+        .order_by(Product.category)
+        .all()
+    )
+    return jsonify([
+        {"name": name, "count": count}
+        for name, count in rows if name
     ]), 200
 
 

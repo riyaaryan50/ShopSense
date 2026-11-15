@@ -1,0 +1,241 @@
+id,user_id,product_id,rating,comment,created_at,synthetic
+1,8,2,1,Very bad experience. RAM is not upgradeable so it will age quickly. The display is dull and colours look washed out.,2026-10-18T06:48:34.554361,1
+2,5,2,5,"Excellent purchase. Fast SSD storage, apps open instantly. Handles coding, browser tabs and Zoom classes smoothly.",2026-10-24T15:48:34.554361,1
+3,16,2,2,Not satisfied. 8GB soldered RAM cannot be upgraded which is frustrating. At least the keyboard is comfortable for typing long reports.,2026-11-02T02:48:34.554361,1
+4,9,2,5,Absolutely love it! Build quality feels solid and it is light enough to carry daily. Performance is snappy for assignments and light programming.,2026-08-27T02:48:34.554361,1
+5,20,2,5,"Highly recommended for students. The SSD makes boot up really fast. Battery backup is excellent, around seven hours of note taking.",2026-07-28T06:48:34.554361,1
+6,18,2,4,Good value for money. The keyboard is comfortable for typing long reports. Only downside: 8GB soldered RAM cannot be upgraded which is frustrating.,2026-08-21T05:48:34.554361,1
+7,7,2,4,Happy with this purchase. The keyboard is comfortable for typing long reports. Only downside: 8GB soldered RAM cannot be upgraded which is frustrating.,2026-07-30T12:48:34.554361,1
+8,6,2,4,"Good value for money. Battery backup is excellent, around seven hours of note taking. Only downside: it heats up a lot near the keyboard during calls.",2026-09-24T17:48:34.554361,1
+9,13,2,5,"Absolutely love it! Handles coding, browser tabs and Zoom classes smoothly. Build quality feels solid and it is light enough to carry daily.",2026-09-24T02:48:34.554361,1
+10,17,2,2,Below average. 8GB soldered RAM cannot be upgraded which is frustrating. At least battery life easily lasts through a full day of lectures.,2026-10-24T16:48:34.554361,1
+11,15,2,4,Good value for money. The keyboard is comfortable for typing long reports. Only downside: 8GB soldered RAM cannot be upgraded which is frustrating.,2026-09-07T05:48:34.554361,1
+12,19,2,4,Good value for money. Build quality feels solid and it is light enough to carry daily. Only downside: rAM is not upgradeable so it will age quickly.,2026-10-31T17:48:34.554361,1
+13,20,3,5,"Superb product. Handles coding, browser tabs and Zoom classes smoothly. The keyboard is comfortable for typing long reports.",2026-08-08T20:48:34.554361,1
+14,5,3,4,Solid choice for college. Performance is snappy for assignments and light programming. Only downside: battery life is disappointing for a college day.,2026-08-29T00:48:34.554361,1
+15,6,3,2,Disappointing. The display is dull and colours look washed out. At least build quality feels solid and it is light enough to carry daily.,2026-10-17T11:48:34.554361,1
+16,10,3,3,Mixed feelings about this one. The Full HD anti-glare display is easy on the eyes during long study sessions. But it lags when I run Android Studio with Chrome open.,2026-07-22T12:48:34.554361,1
+17,9,3,5,Best purchase this semester. Battery life easily lasts through a full day of lectures. The Full HD anti-glare display is easy on the eyes during long study sessions.,2026-07-24T19:48:34.554361,1
+18,8,3,2,Not satisfied. Battery life is disappointing for a college day. At least performance is snappy for assignments and light programming.,2026-09-20T02:48:34.554361,1
+19,19,3,5,Excellent purchase. Performance is snappy for assignments and light programming. Build quality feels solid and it is light enough to carry daily.,2026-11-01T06:48:34.554361,1
+20,15,3,3,It's okay. The Full HD anti-glare display is easy on the eyes during long study sessions. But battery life is disappointing for a college day.,2026-10-14T11:48:34.554361,1
+21,18,3,4,"Solid choice for college. Battery backup is excellent, around seven hours of note taking. Only downside: it heats up a lot near the keyboard during calls.",2026-10-18T01:48:34.554361,1
+22,14,3,4,Good value for money. The SSD makes boot up really fast. Only downside: battery life is disappointing for a college day.,2026-08-12T20:48:34.554361,1
+23,17,3,1,"Worst purchase ever. The body flexes and the hinge feels cheap. Battery drains fast, barely four hours on a charge.",2026-08-31T22:48:34.554361,1
+24,13,3,4,"Solid choice for college. Fast SSD storage, apps open instantly. Only downside: brightness is too low to use near a window.",2026-07-23T19:48:34.554361,1
+25,11,4,1,Completely useless. It stutters when switching between apps. Charging is very slow.,2026-08-26T19:48:34.554361,1
+26,15,4,5,Superb product. The display is bright and great for reading PDFs. Battery life is excellent.,2026-09-28T04:48:34.554361,1
+27,16,4,5,Superb product. Smooth for notes apps and online classes. Perfect for annotating lecture slides with the pen.,2026-11-01T09:48:34.554361,1
+28,10,4,2,Below average. Apps lag and reload because of limited RAM. At least the S Pen makes handwritten notes feel natural.,2026-10-18T15:48:34.554361,1
+29,8,4,4,Good value for money. Battery life is excellent. Only downside: apps lag and reload because of limited RAM.,2026-07-31T05:48:34.554361,1
+30,9,4,4,Very good overall. The display is bright and great for reading PDFs. Only downside: apps lag and reload because of limited RAM.,2026-09-04T15:48:34.554361,1
+31,20,4,4,Very good overall. Battery lasts two days of reading and classes. Only downside: it stutters when switching between apps.,2026-08-31T20:48:34.554361,1
+32,7,4,2,Disappointing. Charging is very slow. At least the S Pen makes handwritten notes feel natural.,2026-10-13T16:48:34.554361,1
+33,19,4,5,Highly recommended for students. The S Pen makes handwritten notes feel natural. The display is bright and great for reading PDFs.,2026-11-11T08:48:34.554361,1
+34,18,4,3,Mixed feelings about this one. Battery lasts two days of reading and classes. But apps lag and reload because of limited RAM.,2026-11-09T22:48:34.554361,1
+35,13,4,1,Completely useless. It stutters when switching between apps. Palm rejection with the stylus is poor.,2026-10-21T01:48:34.554361,1
+36,5,4,5,Absolutely love it! The display is bright and great for reading PDFs. Perfect for annotating lecture slides with the pen.,2026-10-31T05:48:34.554361,1
+37,16,5,2,Not satisfied. Palm rejection with the stylus is poor. At least the display is bright and great for reading PDFs.,2026-09-20T13:48:34.554361,1
+38,20,5,5,Highly recommended for students. Lovely screen for watching recorded lectures. Multitasking with split screen works well.,2026-10-06T21:48:34.554361,1
+39,17,5,5,Superb product. Multitasking with split screen works well. Lovely screen for watching recorded lectures.,2026-10-21T00:48:34.554361,1
+40,10,5,5,Superb product. Perfect for annotating lecture slides with the pen. Multitasking with split screen works well.,2026-11-14T04:48:34.554361,1
+41,11,5,4,Very good overall. Multitasking with split screen works well. Only downside: charging is very slow.,2026-08-20T07:48:34.554361,1
+42,14,5,5,Excellent purchase. Smooth for notes apps and online classes. The S Pen makes handwritten notes feel natural.,2026-08-10T06:48:34.554361,1
+43,13,5,4,Good value for money. Perfect for annotating lecture slides with the pen. Only downside: display is dim outdoors.,2026-09-14T18:48:34.554361,1
+44,6,5,4,Good value for money. Battery life is excellent. Only downside: apps lag and reload because of limited RAM.,2026-08-22T15:48:34.554361,1
+45,19,5,5,Superb product. Battery life is excellent. Multitasking with split screen works well.,2026-07-20T10:48:34.554361,1
+46,9,5,5,Excellent purchase. Lovely screen for watching recorded lectures. Multitasking with split screen works well.,2026-08-13T21:48:34.554361,1
+47,15,5,4,"Good value for money. Lovely screen for watching recorded lectures. Only downside: no stylus in the box, you have to buy one separately.",2026-10-13T17:48:34.554361,1
+48,7,5,5,Excellent purchase. The S Pen makes handwritten notes feel natural. The display is bright and great for reading PDFs.,2026-10-15T05:48:34.554361,1
+49,17,6,1,Very bad experience. Charging speed is slow compared to rivals. Auto brightness is unreliable.,2026-07-31T00:48:34.554361,1
+50,16,6,5,Highly recommended for students. Great battery backup with heavy use. Camera quality is great in daylight.,2026-07-28T00:48:34.554361,1
+51,7,6,1,Very bad experience. Auto brightness is unreliable. Low light photos are noisy and blurry.,2026-10-01T16:48:34.554361,1
+52,19,6,2,"Expected better. No charger in the box, which is annoying. At least super AMOLED screen looks fantastic.",2026-09-21T09:48:34.554361,1
+53,8,6,4,Very good overall. The main camera takes sharp photos and scans documents well. Only downside: charging speed is slow compared to rivals.,2026-08-09T01:48:34.554361,1
+54,6,6,3,"Average product. The AMOLED display is vivid and smooth at 120Hz. But no charger in the box, which is annoying.",2026-11-05T17:48:34.554361,1
+55,11,6,4,"Happy with this purchase. The main camera takes sharp photos and scans documents well. Only downside: no charger in the box, which is annoying.",2026-10-30T19:48:34.554361,1
+56,14,6,5,Best purchase this semester. Software updates are regular and the UI is clean. Battery comfortably lasts a full day and more.,2026-10-31T19:48:34.554361,1
+57,10,6,4,Very good overall. 5G connectivity works well on campus. Only downside: charging speed is slow compared to rivals.,2026-07-30T17:48:34.554361,1
+58,9,6,4,Solid choice for college. 5G connectivity works well on campus. Only downside: charging speed is slow compared to rivals.,2026-11-05T21:48:34.554361,1
+59,20,6,5,Best purchase this semester. Camera quality is great in daylight. Super AMOLED screen looks fantastic.,2026-09-20T08:48:34.554361,1
+60,12,6,4,Solid choice for college. 5G connectivity works well on campus. Only downside: charging speed is slow compared to rivals.,2026-10-14T11:48:34.554361,1
+61,5,7,5,Best purchase this semester. Multipoint connection between laptop and phone is very handy. Very comfortable and lightweight for long study sessions.,2026-10-09T20:48:34.554361,1
+62,12,7,5,"Highly recommended for students. Battery life is amazing, I charge it once a week. Ear cushions are soft and comfortable for hours.",2026-08-23T15:48:34.554361,1
+63,18,7,5,Best purchase this semester. Audio is crisp and vocals are clear for lectures. Multipoint connection between laptop and phone is very handy.,2026-10-05T16:48:34.554361,1
+64,10,7,5,Highly recommended for students. The mic works great for online classes and calls. Build quality feels sturdy.,2026-10-11T04:48:34.554361,1
+65,7,7,4,"Happy with this purchase. Battery lasts for days, easily forty hours. Only downside: the microphone quality is poor on calls, people can't hear me.",2026-08-11T22:48:34.554361,1
+66,19,7,4,"Happy with this purchase. Folds easily and fits in my bag. Only downside: the microphone quality is poor on calls, people can't hear me.",2026-08-15T20:48:34.554361,1
+67,8,7,5,Excellent purchase. Sound quality is clear with punchy bass. Ear cushions are soft and comfortable for hours.,2026-09-02T04:48:34.554361,1
+68,17,7,5,Superb product. Very comfortable and lightweight for long study sessions. Build quality feels sturdy.,2026-09-14T10:48:34.554361,1
+69,9,7,3,Average product. Ear cushions are soft and comfortable for hours. But sound quality is flat and tinny.,2026-09-03T04:48:34.554361,1
+70,16,7,5,"Superb product. Battery life is amazing, I charge it once a week. Sound quality is clear with punchy bass.",2026-10-06T19:48:34.554361,1
+71,11,7,5,Superb product. The mic works great for online classes and calls. Very comfortable and lightweight for long study sessions.,2026-10-11T16:48:34.554361,1
+72,15,7,2,Disappointing. Battery indicator is inaccurate and it dies suddenly. At least ear cushions are soft and comfortable for hours.,2026-09-17T15:48:34.554361,1
+73,7,8,5,"Superb product. Ear cushions are soft and comfortable for hours. Battery lasts for days, easily forty hours.",2026-08-01T09:48:34.554361,1
+74,15,8,1,Very bad experience. Build quality is cheap plastic and the headband cracked. Sound quality is flat and tinny.,2026-08-18T04:48:34.554361,1
+75,8,8,4,"Happy with this purchase. Battery life is amazing, I charge it once a week. Only downside: the plastic hinge broke within a month.",2026-08-29T05:48:34.554361,1
+76,9,8,3,It's okay. Audio is crisp and vocals are clear for lectures. But the plastic hinge broke within a month.,2026-09-19T05:48:34.554361,1
+77,19,8,2,Expected better. The plastic hinge broke within a month. At least sound quality is clear with punchy bass.,2026-11-01T08:48:34.554361,1
+78,14,8,3,Decent but not great. The mic works great for online classes and calls. But the plastic hinge broke within a month.,2026-10-05T05:48:34.554361,1
+79,18,8,4,Good value for money. Ear cushions are soft and comfortable for hours. Only downside: bass is muddy and the sound distorts at high volume.,2026-09-11T17:48:34.554361,1
+80,11,8,1,Very bad experience. Build quality is cheap plastic and the headband cracked. Clamping force is too tight and uncomfortable.,2026-08-25T18:48:34.554361,1
+81,6,8,5,"Best purchase this semester. Audio is crisp and vocals are clear for lectures. Battery lasts for days, easily forty hours.",2026-08-24T09:48:34.554361,1
+82,17,8,2,Not satisfied. The plastic hinge broke within a month. At least audio is crisp and vocals are clear for lectures.,2026-09-05T09:48:34.554361,1
+83,12,8,5,"Superb product. Folds easily and fits in my bag. Battery life is amazing, I charge it once a week.",2026-09-11T05:48:34.554361,1
+84,10,8,3,Average product. Audio is crisp and vocals are clear for lectures. But build quality is cheap plastic and the headband cracked.,2026-09-14T02:48:34.554361,1
+85,18,9,5,Superb product. Battery life is excellent. Typing is quiet and comfortable for long reports.,2026-10-03T10:48:34.554361,1
+86,5,9,5,Best purchase this semester. Wireless connection is reliable with no lag. Battery life is excellent.,2026-09-22T17:48:34.554361,1
+87,10,9,5,Superb product. Battery life is excellent. Wireless connection is reliable with no lag.,2026-09-24T17:48:34.554361,1
+88,16,9,5,Superb product. Single USB receiver for both is very convenient. Typing is quiet and comfortable for long reports.,2026-07-23T22:48:34.554361,1
+89,12,9,5,Best purchase this semester. Single USB receiver for both is very convenient. Batteries last for months.,2026-07-20T04:48:34.554361,1
+90,11,9,4,Happy with this purchase. Battery life is excellent. Only downside: receiver range is short.,2026-08-18T04:48:34.554361,1
+91,15,9,4,Good value for money. Single USB receiver for both is very convenient. Only downside: keys feel mushy and some keys stick.,2026-10-27T06:48:34.554361,1
+92,7,9,5,Best purchase this semester. Single USB receiver for both is very convenient. Typing is quiet and comfortable for long reports.,2026-09-26T18:48:34.554361,1
+93,17,9,4,Solid choice for college. Batteries last for months. Only downside: keys feel mushy and some keys stick.,2026-10-12T23:48:34.554361,1
+94,19,9,4,Happy with this purchase. Full size keyboard with a number pad is great for spreadsheets. Only downside: mouse eats batteries quickly.,2026-09-30T19:48:34.554361,1
+95,6,9,5,Best purchase this semester. Wireless connection is reliable with no lag. Battery life is excellent.,2026-07-27T22:48:34.554361,1
+96,9,9,5,Highly recommended for students. Typing is quiet and comfortable for long reports. Single USB receiver for both is very convenient.,2026-10-08T13:48:34.554361,1
+97,20,10,5,Highly recommended for students. Comfortable grip for both hands. The silent clicks are perfect for the library and shared rooms.,2026-07-21T17:48:34.554361,1
+98,18,10,5,Highly recommended for students. Nano receiver stays in the laptop and works instantly. Compact size is great for travelling with a laptop.,2026-08-13T09:48:34.554361,1
+99,9,10,4,"Good value for money. Clicks are really quiet, my roommate doesn't notice. Only downside: connection drops if the receiver is on the far side.",2026-08-05T20:48:34.554361,1
+100,17,10,5,"Excellent purchase. Plug and play, connection is stable. Clicks are really quiet, my roommate doesn't notice.",2026-10-02T10:48:34.554361,1
+101,8,10,5,"Best purchase this semester. Plug and play, connection is stable. Clicks are really quiet, my roommate doesn't notice.",2026-08-03T20:48:34.554361,1
+102,14,10,5,"Superb product. Clicks are really quiet, my roommate doesn't notice. Comfortable grip for both hands.",2026-09-17T02:48:34.554361,1
+103,10,10,3,"Average product. Plug and play, connection is stable. But clicks feel too soft and mushy.",2026-10-15T22:48:34.554361,1
+104,16,10,5,"Excellent purchase. Plug and play, connection is stable. The silent clicks are perfect for the library and shared rooms.",2026-10-06T17:48:34.554361,1
+105,13,10,4,Good value for money. Comfortable grip for both hands. Only downside: connection drops if the receiver is on the far side.,2026-09-12T10:48:34.554361,1
+106,19,10,5,Superb product. The silent clicks are perfect for the library and shared rooms. Comfortable grip for both hands.,2026-08-10T15:48:34.554361,1
+107,7,10,5,Highly recommended for students. The silent clicks are perfect for the library and shared rooms. Comfortable grip for both hands.,2026-07-30T22:48:34.554361,1
+108,6,10,4,Happy with this purchase. Nano receiver stays in the laptop and works instantly. Only downside: it is too small for large hands and cramps my wrist.,2026-09-19T06:48:34.554361,1
+109,17,11,5,Superb product. The natural textbook display makes fractions easy to read. Solid build and the solar battery lasts forever.,2026-08-05T19:48:34.554361,1
+110,9,11,5,Highly recommended for students. The natural textbook display makes fractions easy to read. Solid build and the solar battery lasts forever.,2026-10-16T03:48:34.554361,1
+111,8,11,5,Excellent purchase. The natural textbook display makes fractions easy to read. Buttons are responsive and durable.,2026-08-04T08:48:34.554361,1
+112,6,11,5,"Excellent purchase. Buttons are responsive and durable. Matrix, vector and complex number functions are perfect for engineering maths.",2026-10-14T19:48:34.554361,1
+113,12,11,4,Solid choice for college. Display is clear and readable. Only downside: cover feels flimsy.,2026-09-21T21:48:34.554361,1
+114,20,11,5,Best purchase this semester. Solid build and the solar battery lasts forever. The natural textbook display makes fractions easy to read.,2026-10-16T18:48:34.554361,1
+115,18,11,5,"Best purchase this semester. Buttons are responsive and durable. Matrix, vector and complex number functions are perfect for engineering maths.",2026-07-29T01:48:34.554361,1
+116,5,11,5,Excellent purchase. Display is clear and readable. Buttons are responsive and durable.,2026-10-03T18:48:34.554361,1
+117,13,11,5,Superb product. Has every function needed for exams and it is allowed in the exam hall. Solid build and the solar battery lasts forever.,2026-08-29T21:48:34.554361,1
+118,11,11,5,"Best purchase this semester. Display is clear and readable. Matrix, vector and complex number functions are perfect for engineering maths.",2026-10-30T17:48:34.554361,1
+119,7,11,5,Absolutely love it! Has every function needed for exams and it is allowed in the exam hall. Buttons are responsive and durable.,2026-07-31T23:48:34.554361,1
+120,15,11,4,Very good overall. The natural textbook display makes fractions easy to read. Only downside: cover feels flimsy.,2026-10-13T02:48:34.554361,1
+121,18,12,3,Mixed feelings about this one. Charges two devices at once quickly. But actual capacity feels much lower than advertised.,2026-08-21T00:48:34.554361,1
+122,6,12,4,Good value for money. Easily lasts a whole weekend trip. Only downside: takes forever to recharge the power bank itself.,2026-10-18T09:48:34.554361,1
+123,16,12,5,"Superb product. Fits easily in my backpack. Charges my phone four times, great capacity.",2026-09-02T06:48:34.554361,1
+124,20,12,2,Not satisfied. Actual capacity feels much lower than advertised. At least fits easily in my backpack.,2026-08-17T04:48:34.554361,1
+125,10,12,1,"Worst purchase ever. Only charges my phone twice, not what I expected from 20000mAh. Charging speed drops when two devices are connected.",2026-08-11T17:48:34.554361,1
+126,7,12,2,Not satisfied. Actual capacity feels much lower than advertised. At least compact and sturdy body.,2026-10-05T14:48:34.554361,1
+127,13,12,3,"Decent but not great. Compact and sturdy body. But only charges my phone twice, not what I expected from 20000mAh.",2026-08-22T00:48:34.554361,1
+128,5,12,4,Happy with this purchase. Charges two devices at once quickly. Only downside: actual capacity feels much lower than advertised.,2026-10-08T16:48:34.554361,1
+129,17,12,1,Completely useless. Actual capacity feels much lower than advertised. It gets hot while charging.,2026-10-07T07:48:34.554361,1
+130,12,12,5,"Superb product. Fits easily in my backpack. Charges my phone four times, great capacity.",2026-10-23T09:48:34.554361,1
+131,14,12,4,"Solid choice for college. Fits easily in my backpack. Only downside: only charges my phone twice, not what I expected from 20000mAh.",2026-08-12T12:48:34.554361,1
+132,8,12,5,Absolutely love it! Fits easily in my backpack. Fast charging over USB-C works well.,2026-09-22T04:48:34.554361,1
+133,19,13,2,Disappointing. The auto shut off failed after a few weeks. At least boils water very quickly for tea and instant noodles.,2026-07-26T04:48:34.554361,1
+134,18,13,5,Highly recommended for students. Cordless base and auto cut off make it safe to use. Boils water very quickly for tea and instant noodles.,2026-10-30T21:48:34.554361,1
+135,16,13,4,"Good value for money. Auto shut off works reliably, feels safe. Only downside: takes too long to boil.",2026-10-27T05:48:34.554361,1
+136,10,13,5,"Superb product. Boils in just a few minutes, very handy in the hostel. Sturdy steel build and lid closes tightly.",2026-08-25T22:48:34.554361,1
+137,6,13,3,Mixed feelings about this one. Boils water very quickly for tea and instant noodles. But the handle gets hot.,2026-11-05T22:48:34.554361,1
+138,11,13,5,"Absolutely love it! Sturdy steel build and lid closes tightly. Boils in just a few minutes, very handy in the hostel.",2026-10-05T23:48:34.554361,1
+139,20,13,2,"Below average. The lid is loose and water leaks while pouring. At least boils in just a few minutes, very handy in the hostel.",2026-07-27T11:48:34.554361,1
+140,8,13,5,"Superb product. Sturdy steel build and lid closes tightly. Auto shut off works reliably, feels safe.",2026-09-01T17:48:34.554361,1
+141,15,13,5,Superb product. Stainless steel body is easy to clean. Boils water very quickly for tea and instant noodles.,2026-09-18T10:48:34.554361,1
+142,9,13,4,Happy with this purchase. Cordless base and auto cut off make it safe to use. Only downside: water has a plastic smell initially.,2026-09-18T23:48:34.554361,1
+143,13,13,4,"Happy with this purchase. Boils in just a few minutes, very handy in the hostel. Only downside: the auto shut off failed after a few weeks.",2026-10-01T16:48:34.554361,1
+144,12,13,5,Highly recommended for students. Stainless steel body is easy to clean. Boils water very quickly for tea and instant noodles.,2026-09-26T04:48:34.554361,1
+145,16,14,5,"Best purchase this semester. Lid seals tightly, no leaks at all. Keeps tea hot for hours and water cold all day.",2026-08-20T15:48:34.554361,1
+146,9,14,4,"Good value for money. Sturdy steel and easy to carry. Only downside: insulation is weak, coffee gets cold in a few hours.",2026-10-22T07:48:34.554361,1
+147,15,14,2,"Expected better. It dents easily when dropped. At least lid seals tightly, no leaks at all.",2026-07-29T10:48:34.554361,1
+148,20,14,3,"Decent but not great. Insulation is excellent, water stays cold till evening. But cap seal loosened after a month and it leaks.",2026-10-21T15:48:34.554361,1
+149,18,14,5,Best purchase this semester. Keeps tea hot for hours and water cold all day. Completely leak proof in my backpack.,2026-10-14T23:48:34.554361,1
+150,11,14,4,Solid choice for college. Easy to clean and no smell. Only downside: cap seal loosened after a month and it leaks.,2026-08-02T22:48:34.554361,1
+151,7,14,4,Happy with this purchase. Easy to clean and no smell. Only downside: cap seal loosened after a month and it leaks.,2026-09-22T08:48:34.554361,1
+152,6,14,4,Happy with this purchase. Keeps tea hot for hours and water cold all day. Only downside: cap seal loosened after a month and it leaks.,2026-10-31T15:48:34.554361,1
+153,19,14,4,"Good value for money. Easy to clean and no smell. Only downside: insulation is weak, coffee gets cold in a few hours.",2026-09-10T09:48:34.554361,1
+154,12,14,4,"Solid choice for college. Insulation is excellent, water stays cold till evening. Only downside: it dents easily when dropped.",2026-09-24T21:48:34.554361,1
+155,8,14,1,"Worst purchase ever. Insulation is weak, coffee gets cold in a few hours. Cap seal loosened after a month and it leaks.",2026-07-18T10:48:34.554361,1
+156,14,14,5,Best purchase this semester. Sturdy steel and easy to carry. Completely leak proof in my backpack.,2026-09-14T15:48:34.554361,1
+157,5,15,3,It's okay. Stitching and zips feel durable. But the laptop compartment is too tight for a 15.6 inch laptop.,2026-11-08T06:48:34.554361,1
+158,9,15,4,Happy with this purchase. Padded shoulder straps are comfortable even when full. Only downside: not enough pockets for small items.,2026-09-02T06:48:34.554361,1
+159,8,15,3,"Mixed feelings about this one. Lots of space for a laptop, books and a water bottle. But no back padding, uncomfortable on long walks.",2026-09-22T08:48:34.554361,1
+160,7,15,5,"Highly recommended for students. Lots of space for a laptop, books and a water bottle. Stitching and zips feel durable.",2026-11-08T17:48:34.554361,1
+161,13,15,5,"Superb product. Comfortable to carry all day on campus. Lots of space for a laptop, books and a water bottle.",2026-10-01T06:48:34.554361,1
+162,14,15,1,Very bad experience. Stitching came loose near the strap. Straps dig into the shoulders when the bag is heavy.,2026-09-06T03:48:34.554361,1
+163,16,15,5,"Highly recommended for students. The rain cover kept my laptop dry in the monsoon. Lots of space for a laptop, books and a water bottle.",2026-11-05T15:48:34.554361,1
+164,11,15,5,Superb product. Multiple compartments keep everything organised. Stitching and zips feel durable.,2026-07-24T12:48:34.554361,1
+165,6,15,3,Mixed feelings about this one. Comfortable to carry all day on campus. But stitching came loose near the strap.,2026-08-09T17:48:34.554361,1
+166,15,15,2,Below average. The zip broke within two months. At least multiple compartments keep everything organised.,2026-09-28T00:48:34.554361,1
+167,17,15,4,Solid choice for college. Multiple compartments keep everything organised. Only downside: the zip broke within two months.,2026-09-27T21:48:34.554361,1
+168,12,15,4,"Happy with this purchase. Stitching and zips feel durable. Only downside: no back padding, uncomfortable on long walks.",2026-10-04T10:48:34.554361,1
+169,10,16,5,Absolutely love it! Padded shoulder straps are comfortable even when full. Multiple compartments keep everything organised.,2026-09-24T02:48:34.554361,1
+170,16,16,1,Completely useless. Straps dig into the shoulders when the bag is heavy. The laptop compartment is too tight for a 15.6 inch laptop.,2026-11-06T06:48:34.554361,1
+171,12,16,5,Superb product. The rain cover kept my laptop dry in the monsoon. Multiple compartments keep everything organised.,2026-09-28T02:48:34.554361,1
+172,20,16,4,Very good overall. Padded shoulder straps are comfortable even when full. Only downside: not enough pockets for small items.,2026-08-23T05:48:34.554361,1
+173,18,16,4,Happy with this purchase. Stitching and zips feel durable. Only downside: the laptop compartment is too tight for a 15.6 inch laptop.,2026-07-20T20:48:34.554361,1
+174,5,16,5,"Absolutely love it! The rain cover kept my laptop dry in the monsoon. Lots of space for a laptop, books and a water bottle.",2026-10-08T15:48:34.554361,1
+175,17,16,4,Happy with this purchase. Stitching and zips feel durable. Only downside: straps dig into the shoulders when the bag is heavy.,2026-07-21T15:48:34.554361,1
+176,11,16,4,Happy with this purchase. Padded shoulder straps are comfortable even when full. Only downside: the laptop compartment is too tight for a 15.6 inch laptop.,2026-10-08T04:48:34.554361,1
+177,9,16,5,Absolutely love it! Stitching and zips feel durable. Comfortable to carry all day on campus.,2026-08-05T09:48:34.554361,1
+178,14,16,4,Very good overall. Comfortable to carry all day on campus. Only downside: not enough pockets for small items.,2026-09-05T09:48:34.554361,1
+179,15,16,4,Good value for money. Padded shoulder straps are comfortable even when full. Only downside: not enough pockets for small items.,2026-08-08T00:48:34.554361,1
+180,13,16,4,Good value for money. Padded shoulder straps are comfortable even when full. Only downside: the zip broke within two months.,2026-09-09T02:48:34.554361,1
+181,9,17,2,Not satisfied. Not bright enough to light the whole desk. At least flexible neck makes it easy to point the light.,2026-09-05T05:48:34.554361,1
+182,20,17,2,Not satisfied. Not bright enough to light the whole desk. At least soft light reduces eye strain during long study sessions.,2026-08-26T14:48:34.554361,1
+183,7,17,5,Superb product. Touch control is convenient. Bright enough for reading textbooks late at night.,2026-08-07T19:48:34.554361,1
+184,18,17,4,Solid choice for college. Touch control is convenient. Only downside: light flickers at the lowest brightness.,2026-08-25T20:48:34.554361,1
+185,10,17,4,Solid choice for college. Touch control is convenient. Only downside: the light is harsh and gives me a headache.,2026-08-18T12:48:34.554361,1
+186,8,17,3,Mixed feelings about this one. Bright enough for reading textbooks late at night. But light colour is too blue.,2026-10-27T03:48:34.554361,1
+187,16,17,4,Very good overall. Touch control is convenient. Only downside: the light is harsh and gives me a headache.,2026-11-01T03:48:34.554361,1
+188,13,17,2,Disappointing. Light flickers at the lowest brightness. At least touch control is convenient.,2026-11-08T04:48:34.554361,1
+189,19,17,2,Below average. Light colour is too blue. At least bright enough for reading textbooks late at night.,2026-10-24T22:48:34.554361,1
+190,11,17,2,Disappointing. Light colour is too blue. At least flexible neck makes it easy to point the light.,2026-09-24T21:48:34.554361,1
+191,5,17,1,Completely useless. The neck is wobbly and does not hold position. Not bright enough to light the whole desk.,2026-09-11T18:48:34.554361,1
+192,17,17,4,Solid choice for college. Bright enough for reading textbooks late at night. Only downside: light colour is too blue.,2026-07-25T05:48:34.554361,1
+193,6,18,3,Average product. USB ports are handy for charging phones directly. But gets warm with a laptop charger connected.,2026-08-26T16:48:34.554361,1
+194,14,18,5,"Excellent purchase. Solid build quality. Enough sockets for laptop, phone and tablet chargers.",2026-10-01T20:48:34.554361,1
+195,13,18,1,Very bad experience. Sockets are too close together for bulky adapters. Build feels cheap.,2026-10-27T15:48:34.554361,1
+196,8,18,5,Superb product. USB ports are handy for charging phones directly. Solid build quality.,2026-10-05T08:48:34.554361,1
+197,10,18,5,Highly recommended for students. Compact and the long cable is useful in hostel rooms. Feels safe with heavy chargers.,2026-10-06T22:48:34.554361,1
+198,18,18,4,Solid choice for college. Individual switches and surge protection feel safe. Only downside: sockets are too close together for bulky adapters.,2026-08-04T14:48:34.554361,1
+199,9,18,4,"Good value for money. Enough sockets for laptop, phone and tablet chargers. Only downside: cable is too short.",2026-10-23T21:48:34.554361,1
+200,20,18,4,Solid choice for college. Feels safe with heavy chargers. Only downside: cable is too short.,2026-08-17T10:48:34.554361,1
+201,11,18,4,"Very good overall. Enough sockets for laptop, phone and tablet chargers. Only downside: cable is too short.",2026-10-19T00:48:34.554361,1
+202,19,18,4,Happy with this purchase. Feels safe with heavy chargers. Only downside: plugs fit loosely in the sockets.,2026-08-21T22:48:34.554361,1
+203,17,18,4,Solid choice for college. Individual switches and surge protection feel safe. Only downside: plugs fit loosely in the sockets.,2026-08-19T14:48:34.554361,1
+204,12,18,4,Solid choice for college. Solid build quality. Only downside: plugs fit loosely in the sockets.,2026-10-17T04:48:34.554361,1
+205,13,19,1,Completely useless. Write speed is very slow for large files. Files got corrupted once.,2026-08-15T11:48:34.554361,1
+206,9,19,5,"Superb product. Metal casing feels sturdy and premium. Reliable, never lost a file.",2026-08-17T05:48:34.554361,1
+207,6,19,1,"Terrible, do not buy. Copying videos takes forever. The casing scratches easily.",2026-07-21T21:48:34.554361,1
+208,14,19,2,Below average. Copying videos takes forever. At least compact and fits on a keychain.,2026-08-08T09:48:34.554361,1
+209,15,19,5,"Absolutely love it! Transfer speeds are fast for project files and slides. Reliable, never lost a file.",2026-08-10T04:48:34.554361,1
+210,20,19,4,Good value for money. Compact and fits on a keychain. Only downside: files got corrupted once.,2026-08-14T12:48:34.554361,1
+211,11,19,3,Mixed feelings about this one. Metal casing feels sturdy and premium. But copying videos takes forever.,2026-08-11T04:48:34.554361,1
+212,17,19,3,Average product. Read speed is excellent on USB 3.0. But it gets very hot during transfers.,2026-08-23T20:48:34.554361,1
+213,10,19,5,Highly recommended for students. Transfer speeds are fast for project files and slides. Metal casing feels sturdy and premium.,2026-10-03T08:48:34.554361,1
+214,16,19,5,Excellent purchase. Compact and fits on a keychain. Read speed is excellent on USB 3.0.,2026-08-05T04:48:34.554361,1
+215,18,19,4,Good value for money. Compact and fits on a keychain. Only downside: write speed is very slow for large files.,2026-11-03T01:48:34.554361,1
+216,7,19,1,Completely useless. Write speed is very slow for large files. Files got corrupted once.,2026-09-26T06:48:34.554361,1
+217,16,20,5,Highly recommended for students. Scanning and copying are convenient. Print quality is sharp for assignments.,2026-07-23T15:48:34.554361,1
+218,20,20,1,Very bad experience. Ink cartridges are expensive and run out quickly. Prints come out streaky and faded.,2026-10-27T22:48:34.554361,1
+219,8,20,3,It's okay. Ink cartridges last reasonably for occasional printing. But prints come out streaky and faded.,2026-08-30T11:48:34.554361,1
+220,5,20,3,It's okay. Colour prints look good for project reports. But ink cartridges are expensive and run out quickly.,2026-10-26T08:48:34.554361,1
+221,15,20,5,Best purchase this semester. Setup was easy and it works over USB without issues. Scanning and copying are convenient.,2026-09-18T12:48:34.554361,1
+222,6,20,3,It's okay. Setup was easy and it works over USB without issues. But very noisy while printing.,2026-10-05T14:48:34.554361,1
+223,12,20,2,Not satisfied. Ink cartridges are expensive and run out quickly. At least setup was easy and it works over USB without issues.,2026-11-05T20:48:34.554361,1
+224,9,20,4,Solid choice for college. Colour prints look good for project reports. Only downside: printing is very slow.,2026-08-12T17:48:34.554361,1
+225,7,20,3,It's okay. Colour prints look good for project reports. But ink cartridges are expensive and run out quickly.,2026-08-21T20:48:34.554361,1
+226,18,20,4,Solid choice for college. Printing speed is fine for home use. Only downside: ink cartridges are expensive and run out quickly.,2026-10-17T13:48:34.554361,1
+227,10,20,2,Not satisfied. Ink cartridges are expensive and run out quickly. At least printing speed is fine for home use.,2026-10-26T05:48:34.554361,1
+228,13,20,1,Worst purchase ever. Colour prints are dull. Setup was painful and drivers kept failing.,2026-11-01T18:48:34.554361,1
+229,11,21,4,Happy with this purchase. Holds my phone steady during online lectures. Only downside: rubber pads came off.,2026-08-29T16:48:34.554361,1
+230,17,21,4,Solid choice for college. Easy to adjust the viewing angle. Only downside: it is heavier than expected.,2026-11-06T20:48:34.554361,1
+231,18,21,5,Best purchase this semester. Very stable even with a big phone. Folds flat and fits in my pencil case.,2026-08-23T16:48:34.554361,1
+232,19,21,4,Good value for money. Folds flat and fits in my pencil case. Only downside: phone slips off at steep angles.,2026-10-21T20:48:34.554361,1
+233,5,21,5,Best purchase this semester. Folds flat and fits in my pencil case. Very stable even with a big phone.,2026-09-04T00:48:34.554361,1
+234,7,21,4,Very good overall. Holds my phone steady during online lectures. Only downside: hinge loosens over time and the angle drops.,2026-08-24T11:48:34.554361,1
+235,13,21,4,Very good overall. Holds my phone steady during online lectures. Only downside: angle adjustment is stiff.,2026-08-19T18:48:34.554361,1
+236,9,21,4,Good value for money. Holds my phone steady during online lectures. Only downside: rubber pads came off.,2026-07-21T03:48:34.554361,1
+237,8,21,5,Best purchase this semester. The adjustable angle is perfect for video calls. Very stable even with a big phone.,2026-08-16T18:48:34.554361,1
+238,20,21,5,Highly recommended for students. Very stable even with a big phone. Easy to adjust the viewing angle.,2026-09-26T23:48:34.554361,1
+239,10,21,5,Highly recommended for students. Folds flat and fits in my pencil case. Easy to adjust the viewing angle.,2026-09-11T23:48:34.554361,1
+240,14,21,4,Very good overall. Easy to adjust the viewing angle. Only downside: rubber pads came off.,2026-11-08T19:48:34.554361,1

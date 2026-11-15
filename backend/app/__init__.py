@@ -29,6 +29,7 @@ def create_app():
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["JWT_SECRET_KEY"] = jwt_secret
     app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 3600
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = 60 * 60 * 24 * 7
 
     db.init_app(app)
     jwt.init_app(app)
@@ -78,11 +79,15 @@ def create_app():
     from app.routes.cart import cart_bp
     from app.routes.wishlist import wishlist_bp
     from app.routes.interaction import interaction_bp
+    from app.routes.survey import survey_bp
+    from app.routes.ai import ai_bp
     app.register_blueprint(auth_bp)
     app.register_blueprint(product_bp)
     app.register_blueprint(review_bp)
     app.register_blueprint(cart_bp)
     app.register_blueprint(wishlist_bp)
     app.register_blueprint(interaction_bp)
+    app.register_blueprint(survey_bp)
+    app.register_blueprint(ai_bp)
 
     return app

@@ -140,6 +140,10 @@ function Navbar({ searchQuery, setSearchQuery }) {
               AI Discover
             </a>
 
+            <Link to="/survey" className="hover:text-purple-600">
+              Survey
+            </Link>
+
             <Link
               to="/chatbot"
               className="flex items-center gap-1.5 text-purple-700 hover:text-purple-900"
@@ -267,6 +271,14 @@ function Navbar({ searchQuery, setSearchQuery }) {
             >
               AI Discover
             </a>
+
+            <Link
+              to="/survey"
+              onClick={closeMenu}
+              className="block font-medium"
+            >
+              Preference Survey
+            </Link>
 
             <Link
               to="/chatbot"

@@ -1,0 +1,262 @@
+{
+  "engine": "sentence-transformers/all-MiniLM-L6-v2",
+  "data_source": "backend",
+  "search_latency": {
+    "queries": 60,
+    "mean_ms": 14.13,
+    "p50_ms": 13.68,
+    "p95_ms": 20.99,
+    "max_ms": 27.25,
+    "target_ms": 200,
+    "meets_target": true
+  },
+  "search_relevance": {
+    "hit_rate_at_3": 1.0,
+    "details": [
+      {
+        "query": "something to keep my tea hot during lectures",
+        "expected": 14,
+        "top3": [
+          14,
+          13,
+          17
+        ],
+        "hit": true
+      },
+      {
+        "query": "boil water for instant noodles in the hostel",
+        "expected": 13,
+        "top3": [
+          13,
+          14,
+          15
+        ],
+        "hit": true
+      },
+      {
+        "query": "listen to music on the bus",
+        "expected": 7,
+        "top3": [
+          8,
+          4,
+          7
+        ],
+        "hit": true
+      },
+      {
+        "query": "quiet clicking mouse for the library",
+        "expected": 10,
+        "top3": [
+          10,
+          9,
+          7
+        ],
+        "hit": true
+      },
+      {
+        "query": "carry my laptop and books to college in the rain",
+        "expected": 15,
+        "top3": [
+          15,
+          16,
+          14
+        ],
+        "hit": true
+      },
+      {
+        "query": "charge my phone during a power cut",
+        "expected": 12,
+        "top3": [
+          12,
+          18,
+          6
+        ],
+        "hit": true
+      },
+      {
+        "query": "solve matrices and complex numbers in the engineering exam",
+        "expected": 11,
+        "top3": [
+          11,
+          12,
+          15
+        ],
+        "hit": true
+      },
+      {
+        "query": "light to read textbooks at night",
+        "expected": 17,
+        "top3": [
+          17,
+          15,
+          4
+        ],
+        "hit": true
+      },
+      {
+        "query": "print my project report at home",
+        "expected": 20,
+        "top3": [
+          20,
+          18,
+          13
+        ],
+        "hit": true
+      },
+      {
+        "query": "take handwritten notes on lecture slides with a pen",
+        "expected": 5,
+        "top3": [
+          5,
+          4,
+          19
+        ],
+        "hit": true
+      },
+      {
+        "query": "move presentation files between computers",
+        "expected": 19,
+        "top3": [
+          19,
+          4,
+          18
+        ],
+        "hit": true
+      },
+      {
+        "query": "hold my phone upright for video calls",
+        "expected": 21,
+        "top3": [
+          21,
+          4,
+          6
+        ],
+        "hit": true
+      },
+      {
+        "query": "plug in all my chargers at the study desk",
+        "expected": 18,
+        "top3": [
+          18,
+          12,
+          11
+        ],
+        "hit": true
+      },
+      {
+        "query": "budget laptop for programming",
+        "expected": 3,
+        "top3": [
+          3,
+          2,
+          5
+        ],
+        "hit": true
+      },
+      {
+        "query": "type long assignments on a full size keyboard",
+        "expected": 9,
+        "top3": [
+          9,
+          11,
+          17
+        ],
+        "hit": true
+      }
+    ]
+  },
+  "sentiment": {
+    "sample_size": 100,
+    "ground_truth": "stars 4-5 positive, 3 neutral, 1-2 negative",
+    "vader": {
+      "accuracy_3class": 0.85,
+      "accuracy_pos_vs_neg": 0.933,
+      "per_class": {
+        "positive": {
+          "n": 70,
+          "accuracy": 0.943
+        },
+        "neutral": {
+          "n": 11,
+          "accuracy": 0.182
+        },
+        "negative": {
+          "n": 19,
+          "accuracy": 0.895
+        }
+      },
+      "confusion": {
+        "negative->negative": 17,
+        "positive->positive": 66,
+        "neutral->negative": 7,
+        "positive->negative": 2,
+        "negative->positive": 2,
+        "positive->neutral": 2,
+        "neutral->neutral": 2,
+        "neutral->positive": 2
+      },
+      "ms_per_review": 0.074
+    },
+    "vader+domain": {
+      "accuracy_3class": 0.82,
+      "accuracy_pos_vs_neg": 0.91,
+      "per_class": {
+        "positive": {
+          "n": 70,
+          "accuracy": 0.9
+        },
+        "neutral": {
+          "n": 11,
+          "accuracy": 0.091
+        },
+        "negative": {
+          "n": 19,
+          "accuracy": 0.947
+        }
+      },
+      "confusion": {
+        "negative->negative": 18,
+        "positive->positive": 63,
+        "neutral->neutral": 1,
+        "positive->negative": 4,
+        "negative->positive": 1,
+        "positive->neutral": 3,
+        "neutral->negative": 8,
+        "neutral->positive": 2
+      },
+      "ms_per_review": 0.08
+    },
+    "distilbert": {
+      "accuracy_3class": 0.56,
+      "accuracy_pos_vs_neg": 0.629,
+      "per_class": {
+        "positive": {
+          "n": 70,
+          "accuracy": 0.571
+        },
+        "neutral": {
+          "n": 11,
+          "accuracy": 0.0
+        },
+        "negative": {
+          "n": 19,
+          "accuracy": 0.842
+        }
+      },
+      "confusion": {
+        "negative->negative": 16,
+        "positive->positive": 40,
+        "positive->negative": 26,
+        "neutral->negative": 11,
+        "negative->positive": 3,
+        "positive->neutral": 4
+      },
+      "ms_per_review": 24.325
+    }
+  },
+  "intents": {
+    "queries": 30,
+    "accuracy": 1.0,
+    "errors": []
+  }
+}

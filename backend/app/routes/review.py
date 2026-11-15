@@ -4,6 +4,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from app.extensions import db
 from app.models import Review, Product
+from app.ai_clients import notify_review_changed
 
 review_bp = Blueprint(
     "reviews",
@@ -83,6 +84,9 @@ def create_review():
 
     db.session.add(review)
     db.session.commit()
+
+    # Let the NLP service recompute this product's sentiment summary.
+    notify_review_changed(product_id)
 
     return jsonify({
         "message": "Review submitted successfully",
