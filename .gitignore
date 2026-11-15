@@ -7,7 +7,13 @@ __pycache__/
 
 # Environment variables and secrets
 .env
-
+.env.*
+!.env.example
+ncf_env/
+.venv/
+venv/
+__pycache__/
+*.pyc
 # Mac system files
 .DS_Store
 # Node.js dependencies
