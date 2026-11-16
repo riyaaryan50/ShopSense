@@ -25,6 +25,7 @@ import {
   semanticSearch,
 } from "../services/aiService";
 import { API_URL as API_BASE, getToken } from "../config";
+import ProductImage from "../components/ProductImage";
 
 const API_URL = `${API_BASE}/products/`;
 const MIN_SEMANTIC_SCORE = 0.2;
@@ -490,11 +491,7 @@ useEffect(() => {
                     >
                       <Link to={`/product/${product.id}`}>
                         {product.image ? (
-                          <img
-                            src={product.image}
-                            alt={product.name}
-                            className="w-full h-44 object-cover"
-                          />
+                          <ProductImage src={product.image} alt={product.name} className="w-full h-44 object-cover" />
                         ) : (
                           <div className="w-full h-44 bg-purple-50 flex items-center justify-center">
                             <ShoppingCart size={40} className="text-purple-400" />
@@ -719,15 +716,7 @@ useEffect(() => {
                       <div className="relative bg-gray-50">
                         <Link to={`/product/${product.id}`}>
                           {product.image ? (
-                            <img
-                              src={product.image}
-                              alt={product.name}
-                              onError={(e) => {
-                                e.currentTarget.onerror = null;
-                                e.currentTarget.style.display = "none";
-                              }}
-                              className="w-full h-56 object-cover group-hover:scale-105 transition duration-500"
-                            />
+                            <ProductImage src={product.image} alt={product.name} className="w-full h-56 object-cover group-hover:scale-105 transition duration-500" />
                           ) : (
                             <div className="w-full h-56 flex items-center justify-center bg-purple-50 text-purple-400">
                               <ShoppingCart size={45} />

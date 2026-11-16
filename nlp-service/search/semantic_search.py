@@ -150,6 +150,9 @@ class SemanticSearchIndex:
 
         with self._lock:
             if fingerprint == self.fingerprint:
+                # Searchable text is unchanged, so the vectors are still valid, but
+                # price, image, stock etc. may have changed: keep those fresh.
+                self.products = {int(p["id"]): p for p in products}
                 return False
 
             self.embedder.fit(texts)

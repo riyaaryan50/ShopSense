@@ -21,6 +21,7 @@ import {
   saveSurvey,
   storeGuestSurvey,
 } from "../services/aiService";
+import ProductImage from "../components/ProductImage";
 
 const ROLES = [
   { value: "school", label: "School student" },
@@ -439,14 +440,7 @@ function Results({ results, loggedIn, onRestart, addToCart, toggleWishlist, wish
               <article key={product.id} className="flex flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white">
                 <Link to={`/product/${product.id}`} className="relative block h-44 bg-gray-50">
                   {product.image_url ? (
-                    <img
-                      src={product.image_url}
-                      alt={product.name}
-                      className="h-44 w-full object-contain p-4"
-                      onError={(e) => {
-                        e.currentTarget.style.display = "none";
-                      }}
-                    />
+                    <ProductImage src={product.image_url} alt={product.name} className="h-44 w-full object-contain p-4" />
                   ) : (
                     <div className="flex h-44 items-center justify-center text-purple-300">
                       <Package size={44} />

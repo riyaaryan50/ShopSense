@@ -9,6 +9,7 @@ import {
   Sparkles,
   ArrowRight,
 } from "lucide-react";
+import ProductImage from "../components/ProductImage";
 
 function Wishlist() {
   const { wishlist, toggleWishlist, addToCart } = useCart();
@@ -106,11 +107,7 @@ function Wishlist() {
                 <div className="relative bg-purple-50 overflow-hidden">
 
                   <Link to={`/product/${product.id}`}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-60 object-contain p-5 group-hover:scale-105 transition duration-500"
-                    />
+                    <ProductImage src={product.image || product.image_url} alt={product.name} className="w-full h-60 object-contain p-5 group-hover:scale-105 transition duration-500" />
                   </Link>
 
                   <div className="absolute top-4 right-4 bg-white p-2.5 rounded-full shadow-sm">

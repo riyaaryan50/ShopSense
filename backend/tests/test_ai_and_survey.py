@@ -205,3 +205,15 @@ def test_recommendations_cached_and_invalidated_on_change(client):
     third = client.get("/api/recommendations/me", headers=auth(token)).get_json()
     assert third["cached"] is False
     assert "survey" in third["sources_used"]
+
+
+def test_cached_recommendations_show_fresh_product_details(client, app):
+    token = login(client)["access_token"]
+    first = client.get("/api/recommendations/me", headers=auth(token)).get_json()
+    pid = first["recommendations"][0]["id"]
+    with app.app_context():
+        db.session.get(Product, pid).image_url = "/images/new.jpg"
+        db.session.commit()
+    second = client.get("/api/recommendations/me", headers=auth(token)).get_json()
+    assert second["cached"] is True
+    assert second["recommendations"][0]["image_url"] == "/images/new.jpg"

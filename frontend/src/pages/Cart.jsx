@@ -12,6 +12,7 @@ import {
   Sparkles,
   ShoppingCart,
 } from "lucide-react";
+import ProductImage from "../components/ProductImage";
 
 function Cart() {
   const { cart, removeFromCart, updateQuantity, refreshCart } = useCart();
@@ -110,11 +111,7 @@ function Cart() {
                   {/* Product Image */}
                   <div className="bg-purple-50 rounded-xl p-2 shrink-0">
                     {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-full sm:w-28 h-36 sm:h-28 object-contain rounded-lg"
-                      />
+                      <ProductImage src={item.image} alt={item.name} className="w-full sm:w-28 h-36 sm:h-28 object-contain rounded-lg" />
                     ) : (
                       <div className="w-full sm:w-28 h-36 sm:h-28 flex items-center justify-center">
                         <ShoppingBag size={40} className="text-purple-300" />

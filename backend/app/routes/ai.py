@@ -293,8 +293,17 @@ def cached_recommendations(user_id, limit):
     cached = payload is not None
     if not cached:
         payload = blended_recommendations(user_id, _token(), CACHED_LIMIT)
-        cache.set_recs(user_id, payload)
-    return {**payload, "recommendations": payload["recommendations"][:limit],
+        # Cache only the ranking; product details are always read fresh below so
+        # price/image/stock edits (or deleted products) never go stale.
+        cache.set_recs(user_id, {**payload, "recommendations": [
+            {k: r[k] for k in ("id", "score", "sources", "reason")}
+            for r in payload["recommendations"]]})
+    ranking = payload["recommendations"]
+    products = _products_by_id([r["id"] for r in ranking])
+    fresh = [{**product_to_dict(products[r["id"]]), **{k: r[k] for k in
+              ("score", "sources", "reason")}}
+             for r in ranking if r["id"] in products]
+    return {**payload, "recommendations": fresh[:limit],
             "cached": cached, "cache_backend": cache.BACKEND}
 
 

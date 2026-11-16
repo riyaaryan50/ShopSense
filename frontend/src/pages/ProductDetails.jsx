@@ -22,6 +22,7 @@ import {
   submitReview,
 } from "../services/aiService";
 import SentimentSummary from "../components/SentimentSummary";
+import ProductImage from "../components/ProductImage";
 
 const SENTIMENT_BADGE = {
   positive: "bg-green-100 text-green-700",
@@ -264,15 +265,7 @@ function ProductDetails() {
           {/* Product Image */}
           <div className="bg-gray-50 rounded-2xl overflow-hidden flex items-center justify-center min-h-[350px]">
             {product.image ? (
-              <img
-                src={product.image}
-                alt={product.name}
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.style.display = "none";
-                }}
-                className="w-full h-[350px] md:h-[480px] object-contain p-4"
-              />
+              <ProductImage src={product.image} alt={product.name} className="w-full h-[350px] md:h-[480px] object-contain p-4" />
             ) : (
               <div className="flex flex-col items-center justify-center text-purple-400">
                 <Package size={100} strokeWidth={1.2} />
@@ -562,15 +555,7 @@ function ProductDetails() {
                 >
                   <div className="bg-gray-50 h-44 flex items-center justify-center p-4">
                     {item.image ? (
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        onError={(e) => {
-                          e.currentTarget.onerror = null;
-                          e.currentTarget.style.display = "none";
-                        }}
-                        className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
-                      />
+                      <ProductImage src={item.image} alt={item.name} className="w-full h-full object-contain group-hover:scale-105 transition duration-300" />
                     ) : (
                       <Package
                         size={55}

@@ -3,6 +3,7 @@ import { Bot, Package, User } from "lucide-react";
 
 import SentimentSummary from "../SentimentSummary";
 import { formatPrice } from "../../config";
+import ProductImage from "../ProductImage";
 
 function ProductCards({ products, onNavigate }) {
   if (!products?.length) return null;
@@ -17,14 +18,7 @@ function ProductCards({ products, onNavigate }) {
         >
           <div className="flex h-24 items-center justify-center bg-gray-50 p-2">
             {product.image_url ? (
-              <img
-                src={product.image_url}
-                alt={product.name}
-                className="h-full w-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = "none";
-                }}
-              />
+              <ProductImage src={product.image_url} alt={product.name} className="h-full w-full object-contain" />
             ) : (
               <Package className="text-violet-300" size={32} />
             )}

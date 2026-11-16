@@ -153,3 +153,18 @@ def test_survey_excludes_ids_and_limits_category_repeats(services):
     assert 13 not in ids
     categories = [services.product(i)["category"] for i in ids]
     assert max(categories.count(c) for c in set(categories)) <= 3
+
+
+def test_price_and_image_changes_reach_the_index_without_rebuild(tmp_path):
+    from search.semantic_search import SemanticSearchIndex, TfidfEmbedder
+
+    products = [{"id": 1, "name": "Kettle", "description": "boils water", "price": 100.0,
+                 "image_url": "old.jpg"},
+                {"id": 2, "name": "Bottle", "description": "keeps tea hot", "price": 50.0,
+                 "image_url": "b.jpg"}]
+    index = SemanticSearchIndex(embedder=TfidfEmbedder(), artifact_dir=tmp_path)
+    assert index.build(products) is True
+    updated = [dict(products[0], price=80.0, image_url="new.jpg"), products[1]]
+    assert index.build(updated) is False  # text unchanged -> no re-embedding
+    assert index.products[1]["price"] == 80.0
+    assert index.products[1]["image_url"] == "new.jpg"
