@@ -58,32 +58,77 @@ from app.models import Product  # noqa: E402
 backend_app = create_app()
 
 
-def seed_if_empty():
-    """Create tables and load demo data the first time the database is used."""
-    seeded = False
-    with backend_app.app_context():
-        db.create_all()
-        if Product.query.count():
-            return
-        import random
-
-        from scripts import seed_demo_data as seed
-        os.environ["DATA_DIR"] = "/tmp/shopsense-data"
-        rng = random.Random(42)
-        catalog = seed.upsert_products()
-        seed.seed_demo_users(rng)
-        seed.seed_reviews(rng, catalog)
-        log.info("Seeded demo database")
-        seeded = True
-    if seeded:
-        # Riya's script: synthetic reviews for the products added in the
-        # 50-product catalogue (idempotent; skips products with 12 reviews).
-        import runpy
-        runpy.run_module("scripts.seed_new_reviews", run_name="__main__")
-        log.info("Seeded reviews for the expanded catalogue")
+REVIEWS_PER_PRODUCT = 12
+DEMO_EMAIL = "demo.coder@shopsense.ai"
 
 
-seed_if_empty()
+def seeding_complete():
+    """True when products, demo users and every product's reviews are present.
+
+    Checking for *complete* data (not just "any products") means a setup that
+    was interrupted part-way is finished on the next cold start.
+    """
+    import json
+
+    from app.models import Review, User
+
+    catalog_size = len(json.loads(
+        (ROOT / "backend" / "product_catalog.json").read_text(encoding="utf-8")))
+    products = Product.query.count()
+    return (products >= catalog_size
+            and User.query.filter_by(email=DEMO_EMAIL).first() is not None
+            and Review.query.count() >= REVIEWS_PER_PRODUCT * products)
+
+
+def seed_if_needed(attempts=5):
+    """Create tables and load demo data until the database is complete.
+
+    Vercel can start several copies of this function at once (the home page
+    fires parallel API calls). They may all try to seed an empty database;
+    every step skips rows that already exist, so a copy that collides with
+    another one rolls back, waits and tries again until the data is complete.
+    A seeding failure is logged but never stops the API from serving.
+    """
+    import random
+    import runpy
+    import time
+
+    from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError
+
+    from scripts import seed_demo_data as seed
+
+    os.environ["DATA_DIR"] = "/tmp/shopsense-data"
+    for attempt in range(1, attempts + 1):
+        try:
+            with backend_app.app_context():
+                db.create_all()
+                if seeding_complete():
+                    return
+                rng = random.Random(42)
+                catalog = seed.upsert_products()
+                seed.seed_demo_users(rng)
+                seed.seed_reviews(rng, catalog)
+            # Riya's script: reviews for the products added in the 50-product
+            # catalogue (skips products that already have 12 reviews).
+            runpy.run_module("scripts.seed_new_reviews", run_name="__main__")
+            with backend_app.app_context():
+                if seeding_complete():
+                    log.info("Demo database seeded (attempt %d)", attempt)
+                    return
+        except (IntegrityError, OperationalError, ProgrammingError) as error:
+            log.warning("Seeding collided with another instance (attempt %d): %s",
+                        attempt, str(error).splitlines()[0])
+            with backend_app.app_context():
+                db.session.rollback()
+        except Exception:  # noqa: BLE001 - never take the API down
+            log.exception("Seeding failed (attempt %d)", attempt)
+            with backend_app.app_context():
+                db.session.rollback()
+        time.sleep(1.0 * attempt + random.random())
+    log.error("Demo data still incomplete after %d attempts; serving anyway", attempts)
+
+
+seed_if_needed()
 
 
 class InprocessResponse:

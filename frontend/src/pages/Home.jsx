@@ -28,7 +28,13 @@ import { API_URL as API_BASE, getToken } from "../config";
 import ProductImage from "../components/ProductImage";
 
 const API_URL = `${API_BASE}/products/`;
+// Relevance cut-off depends on the search engine: MiniLM cosine scores for a
+// good match are ~0.3-0.6, while the TF-IDF fallback used in the lightweight
+// (Vercel) deployment scores good matches around 0.05-0.15.
 const MIN_SEMANTIC_SCORE = 0.2;
+const MIN_TFIDF_SCORE = 0.04;
+const minScoreFor = (engine) =>
+  engine && engine.startsWith("tfidf") ? MIN_TFIDF_SCORE : MIN_SEMANTIC_SCORE;
 const PAGE_SIZE = 8;
 
 const SORTERS = {
@@ -252,12 +258,14 @@ useEffect(() => {
     ? semanticResults.results
         .filter((item) =>
           semanticResults.engine === "keyword-fallback" ||
-          (item.score ?? 1) >= MIN_SEMANTIC_SCORE
+          (item.score ?? 1) >= minScoreFor(semanticResults.engine)
         )
         .map((item) => ({
           ...(products.find((p) => p.id === item.id) || item),
           image: item.image_url || "",
-          semanticScore: item.score,
+          // TF-IDF scores are not comparable to MiniLM's, so a percentage would
+          // look misleadingly low; show the badge only for the embedding model.
+          semanticScore: semanticResults.engine?.startsWith("tfidf") ? null : item.score,
         }))
         .filter(matchesCategory)
     : products.filter((product) => {
