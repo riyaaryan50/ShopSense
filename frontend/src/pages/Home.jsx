@@ -303,7 +303,7 @@ useEffect(() => {
         {/* Hero Section */}
         <section className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center pt-12 pb-16 md:pt-20 md:pb-24">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-gold-700 ring-1 ring-black/5 shadow-sm mb-7">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 sm:px-4 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.1em] sm:tracking-[0.16em] whitespace-nowrap text-gold-700 ring-1 ring-black/5 shadow-sm mb-7">
               <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
               Built for students · Powered by AI
             </div>
@@ -353,7 +353,7 @@ useEffect(() => {
 
           {/* Product collage */}
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-gold-100 via-brand-50 to-transparent" aria-hidden="true" />
+            <div className="absolute inset-0 md:-inset-6 rounded-[2.5rem] bg-gradient-to-br from-gold-100 via-brand-50 to-transparent" aria-hidden="true" />
             <div className="relative grid grid-cols-2 gap-4 md:gap-5">
               {[2, 7, 13, 11]
                 .map((id) => products.find((p) => p.id === id))

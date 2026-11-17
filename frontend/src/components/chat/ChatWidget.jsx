@@ -33,10 +33,10 @@ function ChatWidget() {
       <button
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? "Close ShopSense AI Assistant" : "Open ShopSense AI Assistant"}
-        className="fixed bottom-6 right-4 z-[60] flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 px-5 py-4 text-white shadow-xl transition hover:scale-105 sm:right-6"
+        className="fixed bottom-6 right-4 z-[60] flex items-center gap-2 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 p-4 sm:px-5 text-white shadow-xl transition hover:scale-105 sm:right-6"
       >
         {open ? <X size={22} /> : <Bot size={22} />}
-        <span className="font-semibold">{open ? "Close" : "Ask AI"}</span>
+        <span className="hidden sm:inline font-semibold">{open ? "Close" : "Ask AI"}</span>
       </button>
     </>
   );

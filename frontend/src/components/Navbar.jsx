@@ -125,7 +125,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
           </Link>
 
           {/* Desktop Search */}
-          <div className="hidden md:block flex-1 max-w-md">
+          <div className="hidden lg:block flex-1 max-w-md">
             <div className="relative">
               <Search
                 size={18}
@@ -145,7 +145,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
+          <nav className="hidden xl:flex items-center gap-6 text-sm font-medium text-gray-600">
 
             <Link to="/" className="hover:text-brand-600">
               Home
@@ -210,7 +210,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
             {currentUser ? (
               <div className="hidden sm:flex items-center gap-3">
 
-                <span className="text-sm font-semibold text-gray-700">
+                <span className="hidden xl:inline text-sm font-semibold text-gray-700">
                   Hi, {currentUser.name || currentUser.username || "User"}
                 </span>
 
@@ -236,7 +236,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100"
+              className="xl:hidden p-2 rounded-lg hover:bg-gray-100"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={23} /> : <Menu size={23} />}
@@ -246,7 +246,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
         </div>
 
         {/* Mobile Search */}
-        <div className="md:hidden pb-4">
+        <div className="lg:hidden pb-4">
           <div className="relative">
             <Search
               size={18}
@@ -267,7 +267,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-gray-100 py-4 space-y-4">
+          <div className="xl:hidden border-t border-gray-100 py-4 space-y-4">
 
             <Link
               to="/"
