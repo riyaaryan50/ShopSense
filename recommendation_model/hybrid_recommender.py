@@ -116,11 +116,14 @@ def hybrid_recommend(
     recommendations = []
 
     for pid in candidates:
-        score = (
-            0.3 * svd_norm.get(pid, 0.0)
-            + 0.3 * cb_norm.get(pid, 0.0)
-            + 0.4 * ncf_norm.get(pid, 0.0)
-        )
+        # Missing collaborative scores indicate an untrained item,
+        # not a negative preference. Renormalize available model weights.
+        signals = [(weight, scores[pid]) for weight, scores in (
+            (0.3, svd_norm), (0.3, cb_norm), (0.4, ncf_norm)
+        ) if pid in scores]
+        if not signals:
+            continue
+        score = sum(w * s for w, s in signals) / sum(w for w, _ in signals)
 
         recommendations.append({
             "product_id": pid,

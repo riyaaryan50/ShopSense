@@ -171,7 +171,7 @@
     "price": 1499,
     "description": "An affordable over-ear wireless headset for students who listen to lectures, attend online classes and want music playback between study sessions. The Rockerz 430 listing highlights 40mm audio drivers, BEAST Mode and up to 40 hours of playback. The cushioned earcups and adjustable headband are intended for everyday use. Check the exact colour and current bundle on the official boAt listing.",
     "image_url": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto/NI_CATALOG/IMAGES/ciw/2026/2/20/e4e20f8e-7254-4613-921c-9edcd995a3a4_3F22X1WA65_MN_19022026.png",
-    "marketplace": "boAt",
+    "marketplace": "boAt Official",
     "product_url": "https://www.boat-lifestyle.com/products/rockerz-430-headphone",
     "marketplace_links": {
       "boAt Official": "https://www.boat-lifestyle.com/products/rockerz-430-headphone"
@@ -184,7 +184,8 @@
       "audio_mode": "BEAST Mode / low-latency mode (as listed)",
       "microphone": "Built-in microphone",
       "design": "Over-ear cushioned earcups; adjustable headband",
-      "price_note": "Official store listing price snapshot; offers may change."
+      "price_note": "Official store listing price snapshot; offers may change.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
     }
   },
   {
@@ -505,6 +506,718 @@
       "weight": "Approx. 122g (listing specification)",
       "use_case": "Video lectures, calls and desk viewing",
       "price_note": "Marketplace price snapshot; colour and seller availability may vary."
+    }
+  },
+  {
+    "id": 22,
+    "name": "ASUS Vivobook Go 15 E1504FA (Ryzen 5, 8GB/512GB)",
+    "brand": "ASUS",
+    "category": "Laptops",
+    "price": 39990,
+    "description": "For coding practice, spreadsheets and coursework; integrated graphics rather than a gaming GPU. Key configuration: Ryzen 5 7520U; 8GB RAM; 512GB SSD; 15.6-inch FHD. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/22.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=ASUS%20Vivobook%20Go%2015%20E1504FA%20(Ryzen%205%2C%208GB%2F512GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=ASUS%20Vivobook%20Go%2015%20E1504FA%20(Ryzen%205%2C%208GB%2F512GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=ASUS%20Vivobook%20Go%2015%20E1504FA%20(Ryzen%205%2C%208GB%2F512GB)"
+    },
+    "specifications": {
+      "model": "ASUS Vivobook Go 15 E1504FA (Ryzen 5, 8GB/512GB)",
+      "feature_1": "Ryzen 5 7520U",
+      "feature_2": "8GB RAM",
+      "feature_3": "512GB SSD",
+      "feature_4": "15.6-inch FHD",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 23,
+    "name": "Acer Aspire Lite AL15-41 (Ryzen 5, 16GB/512GB)",
+    "brand": "Acer",
+    "category": "Laptops",
+    "price": 36990,
+    "description": "Useful for multitasking with IDEs, browser tabs and presentations. Key configuration: Ryzen 5 5500U; 16GB RAM; 512GB SSD; 15.6-inch FHD. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/23.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Acer%20Aspire%20Lite%20AL15-41%20(Ryzen%205%2C%2016GB%2F512GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Acer%20Aspire%20Lite%20AL15-41%20(Ryzen%205%2C%2016GB%2F512GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Acer%20Aspire%20Lite%20AL15-41%20(Ryzen%205%2C%2016GB%2F512GB)"
+    },
+    "specifications": {
+      "model": "Acer Aspire Lite AL15-41 (Ryzen 5, 16GB/512GB)",
+      "feature_1": "Ryzen 5 5500U",
+      "feature_2": "16GB RAM",
+      "feature_3": "512GB SSD",
+      "feature_4": "15.6-inch FHD",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 24,
+    "name": "Apple MacBook Air M2 (13-inch, 8GB/256GB)",
+    "brand": "Apple",
+    "category": "Laptops",
+    "price": 74990,
+    "description": "Portable fanless laptop for programming and writing; check compatibility with Windows-only course software. Key configuration: Apple M2; 8GB unified memory; 256GB SSD; 13.6-inch Liquid Retina. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/24.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Apple%20MacBook%20Air%20M2%20(13-inch%2C%208GB%2F256GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Apple%20MacBook%20Air%20M2%20(13-inch%2C%208GB%2F256GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Apple%20MacBook%20Air%20M2%20(13-inch%2C%208GB%2F256GB)"
+    },
+    "specifications": {
+      "model": "Apple MacBook Air M2 (13-inch, 8GB/256GB)",
+      "feature_1": "Apple M2",
+      "feature_2": "8GB unified memory",
+      "feature_3": "256GB SSD",
+      "feature_4": "13.6-inch Liquid Retina",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 25,
+    "name": "Samsung Galaxy Tab A9+ Wi-Fi (8GB/128GB)",
+    "brand": "Samsung",
+    "category": "Tablets",
+    "price": 20994,
+    "description": "Large screen for reading PDFs, lectures and split-screen study. Key configuration: 11-inch 1920x1200; Snapdragon 695; 8GB RAM; 128GB storage. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/25.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Samsung%20Galaxy%20Tab%20A9%2B%20Wi-Fi%20(8GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Samsung%20Galaxy%20Tab%20A9%2B%20Wi-Fi%20(8GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Samsung%20Galaxy%20Tab%20A9%2B%20Wi-Fi%20(8GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "Samsung Galaxy Tab A9+ Wi-Fi (8GB/128GB)",
+      "feature_1": "11-inch 1920x1200",
+      "feature_2": "Snapdragon 695",
+      "feature_3": "8GB RAM",
+      "feature_4": "128GB storage",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 26,
+    "name": "OnePlus Pad Go Wi-Fi (8GB/128GB)",
+    "brand": "OnePlus",
+    "category": "Tablets",
+    "price": 17999,
+    "description": "Suited to textbooks, streaming lectures and web research. Key configuration: 11.35-inch display; Helio G99; 8GB RAM; 128GB storage. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/26.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=OnePlus%20Pad%20Go%20Wi-Fi%20(8GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=OnePlus%20Pad%20Go%20Wi-Fi%20(8GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=OnePlus%20Pad%20Go%20Wi-Fi%20(8GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "OnePlus Pad Go Wi-Fi (8GB/128GB)",
+      "feature_1": "11.35-inch display",
+      "feature_2": "Helio G99",
+      "feature_3": "8GB RAM",
+      "feature_4": "128GB storage",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 27,
+    "name": "Redmi Pad SE 11-inch (4GB/128GB)",
+    "brand": "Redmi",
+    "category": "Tablets",
+    "price": 11999,
+    "description": "Budget option for digital notes, recorded classes and reading. Key configuration: 11-inch 1920x1200; Snapdragon 680; 4GB RAM; 128GB storage. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/27.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Redmi%20Pad%20SE%2011-inch%20(4GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Redmi%20Pad%20SE%2011-inch%20(4GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Redmi%20Pad%20SE%2011-inch%20(4GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "Redmi Pad SE 11-inch (4GB/128GB)",
+      "feature_1": "11-inch 1920x1200",
+      "feature_2": "Snapdragon 680",
+      "feature_3": "4GB RAM",
+      "feature_4": "128GB storage",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 28,
+    "name": "Samsung Galaxy A16 5G (8GB/128GB)",
+    "brand": "Samsung",
+    "category": "Smartphones",
+    "price": 18999,
+    "description": "Everyday phone for campus communication, scanning notes and online classes. Key configuration: 6.7-inch AMOLED; 5G; 8GB RAM; 128GB storage; 5000mAh. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/28.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Samsung%20Galaxy%20A16%205G%20(8GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Samsung%20Galaxy%20A16%205G%20(8GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Samsung%20Galaxy%20A16%205G%20(8GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "Samsung Galaxy A16 5G (8GB/128GB)",
+      "feature_1": "6.7-inch AMOLED",
+      "feature_2": "5G",
+      "feature_3": "8GB RAM",
+      "feature_4": "128GB storage",
+      "feature_5": "5000mAh",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 29,
+    "name": "Motorola Moto G45 5G (8GB/128GB)",
+    "brand": "Motorola",
+    "category": "Smartphones",
+    "price": 12999,
+    "description": "Affordable phone for messaging, navigation and study apps. Key configuration: Snapdragon 6s Gen 3; 6.5-inch display; 8GB RAM; 128GB; 5000mAh. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/29.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Motorola%20Moto%20G45%205G%20(8GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Motorola%20Moto%20G45%205G%20(8GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Motorola%20Moto%20G45%205G%20(8GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "Motorola Moto G45 5G (8GB/128GB)",
+      "feature_1": "Snapdragon 6s Gen 3",
+      "feature_2": "6.5-inch display",
+      "feature_3": "8GB RAM",
+      "feature_4": "128GB",
+      "feature_5": "5000mAh",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 30,
+    "name": "Redmi Note 14 5G (6GB/128GB)",
+    "brand": "Redmi",
+    "category": "Smartphones",
+    "price": 17999,
+    "description": "Useful for lecture playback, document scans and daily connectivity. Key configuration: Dimensity 7025 Ultra; 6.67-inch AMOLED; 6GB RAM; 128GB. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/30.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Redmi%20Note%2014%205G%20(6GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Redmi%20Note%2014%205G%20(6GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=Redmi%20Note%2014%205G%20(6GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "Redmi Note 14 5G (6GB/128GB)",
+      "feature_1": "Dimensity 7025 Ultra",
+      "feature_2": "6.67-inch AMOLED",
+      "feature_3": "6GB RAM",
+      "feature_4": "128GB",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 31,
+    "name": "iQOO Z9x 5G (6GB/128GB)",
+    "brand": "iQOO",
+    "category": "Smartphones",
+    "price": 13999,
+    "description": "Large battery for long days on campus and commuting. Key configuration: Snapdragon 6 Gen 1; 6.72-inch display; 6000mAh; 128GB. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/31.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=iQOO%20Z9x%205G%20(6GB%2F128GB)",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=iQOO%20Z9x%205G%20(6GB%2F128GB)",
+      "Flipkart search": "https://www.flipkart.com/search?q=iQOO%20Z9x%205G%20(6GB%2F128GB)"
+    },
+    "specifications": {
+      "model": "iQOO Z9x 5G (6GB/128GB)",
+      "feature_1": "Snapdragon 6 Gen 1",
+      "feature_2": "6.72-inch display",
+      "feature_3": "6000mAh",
+      "feature_4": "128GB",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 32,
+    "name": "JBL Tune 520BT",
+    "brand": "JBL",
+    "category": "Audio",
+    "price": 2499,
+    "description": "Wireless headphones for lectures and library study; no active noise cancellation. Key configuration: Bluetooth 5.3; on-ear; up to 57 hours rated playback; USB-C charging. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/32.jpg",
+    "marketplace": "JBL India",
+    "product_url": "https://in.jbl.com/TUNE520BT.html",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=JBL%20Tune%20520BT",
+      "Flipkart search": "https://www.flipkart.com/search?q=JBL%20Tune%20520BT",
+      "JBL India": "https://in.jbl.com/TUNE520BT.html"
+    },
+    "specifications": {
+      "model": "JBL Tune 520BT",
+      "feature_1": "Bluetooth 5.3",
+      "feature_2": "on-ear",
+      "feature_3": "up to 57 hours rated playback",
+      "feature_4": "USB-C charging",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
+    }
+  },
+  {
+    "id": 33,
+    "name": "Sony MDR-EX155AP",
+    "brand": "Sony",
+    "category": "Audio",
+    "price": 899,
+    "description": "Wired earbuds for calls and lectures with compatible headphone sockets. Key configuration: 9mm drivers; 3.5mm plug; inline microphone. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/33.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Sony%20MDR-EX155AP",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Sony%20MDR-EX155AP",
+      "Flipkart search": "https://www.flipkart.com/search?q=Sony%20MDR-EX155AP"
+    },
+    "specifications": {
+      "model": "Sony MDR-EX155AP",
+      "feature_1": "9mm drivers",
+      "feature_2": "3.5mm plug",
+      "feature_3": "inline microphone",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 34,
+    "name": "realme Buds 2",
+    "brand": "realme",
+    "category": "Audio",
+    "price": 599,
+    "description": "Budget wired earphones for classes without needing to recharge. Key configuration: 11.2mm drivers; 3.5mm plug; inline remote and mic. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/34.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=realme%20Buds%202",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=realme%20Buds%202",
+      "Flipkart search": "https://www.flipkart.com/search?q=realme%20Buds%202"
+    },
+    "specifications": {
+      "model": "realme Buds 2",
+      "feature_1": "11.2mm drivers",
+      "feature_2": "3.5mm plug",
+      "feature_3": "inline remote and mic",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 35,
+    "name": "boAt Airdopes 141",
+    "brand": "boAt",
+    "category": "Audio",
+    "price": 1299,
+    "description": "Compact earbuds for commuting and recorded lectures. Key configuration: True wireless; charging case; microphone; USB-C charging. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/35.jpg",
+    "marketplace": "boAt Official",
+    "product_url": "https://www.boat-lifestyle.com/products/airdopes-141",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=boAt%20Airdopes%20141",
+      "Flipkart search": "https://www.flipkart.com/search?q=boAt%20Airdopes%20141",
+      "boAt Official": "https://www.boat-lifestyle.com/products/airdopes-141"
+    },
+    "specifications": {
+      "model": "boAt Airdopes 141",
+      "feature_1": "True wireless",
+      "feature_2": "charging case",
+      "feature_3": "microphone",
+      "feature_4": "USB-C charging",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
+    }
+  },
+  {
+    "id": 36,
+    "name": "Logitech Pebble Keys 2 K380s",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 2995,
+    "description": "Portable keyboard for typing assignments on laptops and tablets. Key configuration: Bluetooth LE; compact layout; three-device switching. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/36.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Logitech%20Pebble%20Keys%202%20K380s",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Logitech%20Pebble%20Keys%202%20K380s",
+      "Flipkart search": "https://www.flipkart.com/search?q=Logitech%20Pebble%20Keys%202%20K380s"
+    },
+    "specifications": {
+      "model": "Logitech Pebble Keys 2 K380s",
+      "feature_1": "Bluetooth LE",
+      "feature_2": "compact layout",
+      "feature_3": "three-device switching",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 37,
+    "name": "Logitech Pebble Mouse 2 M350s",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 1595,
+    "description": "Travel-friendly mouse for quiet study spaces. Key configuration: Bluetooth LE; silent clicks; compact optical mouse. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/37.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Logitech%20Pebble%20Mouse%202%20M350s",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Logitech%20Pebble%20Mouse%202%20M350s",
+      "Flipkart search": "https://www.flipkart.com/search?q=Logitech%20Pebble%20Mouse%202%20M350s"
+    },
+    "specifications": {
+      "model": "Logitech Pebble Mouse 2 M350s",
+      "feature_1": "Bluetooth LE",
+      "feature_2": "silent clicks",
+      "feature_3": "compact optical mouse",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 38,
+    "name": "Logitech C270 HD Webcam",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 1995,
+    "description": "External webcam for interviews, remote classes and group meetings. Key configuration: 720p HD; USB-A; built-in microphone. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/38.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Logitech%20C270%20HD%20Webcam",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Logitech%20C270%20HD%20Webcam",
+      "Flipkart search": "https://www.flipkart.com/search?q=Logitech%20C270%20HD%20Webcam"
+    },
+    "specifications": {
+      "model": "Logitech C270 HD Webcam",
+      "feature_1": "720p HD",
+      "feature_2": "USB-A",
+      "feature_3": "built-in microphone",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 39,
+    "name": "Logitech H390 USB Headset",
+    "brand": "Logitech",
+    "category": "Computer Accessories",
+    "price": 2995,
+    "description": "Headset for online interviews and calls on compatible computers. Key configuration: USB-A; wired stereo; noise-reducing boom microphone. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/39.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Logitech%20H390%20USB%20Headset",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Logitech%20H390%20USB%20Headset",
+      "Flipkart search": "https://www.flipkart.com/search?q=Logitech%20H390%20USB%20Headset"
+    },
+    "specifications": {
+      "model": "Logitech H390 USB Headset",
+      "feature_1": "USB-A",
+      "feature_2": "wired stereo",
+      "feature_3": "noise-reducing boom microphone",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 40,
+    "name": "Casio fx-991CW ClassWiz",
+    "brand": "Casio",
+    "category": "Study Essentials",
+    "price": 1595,
+    "description": "For engineering and science calculations; confirm examination rules. Key configuration: Non-programmable scientific calculator; 540+ functions; solar and battery. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/40.jpg",
+    "marketplace": "Casio India",
+    "product_url": "https://www.casio.com/in/scientific-calculators/product.FX-991CW/",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Casio%20fx-991CW%20ClassWiz",
+      "Flipkart search": "https://www.flipkart.com/search?q=Casio%20fx-991CW%20ClassWiz",
+      "Casio India": "https://www.casio.com/in/scientific-calculators/product.FX-991CW/"
+    },
+    "specifications": {
+      "model": "Casio fx-991CW ClassWiz",
+      "feature_1": "Non-programmable scientific calculator",
+      "feature_2": "540+ functions",
+      "feature_3": "solar and battery",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
+    }
+  },
+  {
+    "id": 41,
+    "name": "Classmate A4 Single Line Notebook 172 Pages",
+    "brand": "Classmate",
+    "category": "Study Essentials",
+    "price": 95,
+    "description": "For lecture notes, derivations and assignment preparation. Key configuration: A4; 172 pages; ruled paper. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/41.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Classmate%20A4%20Single%20Line%20Notebook%20172%20Pages",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Classmate%20A4%20Single%20Line%20Notebook%20172%20Pages",
+      "Flipkart search": "https://www.flipkart.com/search?q=Classmate%20A4%20Single%20Line%20Notebook%20172%20Pages"
+    },
+    "specifications": {
+      "model": "Classmate A4 Single Line Notebook 172 Pages",
+      "feature_1": "A4",
+      "feature_2": "172 pages",
+      "feature_3": "ruled paper",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 42,
+    "name": "Camlin Kokuyo Exam Geometry Box",
+    "brand": "Camlin",
+    "category": "Study Essentials",
+    "price": 150,
+    "description": "For engineering drawing basics and geometry practice. Key configuration: Compass; divider; ruler; set squares; protractor. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/42.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Camlin%20Kokuyo%20Exam%20Geometry%20Box",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Camlin%20Kokuyo%20Exam%20Geometry%20Box",
+      "Flipkart search": "https://www.flipkart.com/search?q=Camlin%20Kokuyo%20Exam%20Geometry%20Box"
+    },
+    "specifications": {
+      "model": "Camlin Kokuyo Exam Geometry Box",
+      "feature_1": "Compass",
+      "feature_2": "divider",
+      "feature_3": "ruler",
+      "feature_4": "set squares",
+      "feature_5": "protractor",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 43,
+    "name": "Epson EcoTank L3210",
+    "brand": "Epson",
+    "category": "Study Essentials",
+    "price": 11999,
+    "description": "For printing assignments and scanning notes; no built-in Wi-Fi. Key configuration: Ink tank; print scan copy; USB connectivity. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/43.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Epson%20EcoTank%20L3210",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Epson%20EcoTank%20L3210",
+      "Flipkart search": "https://www.flipkart.com/search?q=Epson%20EcoTank%20L3210"
+    },
+    "specifications": {
+      "model": "Epson EcoTank L3210",
+      "feature_1": "Ink tank",
+      "feature_2": "print scan copy",
+      "feature_3": "USB connectivity",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 44,
+    "name": "Prestige PKOSS 1.5L Electric Kettle",
+    "brand": "Prestige",
+    "category": "Hostel Essentials",
+    "price": 899,
+    "description": "For boiling drinking water in hostels where kettles are permitted. Key configuration: 1.5 litre; stainless steel body; automatic shut-off. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/44.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Prestige%20PKOSS%201.5L%20Electric%20Kettle",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Prestige%20PKOSS%201.5L%20Electric%20Kettle",
+      "Flipkart search": "https://www.flipkart.com/search?q=Prestige%20PKOSS%201.5L%20Electric%20Kettle"
+    },
+    "specifications": {
+      "model": "Prestige PKOSS 1.5L Electric Kettle",
+      "feature_1": "1.5 litre",
+      "feature_2": "stainless steel body",
+      "feature_3": "automatic shut-off",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 45,
+    "name": "Havells Insta Cook PT 1600W Induction Cooktop",
+    "brand": "Havells",
+    "category": "Hostel Essentials",
+    "price": 2899,
+    "description": "For simple meals with induction-compatible cookware where hostel rules allow. Key configuration: 1600W; induction heating; preset controls. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/45.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Havells%20Insta%20Cook%20PT%201600W%20Induction%20Cooktop",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Havells%20Insta%20Cook%20PT%201600W%20Induction%20Cooktop",
+      "Flipkart search": "https://www.flipkart.com/search?q=Havells%20Insta%20Cook%20PT%201600W%20Induction%20Cooktop"
+    },
+    "specifications": {
+      "model": "Havells Insta Cook PT 1600W Induction Cooktop",
+      "feature_1": "1600W",
+      "feature_2": "induction heating",
+      "feature_3": "preset controls",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 46,
+    "name": "Philips GC1905 Steam Iron",
+    "brand": "Philips",
+    "category": "Hostel Essentials",
+    "price": 1699,
+    "description": "For maintaining formal clothes for presentations and interviews. Key configuration: 1440W; steam and spray; non-stick soleplate. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/46.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Philips%20GC1905%20Steam%20Iron",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Philips%20GC1905%20Steam%20Iron",
+      "Flipkart search": "https://www.flipkart.com/search?q=Philips%20GC1905%20Steam%20Iron"
+    },
+    "specifications": {
+      "model": "Philips GC1905 Steam Iron",
+      "feature_1": "1440W",
+      "feature_2": "steam and spray",
+      "feature_3": "non-stick soleplate",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 47,
+    "name": "Syska Power Pro 20000mAh Power Bank",
+    "brand": "Syska",
+    "category": "Hostel Essentials",
+    "price": 1499,
+    "description": "Backup charging for phones during travel and long campus days. Key configuration: 20000mAh rated cell capacity; USB output; portable rechargeable battery. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/47.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Syska%20Power%20Pro%2020000mAh%20Power%20Bank",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Syska%20Power%20Pro%2020000mAh%20Power%20Bank",
+      "Flipkart search": "https://www.flipkart.com/search?q=Syska%20Power%20Pro%2020000mAh%20Power%20Bank"
+    },
+    "specifications": {
+      "model": "Syska Power Pro 20000mAh Power Bank",
+      "feature_1": "20000mAh rated cell capacity",
+      "feature_2": "USB output",
+      "feature_3": "portable rechargeable battery",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 48,
+    "name": "Skybags Brat 30L Backpack",
+    "brand": "Skybags",
+    "category": "Backpacks",
+    "price": 1099,
+    "description": "For carrying notebooks, stationery and everyday college essentials. Key configuration: 30 litre capacity; zip compartments; shoulder straps. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/48.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Skybags%20Brat%2030L%20Backpack",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Skybags%20Brat%2030L%20Backpack",
+      "Flipkart search": "https://www.flipkart.com/search?q=Skybags%20Brat%2030L%20Backpack"
+    },
+    "specifications": {
+      "model": "Skybags Brat 30L Backpack",
+      "feature_1": "30 litre capacity",
+      "feature_2": "zip compartments",
+      "feature_3": "shoulder straps",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 49,
+    "name": "American Tourister Valex 28L Backpack",
+    "brand": "American Tourister",
+    "category": "Backpacks",
+    "price": 1499,
+    "description": "For commuting with books and accessories; check laptop fit before purchase. Key configuration: 28 litre capacity; multiple compartments; padded shoulder straps. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/49.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=American%20Tourister%20Valex%2028L%20Backpack",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=American%20Tourister%20Valex%2028L%20Backpack",
+      "Flipkart search": "https://www.flipkart.com/search?q=American%20Tourister%20Valex%2028L%20Backpack"
+    },
+    "specifications": {
+      "model": "American Tourister Valex 28L Backpack",
+      "feature_1": "28 litre capacity",
+      "feature_2": "multiple compartments",
+      "feature_3": "padded shoulder straps",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 50,
+    "name": "SanDisk Ultra Dual Drive Go 128GB",
+    "brand": "SanDisk",
+    "category": "Storage & Data",
+    "price": 1199,
+    "description": "Transfer assignments between compatible phones and computers. Key configuration: 128GB; USB Type-C and Type-A; swivel design. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/50.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=SanDisk%20Ultra%20Dual%20Drive%20Go%20128GB",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=SanDisk%20Ultra%20Dual%20Drive%20Go%20128GB",
+      "Flipkart search": "https://www.flipkart.com/search?q=SanDisk%20Ultra%20Dual%20Drive%20Go%20128GB"
+    },
+    "specifications": {
+      "model": "SanDisk Ultra Dual Drive Go 128GB",
+      "feature_1": "128GB",
+      "feature_2": "USB Type-C and Type-A",
+      "feature_3": "swivel design",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
+    }
+  },
+  {
+    "id": 51,
+    "name": "Samsung T7 Portable SSD 500GB",
+    "brand": "Samsung",
+    "category": "Storage & Data",
+    "price": 5499,
+    "description": "Portable backup and project storage; actual transfer speeds depend on host. Key configuration: 500GB; USB 3.2 Gen 2; up to 1050 MB/s rated read. Confirm the exact variant and seller warranty before ordering.",
+    "image_url": "/images/products/51.jpg",
+    "marketplace": "Amazon India search",
+    "product_url": "https://www.amazon.in/s?k=Samsung%20T7%20Portable%20SSD%20500GB",
+    "marketplace_links": {
+      "Amazon India search": "https://www.amazon.in/s?k=Samsung%20T7%20Portable%20SSD%20500GB",
+      "Flipkart search": "https://www.flipkart.com/search?q=Samsung%20T7%20Portable%20SSD%20500GB"
+    },
+    "specifications": {
+      "model": "Samsung T7 Portable SSD 500GB",
+      "feature_1": "500GB",
+      "feature_2": "USB 3.2 Gen 2",
+      "feature_3": "up to 1050 MB/s rated read",
+      "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
+      "image_note": "Product image supplied by project team."
     }
   }
 ]

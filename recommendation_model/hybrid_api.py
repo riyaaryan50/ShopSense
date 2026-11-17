@@ -47,10 +47,14 @@ async def lifespan(app: FastAPI):
         for row in catalogue.itertuples(index=False)
     }
 
-    if names != expected:
+    # The trained NCF catalogue must be intact, but new products may
+    # exist in the live catalogue and receive content-based scores.
+    if set(expected) != set(reverse_product_map.values()):
+        raise RuntimeError("NCF checkpoint and mapping IDs must match.")
+    if any(names.get(pid) != name for pid, name in expected.items()):
         raise RuntimeError(
-            "Product catalogue mismatch! "
-            "NCF and Flask product IDs must match."
+            "Product catalogue mismatch: trained product IDs and names "
+            "must remain unchanged."
         )
 
     # 3. Load anonymous user mapping
