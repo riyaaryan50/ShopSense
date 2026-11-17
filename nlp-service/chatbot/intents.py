@@ -89,7 +89,10 @@ def _singular(token):
 
 
 def _norm_tokens(text):
-    text = str(text or "").lower()
+    # "A9+" and "A9" are different products, so keep the plus as part of the
+    # model token ("a9plus") instead of letting tokenisation drop it.
+    text = re.sub(r"(?<=\w)\+", "plus", str(text or "").lower())
+    text = re.sub(r"\s+plus\b", "plus", text)  # "A9 Plus" -> "a9plus" too
     tokens = tokenize(text) + tokenize(text.replace("-", ""))
     return {_singular(t) for t in tokens}
 

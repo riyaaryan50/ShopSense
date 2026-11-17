@@ -29,11 +29,13 @@ from tests.test_intents import LABELLED_QUERIES  # noqa: E402
 
 REPORT_DIR = SERVICE_DIR / "reports"
 
-# (natural-language query, product id a human would expect in the top 3)
+# (natural-language query, expected): expected is a product id that should be
+# in the top 3, or a category name when several products are equally right
+# answers (e.g. any headphones for "listen to music").
 RELEVANCE_QUERIES = [
     ("something to keep my tea hot during lectures", 14),
     ("boil water for instant noodles in the hostel", 13),
-    ("listen to music on the bus", 7),
+    ("listen to music on the bus", "Audio"),
     ("quiet clicking mouse for the library", 10),
     ("carry my laptop and books to college in the rain", 15),
     ("charge my phone during a power cut", 12),
@@ -76,7 +78,10 @@ def bench_relevance(services):
     hits, rows = 0, []
     for query, expected in RELEVANCE_QUERIES:
         top = [h["product_id"] for h in services.index.search(query, top_k=3)]
-        ok = expected in top
+        if isinstance(expected, str):
+            ok = any(services.product(pid).get("category") == expected for pid in top)
+        else:
+            ok = expected in top
         hits += ok
         rows.append({"query": query, "expected": expected, "top3": top, "hit": ok})
     return {"hit_rate_at_3": round(hits / len(RELEVANCE_QUERIES), 3), "details": rows}

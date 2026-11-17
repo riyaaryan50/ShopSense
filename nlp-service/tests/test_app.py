@@ -1,6 +1,7 @@
 import pytest
 
 import app as nlp_app
+from tests.conftest import CATALOG_SIZE, KETTLES
 
 
 @pytest.fixture(scope="module")
@@ -18,7 +19,7 @@ def client(application):
 def test_health(client):
     data = client.get("/health").get_json()
     assert data["status"] == "healthy"
-    assert data["indexed_products"] == 20
+    assert data["indexed_products"] == CATALOG_SIZE
 
 
 def test_search_requires_query(client):
@@ -27,7 +28,7 @@ def test_search_requires_query(client):
 
 def test_search_returns_ids_scores_and_latency(client):
     data = client.post("/api/nlp/search", json={"query": "electric kettle", "top_k": 3}).get_json()
-    assert data["product_ids"][0] == 13
+    assert data["product_ids"][0] in KETTLES
     assert len(data["scores"]) == len(data["results"]) == 3
     assert data["latency_ms"] >= 0
 

@@ -73,7 +73,8 @@ def test_category_extraction(text, expected):
 
 @pytest.mark.parametrize("text,expected_ids", [
     ("compare galaxy tab a9 vs tab s9 fe", [4, 5]),
-    ("compare sony and boat headphones", [7, 8]),
+    ("compare sony wh-ch520 and boat rockerz 430", [7, 8]),
+    ("compare galaxy tab a9+ and tab a9", [25, 4]),
     ("which is better, the ideapad or the hp 15s?", [2, 3]),
 ])
 def test_product_matching_for_comparison(services, text, expected_ids):
@@ -85,7 +86,10 @@ def test_product_matching_for_comparison(services, text, expected_ids):
     ("the Sony WH-CH520", 7),
     ("wh-ch520", 7),
     ("rockerz 430", 8),
-    ("the kettle", 13),
+    ("the Philips kettle", 13),
+    ("Galaxy Tab A9", 4),
+    ("Galaxy Tab A9+", 25),
+    ("galaxy tab a9 plus", 25),
     ("Casio fx-991ex", 11),
     ("hp laptop", 3),
 ])

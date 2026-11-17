@@ -1,6 +1,7 @@
 import pytest
 
 from chatbot.handlers import ChatEngine
+from tests.conftest import KETTLES
 from survey.recommender import need_statement, survey_recommend
 
 
@@ -12,7 +13,7 @@ def test_index_contains_every_product(services):
 
 
 def test_search_ranks_obvious_match_first(services):
-    assert services.index.search("electric kettle", top_k=3)[0]["product_id"] == 13
+    assert services.index.search("electric kettle", top_k=3)[0]["product_id"] in KETTLES
 
 
 def test_search_price_filter(services):
@@ -51,7 +52,7 @@ def test_chat_search_returns_product_cards(chat):
     response = chat.respond("find me an electric kettle")
     assert response["intent"] == "search_product"
     assert response["type"] == "products"
-    assert response["products"][0]["id"] == 13
+    assert response["products"][0]["id"] in KETTLES
     assert {"id", "name", "price", "image_url"} <= set(response["products"][0])
 
 
@@ -69,7 +70,9 @@ def test_chat_compare_builds_table(chat):
 def test_chat_compare_by_category(chat):
     response = chat.respond("compare headphones")
     assert response["type"] == "comparison"
-    assert {p["id"] for p in response["comparison"]["products"]} == {7, 8}
+    products = response["comparison"]["products"]
+    assert len(products) == 2
+    assert all(p["category"] == "Audio" for p in products)
 
 
 def test_chat_review_summary(chat):

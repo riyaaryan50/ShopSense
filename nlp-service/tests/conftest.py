@@ -13,6 +13,8 @@ from common.services import NLPServices  # noqa: E402
 from search.semantic_search import SemanticSearchIndex, TfidfEmbedder  # noqa: E402
 
 CATALOG = SERVICE_DIR.parent / "backend" / "product_catalog.json"
+CATALOG_SIZE = len(json.loads(CATALOG.read_text(encoding="utf-8")))
+KETTLES = {13, 44}  # Philips and Prestige electric kettles
 
 REVIEWS = {
     7: [  # Sony headphones – mostly positive
