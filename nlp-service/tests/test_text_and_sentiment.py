@@ -78,3 +78,24 @@ def test_summary_without_reviews(services):
     assert summary["total_reviews"] == 0
     assert summary["overall_sentiment"] == "no_reviews"
     assert summary["top_positive_themes"] == []
+
+
+def test_bracketed_labels_are_not_themes(services):
+    from sentiment.summary import summarize_reviews, strip_labels
+
+    assert strip_labels("[Synthetic demo review] Great battery") == "Great battery"
+    assert strip_labels("No label [here] stays") == "No label [here] stays"
+    reviews = [
+        {"id": i, "rating": r, "comment": f"[Synthetic demo review] {c}"}
+        for i, (r, c) in enumerate([
+            (5, "The battery life is excellent."), (5, "Really impressed with the battery life."),
+            (1, "Disappointed with the display."), (2, "The display could be better."),
+        ])
+    ]
+    summary = summarize_reviews(services.product(7), reviews, services.analyzer,
+                                include_reviews=True)
+    themes = summary["top_positive_themes"] + summary["top_negative_themes"]
+    assert not any("synthetic" in t or "demo" in t for t in themes)
+    assert "battery life" in summary["top_positive_themes"]
+    # The original text (with its honesty label) is still what users see.
+    assert summary["reviews"][0]["comment"].startswith("[Synthetic demo review]")

@@ -3,7 +3,7 @@
 Embedding engine: `sentence-transformers/all-MiniLM-L6-v2` · data source: `backend`
 
 ## Semantic search latency
-- 60 queries · mean **12.72 ms** · p50 12.47 ms · p95 **15.18 ms** · max 20.71 ms
+- 60 queries · mean **10.8 ms** · p50 9.95 ms · p95 **18.5 ms** · max 23.89 ms
 - Target < 200 ms: **met**
 
 ## Search relevance (expected product in top 3)
@@ -32,10 +32,11 @@ Ground truth: stars 4-5 positive, 3 neutral, 1-2 negative
 
 | Model | 3-class accuracy | Positive vs negative | ms / review |
 |---|---|---|---|
-| vader | 85% | 93% | 0.077 |
-| vader+domain | 82% | 91% | 0.097 |
+| vader | 72% | 83% | 0.046 |
+| vader+domain | 75% | 85% | 0.052 |
+| distilbert | 65% | 73% | 15.976 |
 
-Per-class (VADER + domain lexicon, used in production): positive 90% (n=70), neutral 9% (n=11), negative 95% (n=19)
+Per-class (VADER + domain lexicon, used in production): positive 98% (n=66), neutral 14% (n=14), negative 40% (n=20)
 
 Note: the review corpus is synthetic demo data (see backend/scripts/review_bank.py). 3-star reviews are deliberately mixed, so the neutral class is the hardest.
 

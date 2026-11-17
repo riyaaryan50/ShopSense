@@ -3,10 +3,10 @@
   "data_source": "backend",
   "search_latency": {
     "queries": 60,
-    "mean_ms": 12.72,
-    "p50_ms": 12.47,
-    "p95_ms": 15.18,
-    "max_ms": 20.71,
+    "mean_ms": 10.8,
+    "p50_ms": 9.95,
+    "p95_ms": 18.5,
+    "max_ms": 23.89,
     "target_ms": 200,
     "meets_target": true
   },
@@ -169,62 +169,89 @@
     "sample_size": 100,
     "ground_truth": "stars 4-5 positive, 3 neutral, 1-2 negative",
     "vader": {
-      "accuracy_3class": 0.85,
-      "accuracy_pos_vs_neg": 0.933,
+      "accuracy_3class": 0.72,
+      "accuracy_pos_vs_neg": 0.826,
       "per_class": {
         "positive": {
-          "n": 70,
-          "accuracy": 0.943
+          "n": 66,
+          "accuracy": 0.955
         },
         "neutral": {
-          "n": 11,
-          "accuracy": 0.182
+          "n": 14,
+          "accuracy": 0.071
         },
         "negative": {
-          "n": 19,
-          "accuracy": 0.895
+          "n": 20,
+          "accuracy": 0.4
         }
       },
       "confusion": {
-        "negative->negative": 17,
-        "positive->positive": 66,
-        "neutral->negative": 7,
+        "positive->positive": 63,
+        "negative->positive": 12,
+        "neutral->negative": 2,
+        "neutral->positive": 11,
+        "neutral->neutral": 1,
+        "negative->negative": 8,
         "positive->negative": 2,
-        "negative->positive": 2,
-        "positive->neutral": 2,
-        "neutral->neutral": 2,
-        "neutral->positive": 2
+        "positive->neutral": 1
       },
-      "ms_per_review": 0.077
+      "ms_per_review": 0.046
     },
     "vader+domain": {
-      "accuracy_3class": 0.82,
-      "accuracy_pos_vs_neg": 0.91,
+      "accuracy_3class": 0.75,
+      "accuracy_pos_vs_neg": 0.849,
       "per_class": {
         "positive": {
-          "n": 70,
-          "accuracy": 0.9
+          "n": 66,
+          "accuracy": 0.985
         },
         "neutral": {
-          "n": 11,
-          "accuracy": 0.091
+          "n": 14,
+          "accuracy": 0.143
         },
         "negative": {
-          "n": 19,
-          "accuracy": 0.947
+          "n": 20,
+          "accuracy": 0.4
         }
       },
       "confusion": {
-        "negative->negative": 18,
-        "positive->positive": 63,
-        "neutral->neutral": 1,
-        "positive->negative": 4,
-        "negative->positive": 1,
-        "positive->neutral": 3,
-        "neutral->negative": 8,
-        "neutral->positive": 2
+        "positive->positive": 65,
+        "negative->positive": 12,
+        "neutral->negative": 3,
+        "neutral->neutral": 2,
+        "negative->negative": 8,
+        "neutral->positive": 9,
+        "positive->neutral": 1
       },
-      "ms_per_review": 0.097
+      "ms_per_review": 0.052
+    },
+    "distilbert": {
+      "accuracy_3class": 0.65,
+      "accuracy_pos_vs_neg": 0.733,
+      "per_class": {
+        "positive": {
+          "n": 66,
+          "accuracy": 0.652
+        },
+        "neutral": {
+          "n": 14,
+          "accuracy": 0.143
+        },
+        "negative": {
+          "n": 20,
+          "accuracy": 1.0
+        }
+      },
+      "confusion": {
+        "positive->positive": 43,
+        "negative->negative": 20,
+        "neutral->negative": 8,
+        "positive->neutral": 2,
+        "positive->negative": 21,
+        "neutral->positive": 4,
+        "neutral->neutral": 2
+      },
+      "ms_per_review": 15.976
     }
   },
   "intents": {

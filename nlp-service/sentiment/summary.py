@@ -35,6 +35,8 @@ OPINION_WORDS = {
     "need", "needed", "comes", "came", "enough", "every", "full", "long",
     "absolutely", "highly", "completely", "solid", "choice", "value",
     "mixed", "feelings", "disappointing", "doesn",
+    "exceeded", "expectations", "improvement", "needs", "everyday", "average",
+    "did", "meet", "better", "ease",
     "run", "runs", "quickly", "kept", "keep", "gets", "goes", "went", "comes",
     "started", "takes", "took", "slightly", "lot", "times", "fits",
     "experience", "satisfied", "superb", "excellent",
@@ -154,15 +156,24 @@ def _verdict(summary, product_name):
     return text
 
 
+# Leading bracketed labels such as "[Synthetic demo review]" are metadata, not
+# opinion: they must not become "themes" or move the sentiment score.
+_LABEL_RE = re.compile(r"^\s*(\[[^\]]{1,60}\]\s*)+")
+
+
+def strip_labels(text):
+    return _LABEL_RE.sub("", text or "")
+
+
 def summarize_reviews(product, reviews, analyzer, top_n=5, include_reviews=False):
     product_name = (product or {}).get("name", "this product")
     analysed = []
     for review in reviews:
-        text = review.get("comment") or ""
+        text = strip_labels(review.get("comment") or "")
         if not text.strip():
             continue
         result = analyzer.analyze(text)
-        analysed.append({**review, "sentiment": result["label"],
+        analysed.append({**review, "text": text, "sentiment": result["label"],
                          "compound": result["compound"]})
 
     counts = Counter(r["sentiment"] for r in analysed)
@@ -185,9 +196,9 @@ def summarize_reviews(product, reviews, analyzer, top_n=5, include_reviews=False
     else:
         overall = "mixed"
 
-    all_texts = [r["comment"] for r in analysed]
-    positive_texts = [r["comment"] for r in analysed if r["sentiment"] == "positive"]
-    negative_texts = [r["comment"] for r in analysed if r["sentiment"] == "negative"]
+    all_texts = [r["text"] for r in analysed]
+    positive_texts = [r["text"] for r in analysed if r["sentiment"] == "positive"]
+    negative_texts = [r["text"] for r in analysed if r["sentiment"] == "negative"]
     exclude = _name_terms(product)
     summary = {
         "product_id": (product or {}).get("id"),

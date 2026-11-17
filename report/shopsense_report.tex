@@ -110,7 +110,7 @@ Fig.~\ref{fig:arch} shows the overall design. The React single-page application 
 \section{Methodology}
 
 \subsection{Data}
-The catalogue has 20 real products in nine student-oriented categories: laptops, tablets, smartphones, audio, computer accessories, study essentials, hostel essentials, backpacks, and storage. Each product has a description, specifications and links to marketplaces. Since we had no real customer reviews for these exact products, we generated 240 \emph{synthetic} reviews (12 per product) from product-specific phrases about real strengths and weaknesses, such as soldered RAM on one laptop or expensive ink on the printer. Star ratings were drawn from a per-product distribution and the text was written to match the rating, with deliberately mixed 3-star reviews. Four demo users with different personas and 16 reviewer accounts produce 502 interaction events (view, click, wishlist, cart and purchase). We state this clearly because it limits how far our sentiment results can be generalised.
+The catalogue has 50 real products in nine student-oriented categories: laptops, tablets, smartphones, audio, computer accessories, study essentials, hostel essentials, backpacks, and storage. Each product has a description, specifications and links to official or marketplace pages. Since we had no real customer reviews for these exact products, we generated 600 \emph{synthetic} reviews, 12 per product, in two ways. For the first 20 products, reviews were composed from product-specific phrases about real strengths and weaknesses, such as soldered RAM on one laptop or expensive ink on the printer, with star ratings drawn from a per-product distribution. For the 30 products added later, a second generator used category-level aspect templates and a fixed rating mix, and labels every review ``[Synthetic demo review]''. Our analysis ignores such bracketed labels so they never become themes. Four demo users with different personas and 16 reviewer accounts produce 502 interaction events (view, click, wishlist, cart and purchase), all on the first 20 products. We state this clearly because it limits how far our results can be generalised.
 
 \subsection{Content-Based Model with Fuzzy Weights}
 Each product is represented by a TF-IDF vector over its name, description, category and a set of keywords. A user's profile is the weighted average of the vectors of the products they interacted with. Instead of fixed weights per event type, the weights adapt to the user: the frequency of each event type is mapped to low, medium and high fuzzy memberships, defuzzified, and used to adjust the base weight by at most 10\%. The adjustment is scaled by a confidence term $n/(n+10)$, where $n$ is the number of interactions. The final score combines profile similarity (65\%) with item-to-item similarity (35\%), excludes items already bought or in the cart, and caps any single category at three results to keep some variety.
@@ -149,7 +149,7 @@ where $s_{\text{budget}}$ falls off smoothly as $(B/p)^2$ for items priced $p$ a
 
 %--------------------------------------------------------------------
 \section{Implementation}
-The frontend uses React with Vite and Tailwind CSS. The backend uses Flask with SQLAlchemy, Flask-JWT-Extended and PostgreSQL. The recommendation models use scikit-learn, NumPy and PyTorch, and the hybrid is served with FastAPI. The NLP service uses sentence-transformers, FAISS, vaderSentiment and Flask-SocketIO. Personal recommendations are cached for an hour under the key \texttt{user:\{id\}:recs} (in Redis when available) and invalidated whenever the user changes their cart, wishlist, survey or interaction history. The schema is managed with Alembic migrations. A Docker Compose file starts the whole stack. For a lightweight hosted demo we also run the backend, recommender and NLP code inside a single serverless function on Vercel; this version uses TF-IDF vectors and REST chat because the transformer model exceeds the platform's size limit. The project has 106 automated tests across the backend and the NLP service.
+The frontend uses React with Vite and Tailwind CSS. The backend uses Flask with SQLAlchemy, Flask-JWT-Extended and PostgreSQL. The recommendation models use scikit-learn, NumPy and PyTorch, and the hybrid is served with FastAPI. The NLP service uses sentence-transformers, FAISS, vaderSentiment and Flask-SocketIO. Personal recommendations are cached for an hour under the key \texttt{user:\{id\}:recs} (in Redis when available) and invalidated whenever the user changes their cart, wishlist, survey or interaction history. The schema is managed with Alembic migrations. A Docker Compose file starts the whole stack. For a lightweight hosted demo we also run the backend, recommender and NLP code inside a single serverless function on Vercel; this version uses TF-IDF vectors and REST chat because the transformer model exceeds the platform's size limit. The project has 113 automated tests across the backend and the NLP service.
 
 %--------------------------------------------------------------------
 \section{Results}
@@ -172,7 +172,7 @@ Intent accuracy (30 labelled messages) & 30/30 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:sent} compares sentiment models on a random sample of 100 reviews, with star ratings as ground truth (4--5 positive, 3 neutral, 1--2 negative). Plain VADER did slightly better on this sample, and the two VADER variants tied at 81\% over all 240 reviews. We kept the domain lexicon because it fixes product-level verdicts: without it, VADER labelled 8 of the printer's 12 reviews positive even though the average rating was 3 stars. DistilBERT fine-tuned on SST-2 scored poorly, mostly because it only predicts two classes and our reviews are often mixed. The neutral class is the weak spot for every model, since a 3-star review that praises one thing and criticises another rarely reads as neutral.
+Table~\ref{tab:sent} compares sentiment models on a random sample of 100 of the 600 reviews, with star ratings as ground truth (4--5 positive, 3 neutral, 1--2 negative). VADER with our domain lexicon scored best on this sample, and the two VADER variants tied at 70\% over all 600 reviews. The lexicon also fixes product-level verdicts: without it, VADER labelled 8 of the printer's 12 reviews positive even though the average rating was 3 stars. DistilBERT fine-tuned on SST-2 scored lower, mostly because it only predicts two classes and many of our reviews are mixed. Positive reviews were recognised well (98\% with the lexicon), but neutral and negative ones were not: many templated 4-star and 2-star reviews combine a compliment with a complaint (``Good battery life\ldots\ Not very satisfied with the display''), which no model reads as cleanly positive or negative.
 
 \begin{table}[t]
 \caption{Sentiment Accuracy Against Star Ratings (100 Reviews)}
@@ -182,9 +182,9 @@ Table~\ref{tab:sent} compares sentiment models on a random sample of 100 reviews
 \toprule
 Model & 3-class & Pos.\ vs.\ neg. & ms/review \\
 \midrule
-VADER & 85\% & 93\% & 0.1 \\
-VADER + domain lexicon & 82\% & 91\% & 0.1 \\
-DistilBERT (SST-2) & 56\% & 63\% & 24 \\
+VADER & 72\% & 83\% & 0.05 \\
+VADER + domain lexicon & 75\% & 85\% & 0.05 \\
+DistilBERT (SST-2) & 65\% & 73\% & 16 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -192,7 +192,7 @@ DistilBERT (SST-2) & 56\% & 63\% & 24 \\
 \subsection{Recommendation Models}
 For rating prediction on a timestamp split (80/20 per user), Surprise SVD reached an RMSE of 0.53 and MAE of 0.17, against 2.94 and 2.64 for the first NumPy version. The NumPy version treated every unobserved entry as zero, which pulled its predictions down.
 
-To compare all five approaches on equal terms, we ran a leave-one-out evaluation over the 19 users with at least two products. Each user's most recent product was held out and ranked against the products they had not touched (7.7 candidates on average); ties counted against the model. Table~\ref{tab:rec} and Fig.~\ref{fig:models} show the results. Content-based filtering gave the best NDCG@10 and MRR, and NCF the best hit rate. The hybrid came close to the best single models but did not beat them, even after we tuned its weights by grid search on a separate validation split, which moved weight from SVD to the content model. We think the reason is the data: the reviewer histories are random, so there is little collaborative signal for the hybrid to add, and with only 20 products a single position in the ranking changes the metrics noticeably. We report this as it is rather than tuning on the test set.
+To compare all five approaches on equal terms, we ran a leave-one-out evaluation over the 19 users with at least two products. Each user's most recent product was held out and ranked against the products they had not touched; ties counted against the model. Only the 20 products with interaction history were ranked (7.7 candidates per user on average). The 30 newer products have no interactions yet, so they can never be a held-out item, and including them would penalise exactly the models that sensibly recommend new products. In the live system, new products reach users through the content-based model and the survey. Table~\ref{tab:rec} and Fig.~\ref{fig:models} show the results. NCF gave the best NDCG@10 and hit rate, and the default hybrid the best MRR, with content-based filtering close behind. The hybrid did not clearly beat the best single model, even after we tuned its weights by grid search on a separate validation split, which shifted weight towards the content model. We think the reason is the data: the reviewer histories are random, so there is little collaborative signal for the hybrid to add, and with 20 ranked products a single position in the ranking changes the metrics noticeably. We report this as it is rather than tuning on the test set.
 
 \begin{table}[t]
 \caption{Leave-One-Out Comparison (19 Users)}
@@ -200,14 +200,14 @@ To compare all five approaches on equal terms, we ran a leave-one-out evaluation
 \centering
 \begin{tabular}{@{}lccc@{}}
 \toprule
-Model & HR@10 & NDCG@10 & MRR \
+Model & HR@10 & NDCG@10 & MRR \\
 \midrule
-Popularity & 0.947 & 0.373 & 0.204 \
-SVD (Surprise) & 0.947 & 0.412 & 0.250 \
-Content-based (TF-IDF) & 0.947 & \textbf{0.576} & \textbf{0.465} \
-NCF (NeuMF) & \textbf{1.000} & 0.569 & 0.434 \
-Hybrid (0.3 / 0.3 / 0.4) & 0.895 & 0.559 & 0.460 \
-Hybrid, tuned (0.1 / 0.5 / 0.4) & 0.895 & 0.557 & 0.458 \
+Popularity & 0.947 & 0.373 & 0.204 \\
+SVD (Surprise) & 0.947 & 0.412 & 0.250 \\
+Content-based (TF-IDF) & 0.947 & 0.561 & 0.443 \\
+NCF (NeuMF) & \textbf{1.000} & \textbf{0.569} & 0.434 \\
+Hybrid (0.3 / 0.3 / 0.4) & 0.895 & 0.565 & \textbf{0.469} \\
+Hybrid, tuned (0.1 / 0.6 / 0.3) & 0.895 & 0.562 & 0.462 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -252,7 +252,7 @@ Figs.~\ref{fig:search}--\ref{fig:chat} show the system in use. The survey (Fig.~
 
 %--------------------------------------------------------------------
 \section{Limitations}
-The biggest limitation is the data. The reviews are synthetic, so the sentiment numbers show that the pipeline works rather than how accurate it would be on real customer text, and we tuned the domain lexicon on the same reviews. The catalogue of 20 products and the small number of users make the recommendation metrics fragile. The chatbot is rule-based. It is predictable and fast, but it will miss phrasings we did not anticipate. Finally, the hosted demo replaces MiniLM with TF-IDF vectors, which match meaning less well than the full version.
+The biggest limitation is the data. The reviews are synthetic, so the sentiment numbers show that the pipeline works rather than how accurate it would be on real customer text, and we tuned the domain lexicon on the earlier reviews. Templated reviews also mix praise and criticism in a fixed pattern that real reviews would not follow. All interactions are on 20 of the 50 products, and the small number of users makes the recommendation metrics fragile. The chatbot is rule-based. It is predictable and fast, but it will miss phrasings we did not anticipate. Finally, the hosted demo replaces MiniLM with TF-IDF vectors, which match meaning less well than the full version.
 
 %--------------------------------------------------------------------
 \section{Conclusion and Future Work}
@@ -260,7 +260,7 @@ ShopSense AI shows that a fairly small set of well-understood techniques, combin
 
 %--------------------------------------------------------------------
 \section*{Individual Contributions}
-\textbf{Aanchal Yadav} built the React frontend and the content-based TF-IDF recommender. \textbf{Riya Aryan} designed the database, built the Flask REST APIs with JWT authentication, and developed the SVD model, popularity fallback and fuzzy interaction weights. \textbf{Susmita} implemented and trained the NeuMF model, built the hybrid engine served through FastAPI. \textbf{Sneha} built the NLP service (semantic search, sentiment analysis and review summaries, and the chatbot), the preference survey and its recommender, the cross-model evaluation, and the integration, testing and deployment.
+\textbf{Aanchal Yadav} built the React frontend and the content-based TF-IDF recommender. \textbf{Riya Aryan} designed the database, built the Flask REST APIs with JWT authentication, developed the SVD model, popularity fallback and fuzzy interaction weights, and expanded the catalogue to 50 products with its review generator. \textbf{Susmita} implemented and trained the NeuMF model and built the hybrid engine served through FastAPI. \textbf{Sneha} built the NLP service (semantic search, sentiment analysis and review summaries, and the chatbot), the preference survey and its recommender, the cross-model evaluation, and the integration, testing and deployment.
 
 %--------------------------------------------------------------------
 \begin{thebibliography}{00}

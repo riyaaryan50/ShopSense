@@ -52,7 +52,7 @@ pip install torch --index-url https://download.pytorch.org/whl/cpu
 pip install -r backend/requirements.txt -r recommendation_model/requirements.txt -r nlp-service/requirements.txt
 
 cp backend/.env.example backend/.env                        # SQLite by default
-cd backend && python -m scripts.seed_demo_data && python run.py      # :5000
+cd backend && python -m scripts.seed_demo_data && python -m scripts.seed_new_reviews && python run.py   # :5000
 cd recommendation_model && python recommendation_api.py              # :5001
 cd nlp-service && python app.py                                      # :5002
 cd frontend && npm install && npm run dev                            # :5173

@@ -60,6 +60,7 @@ backend_app = create_app()
 
 def seed_if_empty():
     """Create tables and load demo data the first time the database is used."""
+    seeded = False
     with backend_app.app_context():
         db.create_all()
         if Product.query.count():
@@ -73,6 +74,13 @@ def seed_if_empty():
         seed.seed_demo_users(rng)
         seed.seed_reviews(rng, catalog)
         log.info("Seeded demo database")
+        seeded = True
+    if seeded:
+        # Riya's script: synthetic reviews for the products added in the
+        # 50-product catalogue (idempotent; skips products with 12 reviews).
+        import runpy
+        runpy.run_module("scripts.seed_new_reviews", run_name="__main__")
+        log.info("Seeded reviews for the expanded catalogue")
 
 
 seed_if_empty()

@@ -25,6 +25,7 @@ sys.path.insert(0, str(SERVICE_DIR))
 
 from common.services import NLPServices  # noqa: E402
 from sentiment.analyzer import SentimentAnalyzer, label_from_rating  # noqa: E402
+from sentiment.summary import strip_labels  # noqa: E402
 from tests.test_intents import LABELLED_QUERIES  # noqa: E402
 
 REPORT_DIR = SERVICE_DIR / "reports"
@@ -118,7 +119,7 @@ def bench_sentiment(services, sample_size=100, distilbert=False):
     for key, analyzer in (("vader", SentimentAnalyzer(domain_lexicon=False)),
                           ("vader+domain", SentimentAnalyzer(domain_lexicon=True))):
         start = time.perf_counter()
-        labels = [analyzer.label(r["comment"]) for r in sample]
+        labels = [analyzer.label(strip_labels(r["comment"])) for r in sample]
         elapsed = (time.perf_counter() - start) * 1000
         result[key] = {**_accuracy(list(zip(labels, truth))),
                        "ms_per_review": round(elapsed / len(sample), 3)}
@@ -130,7 +131,8 @@ def bench_sentiment(services, sample_size=100, distilbert=False):
                            model="distilbert-base-uncased-finetuned-sst-2-english",
                            device=-1)
             start = time.perf_counter()
-            outputs = clf([r["comment"] for r in sample], truncation=True, batch_size=16)
+            outputs = clf([strip_labels(r["comment"]) for r in sample], truncation=True,
+                          batch_size=16)
             bert_ms = (time.perf_counter() - start) * 1000
             # SST-2 is binary; treat low-confidence predictions as neutral.
             bert = ["neutral" if o["score"] < 0.75 else o["label"].lower() for o in outputs]

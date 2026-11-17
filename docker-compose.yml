@@ -37,7 +37,7 @@ services:
       REDIS_URL: redis://redis:6379/0
       DATA_DIR: /data
     # Seeding is idempotent: creates tables, demo users, synthetic reviews, CSV exports.
-    command: sh -c "python -m scripts.seed_demo_data && gunicorn -w 2 --threads 4 -b 0.0.0.0:5000 run:app"
+    command: sh -c "python -m scripts.seed_demo_data && python -m scripts.seed_new_reviews && gunicorn -w 2 --threads 4 -b 0.0.0.0:5000 run:app"
     volumes:
       - ./data:/data
     ports: ["5000:5000"]

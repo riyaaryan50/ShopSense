@@ -225,7 +225,13 @@ def main():
     set_seed()
     interactions, products = load_data()
     ratings, test, train_interactions = leave_one_out(interactions)
-    all_items = set(int(p) for p in products["id"])
+    # Rank only "warm" products (those with interaction history). Products added
+    # later have no interactions, so they can never be a held-out test item;
+    # including them would penalise models for recommending new products.
+    # New products are covered at serving time by the content-based model and
+    # the survey, not by this offline protocol.
+    catalogue_size = len(products)
+    all_items = set(int(p) for p in interactions["product_id"].unique())
 
     results, models = {}, {}
     builders = [
@@ -294,7 +300,9 @@ def main():
         "is held out and ranked against every product they have not interacted with. "
         "Ties count against the model.", "",
         f"Users evaluated: **{results[names[0]]['users']}** · average candidates per user: "
-        f"**{results[names[0]]['candidates_per_user']}** · catalogue: {len(all_items)} products", "",
+        f"**{results[names[0]]['candidates_per_user']}** · ranked products: {len(all_items)} with "
+        f"interaction history (catalogue: {catalogue_size}; products without any interactions "
+        "cannot be test items, so they are excluded from ranking)", "",
         "| Model | HR@10 | NDCG@10 | MRR | Train time (s) |", "|---|---|---|---|---|",
     ]
     for n in names:

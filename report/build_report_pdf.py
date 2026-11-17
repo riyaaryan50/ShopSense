@@ -279,16 +279,19 @@ architecture_diagram()
 # ---------------------------------------------------------------- V. Methodology
 section("Methodology")
 subsection("Data")
-P("The catalogue has 20 real products in nine student-oriented categories: laptops, tablets, "
+P("The catalogue has 50 real products in nine student-oriented categories: laptops, tablets, "
   "smartphones, audio, computer accessories, study essentials, hostel essentials, backpacks, and "
-  "storage. Each product has a description, specifications and links to marketplaces. Since we "
-  "had no real customer reviews for these exact products, we generated 240 <i>synthetic</i> "
-  "reviews (12 per product) from product-specific phrases about real strengths and weaknesses, "
-  "such as soldered RAM on one laptop or expensive ink on the printer. Star ratings were drawn "
-  "from a per-product distribution and the text was written to match the rating, with "
-  "deliberately mixed 3-star reviews. Four demo users with different personas and 16 reviewer "
-  "accounts produce 502 interaction events (view, click, wishlist, cart and purchase). We state "
-  "this clearly because it limits how far our sentiment results can be generalised.")
+  "storage. Each product has a description, specifications and links to official or marketplace "
+  "pages. Since we had no real customer reviews for these exact products, we generated 600 "
+  "<i>synthetic</i> reviews, 12 per product, in two ways. For the first 20 products, reviews were "
+  "composed from product-specific phrases about real strengths and weaknesses, such as soldered "
+  "RAM on one laptop or expensive ink on the printer, with star ratings drawn from a per-product "
+  "distribution. For the 30 products added later, a second generator used category-level aspect "
+  "templates and a fixed rating mix, and labels every review “[Synthetic demo review]”. Our "
+  "analysis ignores such bracketed labels so they never become themes. Four demo users with "
+  "different personas and 16 reviewer accounts produce 502 interaction events (view, click, "
+  "wishlist, cart and purchase), all on the first 20 products. We state this clearly because it "
+  "limits how far our results can be generalised.")
 subsection("Content-Based Model with Fuzzy Weights")
 P("Each product is represented by a TF-IDF vector over its name, description, category and a set "
   "of keywords. A user's profile is the weighted average of the vectors of the products they "
@@ -374,7 +377,7 @@ P("The frontend uses React with Vite and Tailwind CSS. The backend uses Flask wi
   "transformer model exceeds the platform's size limit. Personal recommendations are cached for "
   "an hour under the key user:{id}:recs (in Redis when available) and invalidated whenever the "
   "user changes their cart, wishlist, survey or interaction history. The schema is managed with "
-  "Alembic migrations. The project has 106 automated tests across the backend and the NLP "
+  "Alembic migrations. The project has 113 automated tests across the backend and the NLP "
   "service.")
 
 # ---------------------------------------------------------------- VII. Results
@@ -391,19 +394,21 @@ table("NLP Service Benchmarks", [
     ["Relevance: hit rate@3 (15 queries)", "15/15"],
     ["Intent accuracy (30 labelled messages)", "30/30"],
 ], [COL_W * 0.66, COL_W * 0.30])
-P("Table II compares sentiment models on a random sample of 100 reviews, with star ratings as "
-  "ground truth (4–5 positive, 3 neutral, 1–2 negative). Plain VADER did slightly better on this "
-  "sample, and the two VADER variants tied at 81% over all 240 reviews. We kept the domain "
-  "lexicon because it fixes product-level verdicts: without it, VADER labelled 8 of the "
-  "printer's 12 reviews positive even though the average rating was 3 stars. DistilBERT "
-  "fine-tuned on SST-2 scored poorly, mostly because it only predicts two classes and our "
-  "reviews are often mixed. The neutral class is the weak spot for every model, since a 3-star "
-  "review that praises one thing and criticises another rarely reads as neutral.")
+P("Table II compares sentiment models on a random sample of 100 of the 600 reviews, with star "
+  "ratings as ground truth (4–5 positive, 3 neutral, 1–2 negative). VADER with our domain lexicon "
+  "scored best on this sample, and the two VADER variants tied at 70% over all 600 reviews. The "
+  "lexicon also fixes product-level verdicts: without it, VADER labelled 8 of the printer's 12 "
+  "reviews positive even though the average rating was 3 stars. DistilBERT fine-tuned on SST-2 "
+  "scored lower, mostly because it only predicts two classes and many of our reviews are mixed. "
+  "Positive reviews were recognised well (98% with the lexicon), but neutral and negative ones "
+  "were not: many templated 4-star and 2-star reviews combine a compliment with a complaint "
+  "(“Good battery life… Not very satisfied with the display”), which no model reads as cleanly "
+  "positive or negative.")
 table("Sentiment Accuracy Against Star Ratings (100 Reviews)", [
     ["Model", "3-class", "Pos. vs. neg.", "ms/review"],
-    ["VADER", "85%", "93%", "0.1"],
-    ["VADER + domain lexicon", "82%", "91%", "0.1"],
-    ["DistilBERT (SST-2)", "56%", "63%", "24"],
+    ["VADER", "72%", "83%", "0.05"],
+    ["VADER + domain lexicon", "75%", "85%", "0.05"],
+    ["DistilBERT (SST-2)", "65%", "73%", "16"],
 ], [COL_W * 0.42, COL_W * 0.17, COL_W * 0.22, COL_W * 0.17])
 subsection("Recommendation Models")
 P("For rating prediction on a timestamp split (80/20 per user), Surprise SVD reached an RMSE of "
@@ -411,23 +416,27 @@ P("For rating prediction on a timestamp split (80/20 per user), Surprise SVD rea
   "treated every unobserved entry as zero, which pulled its predictions down.")
 P("To compare all five approaches on equal terms, we ran a leave-one-out evaluation over the 19 "
   "users with at least two products. Each user's most recent product was held out and ranked "
-  "against the products they had not touched (7.7 candidates on average); ties counted against "
-  "the model. Table III and Fig. 2 show the results. Content-based filtering gave the best "
-  "NDCG@10 and MRR, and NCF the best hit rate. The hybrid came close to the best single models "
-  "but did not beat them, even after we tuned its weights by grid search on a separate "
-  "validation split, which moved weight from SVD to the content model. We think the reason is "
-  "the data: the reviewer histories are random, so there is little collaborative signal for the "
-  "hybrid to add, and with only 20 products a single position in the ranking changes the "
-  "metrics noticeably. We report this as it is rather than tuning on the test set.")
+  "against the products they had not touched; ties counted against the model. Only the 20 "
+  "products with interaction history were ranked (7.7 candidates per user on average). The 30 "
+  "newer products have no interactions yet, so they can never be a held-out item, and including "
+  "them would penalise exactly the models that sensibly recommend new products. In the live "
+  "system, new products reach users through the content-based model and the survey. Table III and "
+  "Fig. 2 show the results. NCF gave the best NDCG@10 and hit rate, and the default hybrid the "
+  "best MRR, with content-based filtering close behind. The hybrid did not clearly beat the best "
+  "single model, even after we tuned its weights by grid search on a separate validation split, "
+  "which shifted weight towards the content model. We think the reason is the data: the reviewer "
+  "histories are random, so there is little collaborative signal for the hybrid to add, and with "
+  "20 ranked products a single position in the ranking changes the metrics noticeably. We report "
+  "this as it is rather than tuning on the test set.")
 table("Leave-One-Out Comparison (19 Users)", [
     ["Model", "HR@10", "NDCG@10", "MRR"],
     ["Popularity", "0.947", "0.373", "0.204"],
     ["SVD (Surprise)", "0.947", "0.412", "0.250"],
-    ["Content-based (TF-IDF)", "0.947", "<b>0.576</b>", "<b>0.465</b>"],
-    ["NCF (NeuMF)", "<b>1.000</b>", "0.569", "0.434"],
-    ["Hybrid (0.3 / 0.3 / 0.4)", "0.895", "0.559", "0.460"],
-    ["Hybrid, tuned (0.1 / 0.5 / 0.4)", "0.895", "0.557", "0.458"],
-], [COL_W * 0.46, COL_W * 0.16, COL_W * 0.2, COL_W * 0.16])
+    ["Content-based (TF-IDF)", "0.947", "0.561", "0.443"],
+    ["NCF (NeuMF)", "<b>1.000</b>", "<b>0.569</b>", "0.434"],
+    ["Hybrid (0.3/0.3/0.4)", "0.895", "0.565", "<b>0.469</b>"],
+    ["Hybrid tuned (0.1/0.6/0.3)", "0.895", "0.562", "0.462"],
+], [COL_W * 0.42, COL_W * 0.17, COL_W * 0.23, COL_W * 0.16])
 figure("hr_ndcg_by_model.png", "HR@10 and NDCG@10 for each recommendation model.")
 subsection("User Interface")
 P("Figs. 3–6 show the system in use. The survey (Fig. 4) gave sensible results for a "
@@ -448,8 +457,10 @@ figure("06b_chat_compare.png", "The chatbot comparing two tablets side by side."
 section("Limitations")
 P("The biggest limitation is the data. The reviews are synthetic, so the sentiment numbers show "
   "that the pipeline works rather than how accurate it would be on real customer text, and we "
-  "tuned the domain lexicon on the same reviews. The catalogue of 20 products and the small "
-  "number of users make the recommendation metrics fragile. The chatbot is rule-based. It is "
+  "tuned the domain lexicon on the earlier reviews. Templated reviews also mix praise and "
+  "criticism in a fixed pattern that real reviews would not follow. All interactions are on 20 "
+  "of the 50 products, and the small number of users makes the recommendation metrics fragile. "
+  "The chatbot is rule-based. It is "
   "predictable and fast, but it will miss phrasings we did not anticipate. Finally, the hosted "
   "demo replaces MiniLM with TF-IDF vectors, which match meaning less well than the full "
   "version.")
@@ -467,7 +478,8 @@ P("ShopSense AI shows that a fairly small set of well-understood techniques, com
 section("Individual Contributions", numbered=False)
 P("<b>Aanchal Yadav</b> built the React frontend and the content-based TF-IDF recommender. "
   "<b>Riya Aryan</b> designed the database, built the Flask REST APIs with JWT authentication, "
-  "and developed the SVD model, popularity fallback and fuzzy interaction weights. "
+  "developed the SVD model, popularity fallback and fuzzy interaction weights, and expanded the "
+  "catalogue to 50 products with its review generator. "
   "<b>Susmita</b> implemented and trained the NeuMF model and built the hybrid engine served "
   "through FastAPI. <b>Sneha</b> built the NLP service (semantic search, sentiment analysis and "
   "review summaries, and the chatbot), the preference survey and its recommender, the "
