@@ -266,8 +266,8 @@ def main():
     names = list(results)
     x = np.arange(len(names))
     fig, ax = plt.subplots(figsize=(9, 4.2))
-    ax.bar(x - 0.2, [results[n]["hr@10"] for n in names], 0.4, label="HR@10", color="#7c3aed")
-    ax.bar(x + 0.2, [results[n]["ndcg@10"] for n in names], 0.4, label="NDCG@10", color="#38bdf8")
+    ax.bar(x - 0.2, [results[n]["hr@10"] for n in names], 0.4, label="HR@10", color="#1c1c21")
+    ax.bar(x + 0.2, [results[n]["ndcg@10"] for n in names], 0.4, label="NDCG@10", color="#cfa64a")
     ax.set_xticks(x, [n.split(" (")[0] for n in names], fontsize=8)
     ax.set_ylim(0, 1)
     ax.set_ylabel("Score")
@@ -279,7 +279,7 @@ def main():
 
     losses = models["NCF (NeuMF)"].losses
     fig, ax = plt.subplots(figsize=(6, 3.4))
-    ax.plot(range(1, len(losses) + 1), losses, marker="o", color="#7c3aed")
+    ax.plot(range(1, len(losses) + 1), losses, marker="o", color="#b88a2e")
     ax.set_xlabel("Epoch")
     ax.set_ylabel("BCE loss")
     ax.set_title("NCF training loss")

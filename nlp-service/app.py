@@ -16,6 +16,7 @@ WebSocket (Flask-SocketIO, namespace /chat)
 """
 
 import logging
+import threading
 import time
 
 from flask import Flask, jsonify, request
@@ -60,6 +61,15 @@ def create_app(services=None):
     app.extensions["nlp_services"] = services
     app.extensions["chat_engine"] = chat
     sessions = {}
+    # One lock per chat session: Flask-SocketIO handles each event on its own
+    # thread, so without this a quick follow-up could be answered before a
+    # slower earlier question and the replies would arrive out of order.
+    session_locks = {}
+    locks_guard = threading.Lock()
+
+    def session_lock(sid):
+        with locks_guard:
+            return session_locks.setdefault(sid, threading.Lock())
 
     # ------------------------------------------------------------------ #
     @app.get("/health")
@@ -189,6 +199,8 @@ def create_app(services=None):
     @socketio.on("disconnect", namespace="/chat")
     def on_disconnect(*_args):
         sessions.pop(request.sid, None)
+        with locks_guard:
+            session_locks.pop(request.sid, None)
 
     @socketio.on("message", namespace="/chat")
     def on_message(data):
@@ -201,8 +213,9 @@ def create_app(services=None):
         if data.get("user_name"):
             context["user_name"] = data["user_name"]
         emit("typing", {"typing": True})
-        response = chat.respond(str(data.get("text") or ""), context)
-        emit("response", response)
+        with session_lock(request.sid):
+            response = chat.respond(str(data.get("text") or ""), context)
+            emit("response", response)
 
     socketio.init_app(app)
     return app

@@ -88,7 +88,7 @@ function Signup() {
     <div className="min-h-screen grid lg:grid-cols-2 bg-white">
 
       {/* Left Side */}
-      <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-purple-700 via-purple-600 to-indigo-700 text-white p-12 relative overflow-hidden">
+      <div className="hidden lg:flex flex-col justify-between bg-gradient-to-br from-brand-700 via-brand-600 to-brand-700 text-white p-12 relative overflow-hidden">
 
         <div className="absolute w-96 h-96 bg-white/10 rounded-full -top-32 -right-32" />
         <div className="absolute w-80 h-80 bg-white/10 rounded-full -bottom-20 -left-20" />
@@ -111,7 +111,7 @@ function Signup() {
             of shopping.
           </h1>
 
-          <p className="text-purple-100 text-lg mt-6 leading-8">
+          <p className="text-brand-100 text-lg mt-6 leading-8">
             Create your account and explore intelligent
             recommendations, AI review insights and
             smarter product comparisons.
@@ -123,14 +123,14 @@ function Signup() {
             </div>
             <div>
               <p className="font-semibold">Your personal shopping assistant</p>
-              <p className="text-purple-200 text-sm">
+              <p className="text-brand-200 text-sm">
                 Discover products that match you.
               </p>
             </div>
           </div>
         </div>
 
-        <p className="relative text-sm text-purple-200">
+        <p className="relative text-sm text-brand-200">
           © 2026 ShopSense AI. All rights reserved.
         </p>
       </div>
@@ -140,16 +140,16 @@ function Signup() {
         <div className="w-full max-w-md">
 
           <Link to="/" className="lg:hidden flex items-center gap-2 mb-10">
-            <div className="bg-purple-600 text-white p-2 rounded-xl">
+            <div className="bg-brand-600 text-white p-2 rounded-xl">
               <Sparkles size={22} />
             </div>
             <span className="text-xl font-bold">
-              ShopSense <span className="text-purple-600">AI</span>
+              ShopSense <span className="text-brand-600">AI</span>
             </span>
           </Link>
 
           <div className="mb-8">
-            <p className="text-purple-600 font-semibold text-sm">
+            <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em]">
               GET STARTED
             </p>
 
@@ -182,7 +182,7 @@ function Signup() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Enter your full name"
-                  className="w-full border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+                  className="w-full border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
                 />
               </div>
             </div>
@@ -205,7 +205,7 @@ function Signup() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
-                  className="w-full border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+                  className="w-full border border-gray-200 rounded-xl pl-12 pr-4 py-3.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
                 />
               </div>
             </div>
@@ -229,7 +229,7 @@ function Signup() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Create a password"
-                  className="w-full border border-gray-200 rounded-xl pl-12 pr-12 py-3.5 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+                  className="w-full border border-gray-200 rounded-xl pl-12 pr-12 py-3.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
                 />
 
                 <button
@@ -260,7 +260,7 @@ function Signup() {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm your password"
-                  className="w-full border border-gray-200 rounded-xl pl-12 pr-12 py-3.5 outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100"
+                  className="w-full border border-gray-200 rounded-xl pl-12 pr-12 py-3.5 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
                 />
 
                 <button
@@ -288,7 +288,7 @@ function Signup() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
+              className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white py-3.5 rounded-xl font-semibold flex justify-center items-center gap-2 transition"
             >
               {loading ? "Creating Account..." : "Create Account"}
               {!loading && <ArrowRight size={19} />}
@@ -300,14 +300,14 @@ function Signup() {
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-purple-600 font-bold hover:underline"
+              className="text-brand-600 font-bold hover:underline"
             >
               Login
             </Link>
           </div>
 
           <div className="mt-8 text-center">
-            <Link to="/" className="text-sm text-gray-400 hover:text-purple-600">
+            <Link to="/" className="text-sm text-gray-400 hover:text-brand-600">
               ← Back to Home
             </Link>
           </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-16">
+    <footer className="bg-brand-700 text-stone-300 mt-16">
       <div className="max-w-7xl mx-auto px-6 py-12">
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -11,7 +11,7 @@ function Footer() {
           {/* Brand */}
           <div>
             <Link to="/" className="text-2xl font-bold text-white">
-              ShopSense <span className="text-blue-500">AI</span>
+              ShopSense <span className="text-gold-400">AI</span>
             </Link>
 
             <p className="mt-4 text-gray-400 leading-7">
@@ -28,10 +28,10 @@ function Footer() {
             </h3>
 
             <ul className="space-y-3">
-              <li><Link to="/" className="hover:text-blue-400">Home</Link></li>
-              <li><Link to="/history" className="hover:text-blue-400">Interaction History</Link></li>
-              <li><Link to="/wishlist" className="hover:text-blue-400">My Wishlist</Link></li>
-              <li><Link to="/cart" className="hover:text-blue-400">Shopping Cart</Link></li>
+              <li><Link to="/" className="hover:text-gold-300">Home</Link></li>
+              <li><Link to="/history" className="hover:text-gold-300">Interaction History</Link></li>
+              <li><Link to="/wishlist" className="hover:text-gold-300">My Wishlist</Link></li>
+              <li><Link to="/cart" className="hover:text-gold-300">Shopping Cart</Link></li>
             </ul>
           </div>
 
@@ -42,10 +42,10 @@ function Footer() {
             </h3>
 
             <ul className="space-y-3">
-              <li>Electronics</li>
-              <li>Fashion</li>
-              <li>Accessories</li>
-              <li>Lifestyle</li>
+              <li><a href="/#products" className="hover:text-gold-300">Laptops &amp; Tablets</a></li>
+              <li><a href="/#products" className="hover:text-gold-300">Audio</a></li>
+              <li><a href="/#products" className="hover:text-gold-300">Study Essentials</a></li>
+              <li><a href="/#products" className="hover:text-gold-300">Hostel Essentials</a></li>
             </ul>
           </div>
 

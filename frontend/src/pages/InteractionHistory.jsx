@@ -67,15 +67,15 @@ function InteractionHistory() {
       add_to_cart: {
         label: "Added to Cart",
         icon: ShoppingCart,
-        color: "text-purple-600",
-        background: "bg-purple-50",
+        color: "text-brand-600",
+        background: "bg-brand-50",
       },
 
       add_to_wishlist: {
         label: "Added to Wishlist",
         icon: Heart,
-        color: "text-pink-600",
-        background: "bg-pink-50",
+        color: "text-gold-600",
+        background: "bg-gold-50",
       },
 
       remove_from_wishlist: {
@@ -95,14 +95,14 @@ function InteractionHistory() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-white px-5 py-10 md:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-brand-50 via-white to-white px-5 py-10 md:px-8">
 
       <div className="max-w-6xl mx-auto">
 
         {/* Back Navigation */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-800 transition"
+          className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-800 transition"
         >
           <ArrowLeft size={19} />
           Back to Home
@@ -111,7 +111,7 @@ function InteractionHistory() {
         {/* Heading */}
         <div className="mt-8 mb-9">
 
-          <p className="text-purple-600 font-semibold text-sm flex items-center gap-2">
+          <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em] flex items-center gap-2">
             <Sparkles size={16} />
             YOUR SHOPPING JOURNEY
           </p>
@@ -146,14 +146,14 @@ function InteractionHistory() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
 
-            <div className="bg-white border border-purple-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-brand-100 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="text-gray-500 font-medium">
                   Total Activities
                 </p>
 
-                <div className="bg-purple-100 p-3 rounded-xl">
-                  <Activity className="text-purple-600" size={22} />
+                <div className="bg-brand-100 p-3 rounded-xl">
+                  <Activity className="text-brand-600" size={22} />
                 </div>
               </div>
 
@@ -162,7 +162,7 @@ function InteractionHistory() {
               </h2>
             </div>
 
-            <div className="bg-white border border-purple-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-brand-100 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="text-gray-500 font-medium">
                   Products Explored
@@ -178,14 +178,14 @@ function InteractionHistory() {
               </h2>
             </div>
 
-            <div className="bg-white border border-purple-100 rounded-2xl p-5 shadow-sm">
+            <div className="bg-white border border-brand-100 rounded-2xl p-5 shadow-sm">
               <div className="flex items-center justify-between">
                 <p className="text-gray-500 font-medium">
                   Cart Activities
                 </p>
 
-                <div className="bg-pink-50 p-3 rounded-xl">
-                  <ShoppingCart className="text-pink-600" size={22} />
+                <div className="bg-gold-50 p-3 rounded-xl">
+                  <ShoppingCart className="text-gold-600" size={22} />
                 </div>
               </div>
 
@@ -202,10 +202,10 @@ function InteractionHistory() {
         {/* Empty History */}
         {interactions.length === 0 ? (
 
-          <div className="bg-white rounded-3xl p-10 md:p-16 text-center shadow-lg shadow-purple-100/50 border border-purple-100">
+          <div className="bg-white rounded-3xl p-10 md:p-16 text-center shadow-lg shadow-brand-100/50 border border-brand-100">
 
-            <div className="bg-purple-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
-              <History size={43} className="text-purple-600" />
+            <div className="bg-brand-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
+              <History size={43} className="text-brand-600" />
             </div>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-7">
@@ -220,7 +220,7 @@ function InteractionHistory() {
 
             <Link
               to="/"
-              className="inline-flex items-center justify-center gap-2 mt-7 bg-purple-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-purple-700 transition"
+              className="inline-flex items-center justify-center gap-2 mt-7 bg-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-700 transition"
             >
               Explore Products
               <Package size={19} />
@@ -231,12 +231,12 @@ function InteractionHistory() {
         ) : (
 
           /* Activity Timeline */
-          <div className="bg-white rounded-2xl border border-purple-100 shadow-sm overflow-hidden">
+          <div className="bg-white rounded-2xl border border-brand-100 shadow-sm overflow-hidden">
 
-            <div className="p-6 border-b border-purple-100 flex items-center gap-3">
+            <div className="p-6 border-b border-brand-100 flex items-center gap-3">
 
-              <div className="bg-purple-100 p-3 rounded-xl">
-                <History size={22} className="text-purple-600" />
+              <div className="bg-brand-100 p-3 rounded-xl">
+                <History size={22} className="text-brand-600" />
               </div>
 
               <div>
@@ -251,7 +251,7 @@ function InteractionHistory() {
 
             </div>
 
-            <div className="divide-y divide-purple-50">
+            <div className="divide-y divide-brand-50">
 
               {interactions.map((interaction, index) => {
 
@@ -261,7 +261,7 @@ function InteractionHistory() {
                 return (
                   <div
                     key={`${interaction.timestamp}-${index}`}
-                    className="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-purple-50/50 transition"
+                    className="p-5 md:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-brand-50/50 transition"
                   >
 
                     <div className="flex items-center gap-4">
@@ -307,7 +307,7 @@ function InteractionHistory() {
 
         {/* Bottom Message */}
         <div className="text-center mt-10">
-          <p className="text-purple-600 font-semibold flex items-center justify-center gap-2">
+          <p className="text-brand-600 font-semibold flex items-center justify-center gap-2">
             <Sparkles size={17} />
             Shop smarter with ShopSense AI.
           </p>

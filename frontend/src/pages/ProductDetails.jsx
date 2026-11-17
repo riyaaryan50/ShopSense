@@ -200,8 +200,8 @@ function ProductDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f8fc]">
-        <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-canvas">
+        <div className="w-12 h-12 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin" />
         <p className="mt-5 text-gray-600 font-medium">
           Loading product details...
         </p>
@@ -211,15 +211,15 @@ function ProductDetails() {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f8fc] px-5">
-        <Package size={55} className="text-purple-400" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-canvas px-5">
+        <Package size={55} className="text-brand-400" />
         <h2 className="text-2xl font-bold mt-5">
           Unable to Load Product
         </h2>
         <p className="text-gray-500 text-center mt-3">{error}</p>
         <Link
           to="/"
-          className="mt-6 bg-purple-600 text-white px-6 py-3 rounded-xl font-semibold"
+          className="mt-6 bg-brand-600 text-white px-6 py-3 rounded-xl font-semibold"
         >
           Back to Home
         </Link>
@@ -229,15 +229,15 @@ function ProductDetails() {
 
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f8fc]">
-        <Package size={55} className="text-purple-400" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-canvas">
+        <Package size={55} className="text-brand-400" />
         <h2 className="text-3xl font-bold mt-5">
           Product Not Found
         </h2>
         <p className="text-gray-500 mt-3">
           This product is not available in the catalogue.
         </p>
-        <Link to="/" className="mt-5 text-purple-600 font-semibold">
+        <Link to="/" className="mt-5 text-brand-600 font-semibold">
           Back to Home
         </Link>
       </div>
@@ -247,13 +247,13 @@ function ProductDetails() {
   const productPrice = Number(product.price) || 0;
 
   return (
-    <div className="min-h-screen bg-[#f8f8fc] text-gray-900">
+    <div className="min-h-screen bg-canvas text-gray-900">
       <main className="max-w-7xl mx-auto px-5 md:px-8 py-10">
 
         {/* Back Button */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-gray-500 hover:text-purple-600 mb-8"
+          className="inline-flex items-center gap-2 text-gray-500 hover:text-brand-600 mb-8"
         >
           <ArrowLeft size={18} />
           Back to Products
@@ -263,11 +263,11 @@ function ProductDetails() {
         <section className="grid lg:grid-cols-2 gap-12 bg-white rounded-3xl p-6 md:p-10 shadow-sm">
 
           {/* Product Image */}
-          <div className="bg-gray-50 rounded-2xl overflow-hidden flex items-center justify-center min-h-[350px]">
+          <div className="lg:sticky lg:top-28 self-start bg-white ring-1 ring-black/5 rounded-2xl overflow-hidden flex items-center justify-center min-h-[350px]">
             {product.image ? (
               <ProductImage src={product.image} alt={product.name} className="w-full h-[350px] md:h-[480px] object-contain p-4" />
             ) : (
-              <div className="flex flex-col items-center justify-center text-purple-400">
+              <div className="flex flex-col items-center justify-center text-brand-400">
                 <Package size={100} strokeWidth={1.2} />
                 <p className="mt-4 text-sm text-gray-400">
                   Product image not available
@@ -279,7 +279,7 @@ function ProductDetails() {
           {/* Product Details */}
           <div className="flex flex-col justify-center">
 
-            <span className="bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold w-fit">
+            <span className="bg-brand-100 text-brand-700 px-4 py-2 rounded-full text-sm font-semibold w-fit">
               {product.category || "Uncategorized"}
             </span>
 
@@ -363,7 +363,7 @@ function ProductDetails() {
               <button
                 onClick={handleAddToCart}
                 disabled={Number(product.stock) <= 0}
-                className="flex-1 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white py-4 rounded-xl font-semibold flex justify-center items-center gap-2"
+                className="flex-1 bg-brand-600 hover:bg-brand-700 disabled:bg-gray-400 text-white py-4 rounded-xl font-semibold flex justify-center items-center gap-2"
               >
                 <ShoppingCart size={20} />
                 Add to Cart
@@ -371,7 +371,7 @@ function ProductDetails() {
 
               <button
                 onClick={handleWishlist}
-                className="border border-gray-200 hover:border-purple-400 p-4 rounded-xl"
+                className="border border-gray-200 hover:border-brand-400 p-4 rounded-xl"
                 aria-label="Toggle wishlist"
               >
                 <Heart
@@ -446,12 +446,12 @@ function ProductDetails() {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-between gap-2 rounded-xl border border-gray-200 p-3 hover:border-purple-400 hover:bg-purple-50 transition"
+                className="flex items-center justify-between gap-2 rounded-xl border border-gray-200 p-3 hover:border-brand-400 hover:bg-brand-50 transition"
               >
                 <span className="font-semibold text-sm text-gray-700">
                   {store.replace(/(official|exact listing|search)/ig, "").trim()}
                 </span>
-                <span className="text-purple-600 text-sm">
+                <span className="text-brand-600 text-sm">
                   Visit ↗
                 </span>
               </a>
@@ -506,14 +506,14 @@ function ProductDetails() {
 
             <div className="grid grid-cols-2 gap-4 mt-8">
               <div className="flex gap-3 items-center">
-                <Truck className="text-purple-600" />
+                <Truck className="text-brand-600" />
                 <span className="text-sm text-gray-600">
                   Delivery information
                 </span>
               </div>
 
               <div className="flex gap-3 items-center">
-                <ShieldCheck className="text-purple-600" />
+                <ShieldCheck className="text-brand-600" />
                 <span className="text-sm text-gray-600">
                   Shopping protection
                 </span>
@@ -526,7 +526,7 @@ function ProductDetails() {
         <section className="mt-14 bg-white rounded-3xl p-6 md:p-10 shadow-sm">
 
           <div className="flex items-center gap-3 mb-8">
-            <div className="bg-purple-100 text-purple-600 p-3 rounded-xl">
+            <div className="bg-brand-100 text-brand-600 p-3 rounded-xl">
               <Sparkles size={25} />
             </div>
 
@@ -559,13 +559,13 @@ function ProductDetails() {
                     ) : (
                       <Package
                         size={55}
-                        className="text-purple-300"
+                        className="text-brand-300"
                       />
                     )}
                   </div>
 
                   <div className="p-4">
-                    <span className="text-xs text-purple-600 font-semibold">
+                    <span className="text-[11px] uppercase tracking-[0.14em] text-gold-600 font-semibold">
                       {item.category}
                     </span>
 
@@ -573,7 +573,7 @@ function ProductDetails() {
                       {item.name}
                     </h3>
 
-                    <p className="text-lg font-bold text-purple-700 mt-3">
+                    <p className="text-lg font-bold text-brand-700 mt-3">
                       ₹{Number(item.price).toLocaleString("en-IN")}
                     </p>
 
@@ -596,7 +596,7 @@ function ProductDetails() {
         {/* AI Review Analysis (VADER sentiment + TF-IDF themes) */}
         <section className="mt-14 bg-white rounded-3xl p-6 md:p-10 shadow-sm">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="bg-purple-100 text-purple-600 p-3 rounded-xl">
+            <div className="bg-brand-100 text-brand-600 p-3 rounded-xl">
               <Sparkles size={25} />
             </div>
 
@@ -624,8 +624,8 @@ function ProductDetails() {
                 <SentimentSummary summary={reviewSummary} />
               </div>
 
-              <div className="mt-8 bg-purple-50 rounded-2xl p-5">
-                <div className="flex items-center gap-2 text-purple-700 font-bold">
+              <div className="mt-8 bg-brand-50 rounded-2xl p-5">
+                <div className="flex items-center gap-2 text-brand-700 font-bold">
                   <MessageSquare size={19} />
                   AI Verdict
                 </div>
@@ -686,12 +686,12 @@ function ProductDetails() {
               required
               rows={3}
               placeholder="What did you like or dislike?"
-              className="mt-3 w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-purple-500"
+              className="mt-3 w-full rounded-xl border border-gray-200 p-3 text-sm outline-none focus:border-brand-500"
             />
             <div className="mt-3 flex flex-wrap items-center gap-3">
               <button
                 type="submit"
-                className="rounded-xl bg-purple-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-purple-700"
+                className="rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-700"
               >
                 Submit review
               </button>
@@ -701,10 +701,10 @@ function ProductDetails() {
         </section>
 
         {/* Bottom Section */}
-        <section className="mt-14 bg-gradient-to-r from-purple-700 to-indigo-600 rounded-3xl p-8 md:p-10 text-white">
+        <section className="mt-14 bg-gradient-to-r from-brand-700 to-brand-600 rounded-3xl p-8 md:p-10 text-white">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <div className="flex items-center gap-2 text-purple-200 mb-3">
+              <div className="flex items-center gap-2 text-brand-200 mb-3">
                 <Sparkles size={19} />
                 ShopSense AI
               </div>
@@ -713,14 +713,14 @@ function ProductDetails() {
                 Shop smarter with AI.
               </h2>
 
-              <p className="text-purple-100 mt-2">
+              <p className="text-brand-100 mt-2">
                 Discover products and make informed shopping decisions.
               </p>
             </div>
 
             <Link
               to="/"
-              className="bg-white text-purple-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2"
+              className="bg-white text-brand-700 px-6 py-3 rounded-xl font-semibold flex items-center gap-2"
             >
               Explore More
               <ArrowLeft size={18} className="rotate-180" />

@@ -33,13 +33,13 @@ function Cart() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 via-white to-white px-5 py-10 md:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-brand-50 via-white to-white px-5 py-10 md:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Back Navigation */}
         <Link
           to="/"
-          className="inline-flex items-center gap-2 text-purple-600 font-semibold hover:text-purple-800 transition"
+          className="inline-flex items-center gap-2 text-brand-600 font-semibold hover:text-brand-800 transition"
         >
           <ArrowLeft size={19} />
           Continue Shopping
@@ -48,7 +48,7 @@ function Cart() {
         {/* Page Heading */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mt-8 mb-9">
           <div>
-            <p className="text-purple-600 font-semibold text-sm flex items-center gap-2">
+            <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em] flex items-center gap-2">
               <Sparkles size={16} />
               YOUR SHOPPING BAG
             </p>
@@ -63,7 +63,7 @@ function Cart() {
           </div>
 
           {cart.length > 0 && (
-            <div className="bg-purple-100 text-purple-700 px-5 py-3 rounded-xl font-semibold w-fit">
+            <div className="bg-brand-100 text-brand-700 px-5 py-3 rounded-xl font-semibold w-fit">
               {totalItems} {totalItems === 1 ? "Item" : "Items"}
             </div>
           )}
@@ -71,10 +71,10 @@ function Cart() {
 
         {/* Empty Cart */}
         {cart.length === 0 ? (
-          <div className="bg-white rounded-3xl p-10 md:p-16 text-center shadow-lg shadow-purple-100/50 border border-purple-100">
+          <div className="bg-white rounded-3xl p-10 md:p-16 text-center shadow-lg shadow-brand-100/50 border border-brand-100">
 
-            <div className="bg-purple-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
-              <ShoppingBag size={43} className="text-purple-600" />
+            <div className="bg-brand-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
+              <ShoppingBag size={43} className="text-brand-600" />
             </div>
 
             <h2 className="text-2xl font-bold text-gray-900 mt-7">
@@ -88,7 +88,7 @@ function Cart() {
 
             <Link
               to="/"
-              className="inline-flex items-center justify-center gap-2 mt-7 bg-purple-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-purple-700 hover:shadow-lg transition"
+              className="inline-flex items-center justify-center gap-2 mt-7 bg-brand-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:bg-brand-700 hover:shadow-lg transition"
             >
               <ShoppingCart size={19} />
               Explore Products
@@ -105,16 +105,16 @@ function Cart() {
               {cart.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-2xl border border-purple-100 shadow-sm hover:shadow-md transition p-4 md:p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
+                  className="bg-white rounded-2xl border border-brand-100 shadow-sm hover:shadow-md transition p-4 md:p-6 flex flex-col sm:flex-row gap-5 items-start sm:items-center"
                 >
 
                   {/* Product Image */}
-                  <div className="bg-purple-50 rounded-xl p-2 shrink-0">
+                  <div className="bg-brand-50 rounded-xl p-2 shrink-0">
                     {item.image ? (
                       <ProductImage src={item.image} alt={item.name} className="w-full sm:w-28 h-36 sm:h-28 object-contain rounded-lg" />
                     ) : (
                       <div className="w-full sm:w-28 h-36 sm:h-28 flex items-center justify-center">
-                        <ShoppingBag size={40} className="text-purple-300" />
+                        <ShoppingBag size={40} className="text-brand-300" />
                       </div>
                     )}
                   </div>
@@ -122,7 +122,7 @@ function Cart() {
                   {/* Product Information */}
                   <div className="flex-1 w-full">
 
-                    <span className="text-xs font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">
+                    <span className="text-xs font-semibold text-brand-600 bg-brand-50 px-3 py-1 rounded-full">
                       {item.category}
                     </span>
 
@@ -130,7 +130,7 @@ function Cart() {
                       {item.name}
                     </h3>
 
-                    <p className="text-purple-600 font-bold text-lg mt-2">
+                    <p className="text-brand-600 font-bold text-lg mt-2">
                       ₹{Number(item.price).toLocaleString("en-IN")}
                     </p>
 
@@ -141,11 +141,11 @@ function Cart() {
                         Quantity:
                       </span>
 
-                      <div className="flex items-center gap-3 bg-purple-50 border border-purple-100 rounded-lg p-1">
+                      <div className="flex items-center gap-3 bg-brand-50 border border-brand-100 rounded-lg p-1">
 
                         <button
                           onClick={() => updateQuantity(item.id, -1)}
-                          className="p-1.5 rounded-md text-purple-600 hover:bg-purple-200 transition"
+                          className="p-1.5 rounded-md text-brand-600 hover:bg-brand-200 transition"
                           aria-label="Decrease quantity"
                         >
                           <Minus size={16} />
@@ -157,7 +157,7 @@ function Cart() {
 
                         <button
                           onClick={() => updateQuantity(item.id, 1)}
-                          className="p-1.5 rounded-md text-purple-600 hover:bg-purple-200 transition"
+                          className="p-1.5 rounded-md text-brand-600 hover:bg-brand-200 transition"
                           aria-label="Increase quantity"
                         >
                           <Plus size={16} />
@@ -200,11 +200,11 @@ function Cart() {
             {/* Order Summary */}
             <div className="lg:col-span-1">
 
-              <div className="bg-white rounded-2xl border border-purple-100 shadow-lg shadow-purple-100/50 p-6 sticky top-28">
+              <div className="bg-white rounded-2xl border border-brand-100 shadow-lg shadow-brand-100/50 p-6 sticky top-28">
 
                 <div className="flex items-center gap-3 mb-7">
-                  <div className="bg-purple-100 p-3 rounded-xl">
-                    <ShoppingBag size={22} className="text-purple-600" />
+                  <div className="bg-brand-100 p-3 rounded-xl">
+                    <ShoppingBag size={22} className="text-brand-600" />
                   </div>
 
                   <h2 className="text-xl font-bold text-gray-900">
@@ -237,14 +237,14 @@ function Cart() {
 
                 </div>
 
-                <div className="border-t border-dashed border-purple-200 my-6" />
+                <div className="border-t border-dashed border-brand-200 my-6" />
 
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-gray-900 text-lg">
                     Total Amount
                   </span>
 
-                  <span className="text-2xl font-bold text-purple-600">
+                  <span className="text-2xl font-bold text-brand-600">
                     ₹{totalAmount.toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -262,8 +262,8 @@ function Cart() {
                 </p>
 
                 {/* Security Information */}
-                <div className="flex items-center justify-center gap-2 bg-purple-50 rounded-xl p-4 mt-6">
-                  <ShieldCheck size={19} className="text-purple-600" />
+                <div className="flex items-center justify-center gap-2 bg-brand-50 rounded-xl p-4 mt-6">
+                  <ShieldCheck size={19} className="text-brand-600" />
 
                   <span className="text-xs text-gray-600 font-medium">
                     Secure shopping experience

@@ -53,7 +53,9 @@ const categories = [
 
 function Home() {
   const [products, setProducts] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(
+    () => new URLSearchParams(window.location.search).get("q") || ""
+  );
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -77,6 +79,16 @@ function Home() {
   });
 
   const { addToCart, wishlist, toggleWishlist } = useCart();
+
+  // Arriving from another page's search box (/?q=...): jump to the results.
+  useEffect(() => {
+    if (!new URLSearchParams(window.location.search).get("q")) return;
+    const timer = setTimeout(
+      () => document.getElementById("products")?.scrollIntoView({ behavior: "smooth" }),
+      600
+    );
+    return () => clearTimeout(timer);
+  }, []);
 
   // Fetch products from Flask backend
   useEffect(() => {
@@ -127,7 +139,7 @@ const fetchPersonalizedRecommendations = async (user) => {
 
     setRecommendationMeta({
       explanation: data.explanation ||
-        "Popular with other shoppers right now. Log in or take the survey for personal picks.",
+        "Popular with other shoppers right now.",
       hasSurvey: Boolean(data.has_survey),
       coldStart: data.cold_start ?? true,
     });
@@ -280,7 +292,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="min-h-screen bg-[#f8f8fc] text-gray-900">
+    <div className="min-h-screen bg-canvas text-gray-900">
       <Navbar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -289,99 +301,92 @@ useEffect(() => {
       <main className="max-w-7xl mx-auto px-5 md:px-8">
 
         {/* Hero Section */}
-        <section className="grid lg:grid-cols-2 gap-10 items-center py-14 md:py-20">
+        <section className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 items-center pt-12 pb-16 md:pt-20 md:pb-24">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-purple-100 text-purple-700 px-4 py-2 text-sm font-semibold mb-6">
-              <Sparkles size={16} />
-              Smart Shopping Starts Here
+            <div className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-gold-700 ring-1 ring-black/5 shadow-sm mb-7">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold-500" />
+              Built for students · Powered by AI
             </div>
 
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              Shopping made
-              <span className="block text-purple-600">
-                smarter with AI.
-              </span>
+            <h1 className="text-[2.75rem] leading-[1.04] md:text-7xl text-brand-700">
+              Everything college needs,
+              <span className="block italic font-medium text-gold-600">chosen smarter.</span>
             </h1>
 
-            <p className="mt-6 text-gray-500 text-lg leading-8 max-w-xl">
-              Discover products that match your interests.
-              Get personalized recommendations and enjoy
-              a smarter shopping experience with ShopSense AI.
+            <p className="mt-7 text-lg leading-8 text-stone-600 max-w-xl">
+              Describe what you need in plain words, take a one-minute survey, and let
+              ShopSense match you with the right laptop, headphones or hostel essentials,
+              backed by what real buyers say.
             </p>
 
-            <div className="flex flex-wrap gap-4 mt-8">
+            <div className="flex flex-wrap gap-3 mt-9">
               <a
                 href="#products"
-                className="bg-purple-600 hover:bg-purple-700 text-white px-7 py-3.5 rounded-xl font-semibold flex items-center gap-2"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand-700 px-7 py-3.5 font-semibold text-white shadow-lg shadow-black/10 transition hover:bg-brand-900"
               >
-                Explore Products <ArrowRight size={18} />
+                Explore products
+                <ArrowRight size={18} className="transition group-hover:translate-x-0.5" />
               </a>
-
-              <a
-                href="#recommendations"
-                className="bg-white border border-gray-200 hover:border-purple-400 px-7 py-3.5 rounded-xl font-semibold"
+              <Link
+                to="/survey"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 font-semibold text-brand-700 ring-1 ring-black/10 transition hover:ring-gold-400"
               >
-                Discover AI
-              </a>
+                <ClipboardList size={18} className="text-gold-600" />
+                Take the 1-minute survey
+              </Link>
             </div>
 
-            <div className="flex gap-8 mt-10">
-              <div>
-                <h3 className="text-2xl font-bold">
-                  {products.length}
-                </h3>
-                <p className="text-sm text-gray-500">Products</p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold">AI</h3>
-                <p className="text-sm text-gray-500">
-                  Powered discovery
-                </p>
-              </div>
-
-              <div>
-                <h3 className="text-2xl font-bold">24/7</h3>
-                <p className="text-sm text-gray-500">
-                  Shopping access
-                </p>
-              </div>
-            </div>
+            <dl className="mt-12 grid max-w-md grid-cols-3 divide-x divide-black/10">
+              {[
+                [products.length || 20, "Curated products"],
+                ["4", "AI models"],
+                ["24/7", "Shopping assistant"],
+              ].map(([value, label]) => (
+                <div key={label} className="px-5 first:pl-0">
+                  <dt className="sr-only">{label}</dt>
+                  <dd className="font-display text-3xl font-semibold text-brand-700">{value}</dd>
+                  <dd className="mt-1 text-xs uppercase tracking-[0.14em] text-stone-500">{label}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
+          {/* Product collage */}
           <div className="relative">
-            <div className="absolute inset-5 bg-purple-300 blur-3xl opacity-30 rounded-full" />
-
-            <div className="relative w-full h-[350px] md:h-[480px] bg-gradient-to-br from-purple-200 to-indigo-200 rounded-3xl shadow-xl flex items-center justify-center overflow-hidden">
-              <div className="text-center">
-                <ShoppingCart
-                  size={100}
-                  className="mx-auto text-purple-600"
-                />
-                <p className="text-purple-800 font-bold text-2xl mt-5">
-                  ShopSense AI
-                </p>
-                <p className="text-purple-700 mt-2">
-                  Smart Shopping Experience
-                </p>
-              </div>
+            <div className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-gold-100 via-brand-50 to-transparent" aria-hidden="true" />
+            <div className="relative grid grid-cols-2 gap-4 md:gap-5">
+              {[2, 7, 13, 11]
+                .map((id) => products.find((p) => p.id === id))
+                .filter(Boolean)
+                .map((product, index) => (
+                  <Link
+                    key={product.id}
+                    to={`/product/${product.id}`}
+                    title={product.name}
+                    aria-label={`${product.name}, ₹${Number(product.price).toLocaleString("en-IN")}`}
+                    className={`group relative block aspect-[4/5] rounded-3xl bg-white p-6 ring-1 ring-black/5 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)] transition hover:-translate-y-1 hover:shadow-[0_20px_40px_-14px_rgba(0,0,0,0.25)] ${
+                      index % 2 === 1 ? "translate-y-10" : ""
+                    }`}
+                  >
+                    <span className="absolute left-4 top-4 z-10 rounded-full bg-canvas px-3 py-1 text-xs font-semibold text-brand-700 ring-1 ring-black/5">
+                      ₹{Number(product.price).toLocaleString("en-IN")}
+                    </span>
+                    <ProductImage
+                      src={product.image}
+                      alt=""
+                      className="h-full w-full object-contain transition duration-500 group-hover:scale-105"
+                    />
+                  </Link>
+                ))}
             </div>
 
-            <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-2xl p-4 shadow-lg">
-              <div className="flex items-center gap-3">
-                <div className="bg-purple-100 p-3 rounded-xl text-purple-600">
-                  <Sparkles />
-                </div>
-
-                <div>
-                  <p className="font-bold">
-                    AI Product Discovery
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Find products you'll love.
-                  </p>
-                </div>
-              </div>
+            <div className="absolute -bottom-10 left-4 md:-left-10 max-w-[260px] rounded-2xl bg-brand-700 p-4 text-white shadow-2xl ring-1 ring-white/10">
+              <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-gold-300">
+                <Sparkles size={14} /> Semantic search
+              </p>
+              <p className="mt-2 text-sm leading-6 text-stone-200">
+                “something to keep my tea hot in class” finds the thermos — no exact keywords needed.
+              </p>
             </div>
           </div>
         </section>
@@ -389,11 +394,11 @@ useEffect(() => {
         {/* AI Banner */}
         <section
           id="recommendations"
-          className="bg-gradient-to-r from-purple-700 to-indigo-600 rounded-3xl p-8 md:p-12 text-white mb-16"
+          className="bg-gradient-to-r from-brand-700 to-brand-600 rounded-3xl p-8 md:p-12 text-white mb-16"
         >
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div>
-              <div className="flex items-center gap-2 text-purple-200 mb-3">
+              <div className="flex items-center gap-2 text-brand-200 mb-3">
                 <Sparkles size={18} />
                 <span className="font-semibold">
                   INTELLIGENT SHOPPING
@@ -404,7 +409,7 @@ useEffect(() => {
                 Your shopping, personalized.
               </h2>
 
-              <p className="mt-3 text-purple-100 max-w-xl">
+              <p className="mt-3 text-brand-100 max-w-xl">
                 Answer a 1-minute survey about what you study, how you'll
                 use it and your budget. Our AI matches your answers to every
                 product and keeps learning from what you browse.
@@ -413,13 +418,13 @@ useEffect(() => {
 
             <Link
               to="/survey"
-              className="bg-white text-purple-700 hover:bg-purple-50 rounded-2xl px-7 py-5 min-w-48 text-center shadow-lg transition"
+              className="bg-white text-brand-700 hover:bg-brand-50 rounded-2xl px-7 py-5 min-w-48 text-center shadow-lg transition"
             >
               <ClipboardList size={32} className="mx-auto mb-2" />
               <p className="font-bold text-lg">
                 {recommendationMeta?.hasSurvey ? "Update your survey" : "Take the survey"}
               </p>
-              <p className="text-sm text-purple-500">Get matched picks →</p>
+              <p className="text-sm text-brand-500">Get matched picks →</p>
             </Link>
           </div>
         </section>
@@ -427,7 +432,7 @@ useEffect(() => {
         {/* Personalized Recommendations */}
         <section className="mb-16">
           <div className="mb-7">
-            <p className="text-purple-600 font-semibold text-sm">
+            <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em]">
               HYBRID AI · BROWSING HISTORY + SURVEY + POPULARITY
             </p>
 
@@ -442,16 +447,16 @@ useEffect(() => {
 
             {!loggedInUser && (
               <p className="text-sm mt-2">
-                <Link to="/login" className="text-purple-600 font-semibold">Log in</Link>
+                <Link to="/login" className="text-brand-600 font-semibold">Log in</Link>
                 {" or "}
-                <Link to="/survey" className="text-purple-600 font-semibold">take the survey</Link>
+                <Link to="/survey" className="text-brand-600 font-semibold">take the survey</Link>
                 {" for personalised picks."}
               </p>
             )}
           </div>
 
           {recommendationLoading && (
-            <div className="bg-white rounded-2xl p-8 text-center text-purple-600">
+            <div className="bg-white rounded-2xl p-8 text-center text-brand-600">
               Finding products you may like...
             </div>
           )}
@@ -463,7 +468,7 @@ useEffect(() => {
                 onClick={() =>
                     fetchPersonalizedRecommendations(loggedInUser)
                 }
-                className="mt-4 bg-purple-600 text-white px-5 py-2 rounded-xl"
+                className="mt-4 bg-brand-600 text-white px-5 py-2 rounded-xl"
               >
                 Try Again
               </button>
@@ -491,15 +496,15 @@ useEffect(() => {
                     >
                       <Link to={`/product/${product.id}`}>
                         {product.image ? (
-                          <ProductImage src={product.image} alt={product.name} className="w-full h-44 object-cover" />
+                          <ProductImage src={product.image} alt={product.name} className="w-full h-44 object-contain bg-white p-5" />
                         ) : (
-                          <div className="w-full h-44 bg-purple-50 flex items-center justify-center">
-                            <ShoppingCart size={40} className="text-purple-400" />
+                          <div className="w-full h-44 bg-brand-50 flex items-center justify-center">
+                            <ShoppingCart size={40} className="text-brand-400" />
                           </div>
                         )}
 
                         <div className="p-4">
-                          <p className="text-purple-600 text-xs font-semibold uppercase">
+                          <p className="text-gold-600 text-[11px] font-semibold uppercase tracking-[0.14em]">
                             {product.category}
                           </p>
 
@@ -516,7 +521,7 @@ useEffect(() => {
                           </p>
 
                           {product.reason && (
-                            <p className="mt-2 flex items-start gap-1.5 text-xs text-purple-700 bg-purple-50 rounded-lg px-2 py-1.5">
+                            <p className="mt-2 flex items-start gap-1.5 text-xs text-brand-700 bg-brand-50 rounded-lg px-2 py-1.5">
                               <Sparkles size={13} className="mt-0.5 shrink-0" />
                               {product.reason}
                             </p>
@@ -532,7 +537,7 @@ useEffect(() => {
         {/* Categories */}
         <section className="mb-16">
           <div className="mb-7">
-            <p className="text-purple-600 font-semibold text-sm">
+            <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em]">
               BROWSE COLLECTIONS
             </p>
 
@@ -557,8 +562,8 @@ useEffect(() => {
                   }}
                   className={`p-5 rounded-2xl border text-left transition ${
                     selectedCategory === category.name
-                      ? "bg-purple-600 text-white border-purple-600"
-                      : "bg-white border-gray-100 hover:border-purple-300"
+                      ? "bg-brand-600 text-white border-brand-600"
+                      : "bg-white border-gray-100 hover:border-brand-300"
                   }`}
                 >
                   <Icon size={26} className="mb-4" />
@@ -570,7 +575,7 @@ useEffect(() => {
                   <p
                     className={`text-xs mt-1 ${
                       selectedCategory === category.name
-                        ? "text-purple-100"
+                        ? "text-brand-100"
                         : "text-gray-400"
                     }`}
                   >
@@ -586,7 +591,7 @@ useEffect(() => {
         <section id="products" className="mb-20">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-8">
             <div>
-              <p className="text-purple-600 font-semibold text-sm">
+              <p className="text-gold-600 font-semibold text-xs uppercase tracking-[0.18em]">
                 OUR COLLECTION
               </p>
 
@@ -609,7 +614,7 @@ useEffect(() => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search products..."
-                className="bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-3 outline-none focus:border-purple-500 w-full sm:w-64"
+                className="bg-white border border-gray-200 rounded-xl pl-11 pr-4 py-3 outline-none focus:border-brand-500 w-full sm:w-64"
               />
             </div>
           </div>
@@ -622,7 +627,7 @@ useEffect(() => {
                 onClick={() => setSelectedCategory(category.name)}
                 className={`px-5 py-2 rounded-full text-sm font-medium ${
                   selectedCategory === category.name
-                    ? "bg-purple-600 text-white"
+                    ? "bg-brand-600 text-white"
                     : "bg-white text-gray-600 border border-gray-200"
                 }`}
               >
@@ -634,7 +639,7 @@ useEffect(() => {
           {/* Loading State */}
           {loading && (
             <div className="bg-white rounded-2xl p-12 text-center">
-              <p className="text-purple-600 font-semibold">
+              <p className="text-brand-600 font-semibold">
                 Loading products...
               </p>
             </div>
@@ -646,7 +651,7 @@ useEffect(() => {
               <p className="text-red-500 font-medium">{error}</p>
               <button
                 onClick={() => window.location.reload()}
-                className="mt-4 bg-purple-600 text-white px-6 py-2 rounded-xl"
+                className="mt-4 bg-brand-600 text-white px-6 py-2 rounded-xl"
               >
                 Try Again
               </button>
@@ -678,7 +683,7 @@ useEffect(() => {
               <p className="text-sm text-gray-500 flex flex-wrap items-center gap-2">
                 Showing {visibleProducts.length} of {filteredProducts.length} products
                 {semanticActive && (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-purple-100 text-purple-700 px-3 py-1 text-xs font-semibold">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-100 text-brand-700 px-3 py-1 text-xs font-semibold">
                     <Sparkles size={13} />
                     {semanticResults.engine === "keyword-fallback"
                       ? "Keyword results (AI search offline)"
@@ -692,7 +697,7 @@ useEffect(() => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-purple-500"
+                  className="rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm outline-none focus:border-brand-500"
                 >
                   <option value="relevance">{semanticActive ? "Relevance" : "Featured"}</option>
                   <option value="price_asc">Price: low to high</option>
@@ -716,9 +721,9 @@ useEffect(() => {
                       <div className="relative bg-gray-50">
                         <Link to={`/product/${product.id}`}>
                           {product.image ? (
-                            <ProductImage src={product.image} alt={product.name} className="w-full h-56 object-cover group-hover:scale-105 transition duration-500" />
+                            <ProductImage src={product.image} alt={product.name} className="w-full h-60 object-contain bg-white p-7 group-hover:scale-[1.03] transition duration-500" />
                           ) : (
-                            <div className="w-full h-56 flex items-center justify-center bg-purple-50 text-purple-400">
+                            <div className="w-full h-56 flex items-center justify-center bg-brand-50 text-brand-400">
                               <ShoppingCart size={45} />
                             </div>
                           )}
@@ -741,7 +746,7 @@ useEffect(() => {
                       </div>
 
                       <div className="p-5">
-                        <p className="text-purple-600 text-xs font-semibold uppercase tracking-wide">
+                        <p className="text-gold-600 text-[11px] font-semibold uppercase tracking-[0.14em]">
                           {product.category}
                         </p>
 
@@ -750,13 +755,13 @@ useEffect(() => {
                         )}
 
                         {product.semanticScore != null && (
-                          <p className="text-[11px] text-purple-600 mt-1 font-medium">
+                          <p className="text-[11px] text-brand-600 mt-1 font-medium">
                             Relevance {Math.round(product.semanticScore * 100)}%
                           </p>
                         )}
 
                         <Link to={`/product/${product.id}`}>
-                          <h3 className="font-bold text-lg mt-2 hover:text-purple-600">
+                          <h3 className="font-bold text-lg mt-2 hover:text-brand-600">
                             {product.name}
                           </h3>
                         </Link>
@@ -777,7 +782,7 @@ useEffect(() => {
                           <button
                             onClick={() => handleAddToCart(product)}
                             disabled={product.stock <= 0}
-                            className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white p-3 rounded-xl"
+                            className="bg-brand-600 hover:bg-brand-700 disabled:bg-gray-400 text-white p-3 rounded-xl"
                             aria-label="Add to cart"
                           >
                             <ShoppingCart size={19} />
@@ -793,7 +798,7 @@ useEffect(() => {
                 <div className="mt-10 text-center">
                   <button
                     onClick={() => setVisibleCount((n) => n + PAGE_SIZE)}
-                    className="rounded-xl border border-purple-200 bg-white px-8 py-3 font-semibold text-purple-700 hover:bg-purple-50"
+                    className="rounded-xl border border-brand-200 bg-white px-8 py-3 font-semibold text-brand-700 hover:bg-brand-50"
                   >
                     Load More ({filteredProducts.length - visibleProducts.length} more)
                   </button>

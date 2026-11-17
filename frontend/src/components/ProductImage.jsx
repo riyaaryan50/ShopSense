@@ -13,7 +13,7 @@ function ProductImage({ src, alt, className = "", iconSize = 40 }) {
       <div
         role="img"
         aria-label={alt}
-        className={`${className} flex items-center justify-center bg-purple-50 text-purple-300`}
+        className={`${className} flex items-center justify-center bg-brand-50 text-brand-300`}
       >
         <Package size={iconSize} strokeWidth={1.4} />
       </div>

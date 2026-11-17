@@ -12,7 +12,6 @@ import {
   Sparkles,
 } from "lucide-react";
 
-import Navbar from "../components/Navbar";
 import { useCart } from "../context/CartContext";
 import { API_URL, formatPrice, getToken } from "../config";
 import {
@@ -77,11 +76,11 @@ function Chip({ selected, onClick, children }) {
       aria-pressed={selected}
       className={`flex items-center gap-2 rounded-xl border px-4 py-3 text-left text-sm font-medium transition ${
         selected
-          ? "border-purple-600 bg-purple-600 text-white"
-          : "border-gray-200 bg-white text-gray-700 hover:border-purple-300"
+          ? "border-brand-600 bg-brand-600 text-white"
+          : "border-gray-200 bg-white text-gray-700 hover:border-brand-300"
       }`}
     >
-      {selected && <Check size={16} />}
+      {selected && <Check size={16} className="text-gold-300" />}
       {children}
     </button>
   );
@@ -172,18 +171,17 @@ function Survey() {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#f8f8fc]">
-        <div className="h-12 w-12 animate-spin rounded-full border-4 border-purple-200 border-t-purple-600" />
+      <div className="flex min-h-screen items-center justify-center bg-canvas">
+        <div className="h-12 w-12 animate-spin rounded-full border-4 border-brand-200 border-t-brand-600" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f8f8fc] text-gray-900">
-      <Navbar searchQuery="" setSearchQuery={() => {}} />
+    <div className="min-h-screen bg-canvas text-gray-900">
 
       <main className="mx-auto max-w-5xl px-4 py-10 md:px-8">
-        <Link to="/" className="mb-6 inline-flex items-center gap-2 text-gray-500 hover:text-purple-600">
+        <Link to="/" className="mb-6 inline-flex items-center gap-2 text-gray-500 hover:text-brand-600">
           <ArrowLeft size={18} /> Back to shopping
         </Link>
 
@@ -203,7 +201,7 @@ function Survey() {
         ) : (
           <section className="rounded-3xl bg-white p-6 shadow-sm md:p-10">
             <div className="flex items-center gap-3">
-              <div className="rounded-xl bg-purple-100 p-3 text-purple-600">
+              <div className="rounded-xl bg-brand-100 p-3 text-brand-600">
                 <ClipboardList size={24} />
               </div>
               <div>
@@ -218,8 +216,8 @@ function Survey() {
             <ol className="mt-8 flex gap-2" aria-label="Survey progress">
               {STEPS.map((label, i) => (
                 <li key={label} className="flex-1">
-                  <div className={`h-2 rounded-full ${i <= step ? "bg-purple-600" : "bg-gray-200"}`} />
-                  <p className={`mt-2 hidden text-xs sm:block ${i === step ? "font-semibold text-purple-700" : "text-gray-400"}`}>
+                  <div className={`h-2 rounded-full ${i <= step ? "bg-brand-600" : "bg-gray-200"}`} />
+                  <p className={`mt-2 hidden text-xs sm:block ${i === step ? "font-semibold text-brand-700" : "text-gray-400"}`}>
                     {label}
                   </p>
                 </li>
@@ -293,7 +291,7 @@ function Survey() {
                       min="0"
                       value={answers.budget_max}
                       onChange={(e) => setAnswers((a) => ({ ...a, budget_max: e.target.value }))}
-                      className="mt-2 block w-full max-w-xs rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-purple-500"
+                      className="mt-2 block w-full max-w-xs rounded-xl border border-gray-200 px-4 py-3 outline-none focus:border-brand-500"
                       placeholder="e.g. 5000"
                     />
                   </label>
@@ -326,8 +324,8 @@ function Survey() {
                           onClick={() => toggle("brands", b)}
                           className={`rounded-full border px-4 py-1.5 text-sm ${
                             answers.brands.includes(b)
-                              ? "border-purple-600 bg-purple-600 text-white"
-                              : "border-gray-200 text-gray-600 hover:border-purple-300"
+                              ? "border-brand-600 bg-brand-600 text-white"
+                              : "border-gray-200 text-gray-600 hover:border-brand-300"
                           }`}
                         >
                           {b}
@@ -343,7 +341,7 @@ function Survey() {
                       rows={3}
                       maxLength={500}
                       placeholder="e.g. Something light for taking notes in lectures that lasts all day"
-                      className="w-full rounded-xl border border-gray-200 p-4 text-sm outline-none focus:border-purple-500"
+                      className="w-full rounded-xl border border-gray-200 p-4 text-sm outline-none focus:border-brand-500"
                     />
                   </Question>
                 </div>
@@ -365,7 +363,7 @@ function Survey() {
                   type="button"
                   onClick={() => setStep((s) => s + 1)}
                   disabled={!canContinue}
-                  className="flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-300"
+                  className="flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white hover:bg-brand-700 disabled:bg-gray-300"
                 >
                   Next <ArrowRight size={18} />
                 </button>
@@ -374,7 +372,7 @@ function Survey() {
                   type="button"
                   onClick={submit}
                   disabled={submitting}
-                  className="flex items-center gap-2 rounded-xl bg-purple-600 px-6 py-3 font-semibold text-white hover:bg-purple-700 disabled:bg-gray-300"
+                  className="flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white hover:bg-brand-700 disabled:bg-gray-300"
                 >
                   <Sparkles size={18} />
                   {submitting ? "Finding matches…" : "Show my recommendations"}
@@ -403,12 +401,12 @@ function Results({ results, loggedIn, onRestart, addToCart, toggleWishlist, wish
   const items = results.recommendations || [];
   return (
     <section>
-      <div className="rounded-3xl bg-gradient-to-r from-purple-700 to-indigo-600 p-6 text-white md:p-8">
-        <p className="flex items-center gap-2 text-sm font-semibold text-purple-200">
+      <div className="rounded-3xl bg-gradient-to-r from-brand-700 to-brand-600 p-6 text-white md:p-8">
+        <p className="flex items-center gap-2 text-sm font-semibold text-brand-200">
           <Sparkles size={16} /> YOUR SURVEY MATCHES
         </p>
         <h1 className="mt-2 text-2xl font-bold md:text-3xl">Products picked from your answers</h1>
-        <p className="mt-2 max-w-2xl text-sm text-purple-100">
+        <p className="mt-2 max-w-2xl text-sm text-brand-100">
           Ranked by semantic match to your needs (MiniLM embeddings), category, budget, brand
           and customer review sentiment.
           {loggedIn
@@ -422,7 +420,7 @@ function Results({ results, loggedIn, onRestart, addToCart, toggleWishlist, wish
           >
             <RotateCcw size={16} /> Retake survey
           </button>
-          <Link to="/" className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-purple-700">
+          <Link to="/" className="rounded-xl bg-white px-4 py-2 text-sm font-semibold text-brand-700">
             Continue shopping
           </Link>
         </div>
@@ -442,17 +440,17 @@ function Results({ results, loggedIn, onRestart, addToCart, toggleWishlist, wish
                   {product.image_url ? (
                     <ProductImage src={product.image_url} alt={product.name} className="h-44 w-full object-contain p-4" />
                   ) : (
-                    <div className="flex h-44 items-center justify-center text-purple-300">
+                    <div className="flex h-44 items-center justify-center text-brand-300">
                       <Package size={44} />
                     </div>
                   )}
-                  <span className="absolute left-3 top-3 rounded-full bg-purple-600 px-3 py-1 text-xs font-bold text-white">
+                  <span className="absolute left-3 top-3 rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white">
                     #{index + 1} · {Math.round(product.match_score)}% match
                   </span>
                 </Link>
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="text-xs font-semibold uppercase text-purple-600">{product.category}</p>
-                  <Link to={`/product/${product.id}`} className="mt-1 font-bold hover:text-purple-600">
+                  <p className="text-xs font-semibold uppercase text-brand-600">{product.category}</p>
+                  <Link to={`/product/${product.id}`} className="mt-1 font-bold hover:text-brand-600">
                     {product.name}
                   </Link>
                   <ul className="mt-3 flex-1 space-y-1.5 text-sm text-gray-600">
@@ -469,14 +467,14 @@ function Results({ results, loggedIn, onRestart, addToCart, toggleWishlist, wish
                       <button
                         onClick={() => toggleWishlist(product)}
                         aria-label="Toggle wishlist"
-                        className="rounded-xl border border-gray-200 p-2.5 hover:border-purple-300"
+                        className="rounded-xl border border-gray-200 p-2.5 hover:border-brand-300"
                       >
                         <Heart size={18} className={wished ? "fill-red-500 text-red-500" : "text-gray-600"} />
                       </button>
                       <button
                         onClick={() => addToCart(product)}
                         aria-label="Add to cart"
-                        className="rounded-xl bg-purple-600 p-2.5 text-white hover:bg-purple-700"
+                        className="rounded-xl bg-brand-600 p-2.5 text-white hover:bg-brand-700"
                       >
                         <ShoppingCart size={18} />
                       </button>

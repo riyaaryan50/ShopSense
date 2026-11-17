@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
 import { CartProvider } from "./context/CartContext";
 
@@ -14,12 +14,21 @@ import Chatbot from "./pages/Chatbot";
 import Survey from "./pages/Survey";
 
 import Footer from "./components/Footer";
+import Navbar from "./components/Navbar";
 import ChatWidget from "./components/chat/ChatWidget";
+
+const NO_GLOBAL_NAVBAR = ["/", "/login", "/signup"];
+
+function SiteHeader() {
+  const { pathname } = useLocation();
+  return NO_GLOBAL_NAVBAR.includes(pathname) ? null : <Navbar />;
+}
 
 function App() {
   return (
     <CartProvider>
       <BrowserRouter>
+        <SiteHeader />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cart" element={<Cart />} />

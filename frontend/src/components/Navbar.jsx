@@ -40,6 +40,23 @@ function Navbar({ searchQuery, setSearchQuery }) {
   const [currentUser, setCurrentUser] = useState(getCurrentUser);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // On the home page the search box filters the grid live; on every other
+  // page it keeps its own text and Enter takes you to the home results.
+  const standalone = typeof setSearchQuery !== "function";
+  const [localQuery, setLocalQuery] = useState("");
+  const query = standalone ? localQuery : searchQuery;
+  const setQuery = standalone ? setLocalQuery : setSearchQuery;
+
+  const submitSearch = (event) => {
+    if (event.key !== "Enter") return;
+    const text = query.trim();
+    if (standalone) {
+      if (text) navigate(`/?q=${encodeURIComponent(text)}`);
+    } else {
+      document.getElementById("products")?.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   // Keep authentication state synchronized
   useEffect(() => {
     setCurrentUser(getCurrentUser());
@@ -81,7 +98,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
   const closeMenu = () => setMobileMenuOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-canvas/85 backdrop-blur-xl border-b border-black/5">
       <div className="max-w-7xl mx-auto px-5 md:px-8">
 
         <div className="h-20 flex items-center justify-between gap-5">
@@ -92,13 +109,13 @@ function Navbar({ searchQuery, setSearchQuery }) {
             onClick={closeMenu}
             className="flex items-center gap-2 shrink-0"
           >
-            <div className="bg-purple-600 text-white p-2.5 rounded-xl">
+            <div className="bg-brand-700 text-gold-300 p-2.5 rounded-xl shadow-sm ring-1 ring-gold-400/30">
               <Sparkles size={23} />
             </div>
 
             <div>
               <h1 className="text-xl font-bold tracking-tight">
-                ShopSense<span className="text-purple-600"> AI</span>
+                ShopSense<span className="text-gold-500"> AI</span>
               </h1>
 
               <p className="text-[10px] text-gray-400 tracking-widest uppercase">
@@ -117,10 +134,12 @@ function Navbar({ searchQuery, setSearchQuery }) {
 
               <input
                 type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={submitSearch}
+                aria-label="Search products"
                 placeholder="Search products..."
-                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:border-purple-500 focus:bg-white transition"
+                className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:border-brand-500 focus:bg-white transition"
               />
             </div>
           </div>
@@ -128,25 +147,25 @@ function Navbar({ searchQuery, setSearchQuery }) {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-gray-600">
 
-            <Link to="/" className="hover:text-purple-600">
+            <Link to="/" className="hover:text-brand-600">
               Home
             </Link>
 
-            <a href="/#products" className="hover:text-purple-600">
+            <a href="/#products" className="hover:text-brand-600">
               Products
             </a>
 
-            <a href="/#recommendations" className="hover:text-purple-600">
+            <a href="/#recommendations" className="hover:text-brand-600">
               AI Discover
             </a>
 
-            <Link to="/survey" className="hover:text-purple-600">
+            <Link to="/survey" className="hover:text-brand-600">
               Survey
             </Link>
 
             <Link
               to="/chatbot"
-              className="flex items-center gap-1.5 text-purple-700 hover:text-purple-900"
+              className="flex items-center gap-1.5 text-brand-700 hover:text-brand-900"
             >
               <Bot size={18} />
               AI Assistant
@@ -160,13 +179,13 @@ function Navbar({ searchQuery, setSearchQuery }) {
             {/* Wishlist */}
             <Link
               to="/wishlist"
-              className="relative p-2.5 rounded-xl hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+              className="relative p-2.5 rounded-xl hover:bg-brand-50 text-gray-600 hover:text-brand-600"
               aria-label="Wishlist"
             >
               <Heart size={21} />
 
               {wishlist.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
                   {wishlist.length}
                 </span>
               )}
@@ -175,13 +194,13 @@ function Navbar({ searchQuery, setSearchQuery }) {
             {/* Cart */}
             <Link
               to="/cart"
-              className="relative p-2.5 rounded-xl hover:bg-purple-50 text-gray-600 hover:text-purple-600"
+              className="relative p-2.5 rounded-xl hover:bg-brand-50 text-gray-600 hover:text-brand-600"
               aria-label="Shopping cart"
             >
               <ShoppingCart size={21} />
 
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-purple-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-brand-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">
                   {cartCount}
                 </span>
               )}
@@ -197,7 +216,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
 
                 <button
                   onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition"
+                  className="bg-white text-brand-700 ring-1 ring-black/10 hover:ring-brand-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition"
                 >
                   Logout
                 </button>
@@ -207,7 +226,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
               <Link
                 to="/login"
                 title="Login"
-                className="hidden sm:flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold"
+                className="hidden sm:flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold"
               >
                 <UserRound size={17} />
                 Login
@@ -236,10 +255,12 @@ function Navbar({ searchQuery, setSearchQuery }) {
 
             <input
               type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={submitSearch}
+              aria-label="Search products"
               placeholder="Search products..."
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:border-purple-500"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl pl-11 pr-4 py-3 text-sm outline-none focus:border-brand-500"
             />
           </div>
         </div>
@@ -283,7 +304,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
             <Link
               to="/chatbot"
               onClick={closeMenu}
-              className="flex items-center gap-2 font-semibold text-purple-700"
+              className="flex items-center gap-2 font-semibold text-brand-700"
             >
               <Bot size={18} />
               AI Assistant
@@ -325,7 +346,7 @@ function Navbar({ searchQuery, setSearchQuery }) {
               <Link
                 to="/login"
                 onClick={closeMenu}
-                className="block font-medium text-purple-600"
+                className="block font-medium text-brand-600"
               >
                 Login / Sign Up
               </Link>

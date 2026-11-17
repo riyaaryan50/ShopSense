@@ -1,1 +1,90 @@
 @import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   ShopSense design tokens — "Graphite & Champagne"
+   Ink (near-black) carries primary actions and dark surfaces, warm
+   ivory/champagne tints carry highlights, gold is the single accent.
+   Green/red stay reserved for meaning (sentiment, errors).
+   ------------------------------------------------------------------ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+
+  /* brand: light end = warm champagne tints, dark end = graphite ink */
+  --color-brand-50: #fbf8f2;
+  --color-brand-100: #f4ede0;
+  --color-brand-200: #e8dcc4;
+  --color-brand-300: #d4bd8f;
+  --color-brand-400: #b8995b;
+  --color-brand-500: #3f3f46;
+  --color-brand-600: #1c1c21;
+  --color-brand-700: #121216;
+  --color-brand-800: #0b0b0e;
+  --color-brand-900: #070709;
+  --color-brand-950: #030304;
+
+  /* gold: the accent, used sparingly */
+  --color-gold-50: #fbf7ec;
+  --color-gold-100: #f5ecd2;
+  --color-gold-200: #ead6a3;
+  --color-gold-300: #dcbd6e;
+  --color-gold-400: #cfa64a;
+  --color-gold-500: #b88a2e;
+  --color-gold-600: #9a7124;
+  --color-gold-700: #7c5a1f;
+  --color-gold-800: #5e451b;
+  --color-gold-900: #3f2f14;
+
+  --color-canvas: #f7f6f2;
+  --color-ink: #121216;
+}
+
+@layer base {
+  /* Tailwind v4 draws borders in currentColor by default; with ink text that
+     gives heavy black lines. Use a warm hairline unless a colour is set. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-stone-200, currentColor);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  h3 {
+    letter-spacing: -0.01em;
+  }
+
+  ::selection {
+    background: var(--color-gold-200);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-500);
+    outline-offset: 2px;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

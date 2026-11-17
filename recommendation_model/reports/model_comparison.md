@@ -6,12 +6,12 @@ Users evaluated: **19** · average candidates per user: **7.7** · catalogue: 20
 
 | Model | HR@10 | NDCG@10 | MRR | Train time (s) |
 |---|---|---|---|---|
-| Popularity | 0.947 | 0.373 | 0.204 | 0.0 |
-| SVD (Surprise) | 0.947 | 0.412 | 0.250 | 0.002 |
-| Content-based (TF-IDF) | 0.947 | 0.576 | 0.465 | 0.012 |
-| NCF (NeuMF) | 1.000 | 0.569 | 0.434 | 2.532 |
-| Hybrid (0.3 SVD + 0.3 CB + 0.4 NCF) | 0.895 | 0.559 | 0.460 | 2.546 |
-| Hybrid tuned (0.1 SVD + 0.5 CB + 0.4 NCF) | 0.895 | 0.557 | 0.458 | 2.546 |
+| Popularity | 0.947 | 0.373 | 0.204 | 0.009 |
+| SVD (Surprise) | 0.947 | 0.412 | 0.250 | 0.03 |
+| Content-based (TF-IDF) | 0.947 | 0.576 | 0.465 | 0.177 |
+| NCF (NeuMF) | 1.000 | 0.569 | 0.434 | 33.947 |
+| Hybrid (0.3 SVD + 0.3 CB + 0.4 NCF) | 0.895 | 0.559 | 0.460 | 34.154 |
+| Hybrid tuned (0.1 SVD + 0.5 CB + 0.4 NCF) | 0.895 | 0.557 | 0.458 | 34.154 |
 
 Best NDCG@10: **Content-based (TF-IDF)**.
 

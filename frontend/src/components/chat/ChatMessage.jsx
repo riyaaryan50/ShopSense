@@ -14,18 +14,18 @@ function ProductCards({ products, onNavigate }) {
           key={product.id}
           to={`/product/${product.id}`}
           onClick={onNavigate}
-          className="w-40 shrink-0 overflow-hidden rounded-xl border border-violet-100 bg-white transition hover:shadow-md"
+          className="w-40 shrink-0 overflow-hidden rounded-xl border border-brand-100 bg-white transition hover:shadow-md"
         >
           <div className="flex h-24 items-center justify-center bg-gray-50 p-2">
             {product.image_url ? (
               <ProductImage src={product.image_url} alt={product.name} className="h-full w-full object-contain" />
             ) : (
-              <Package className="text-violet-300" size={32} />
+              <Package className="text-brand-300" size={32} />
             )}
           </div>
           <div className="p-2.5">
             <p className="line-clamp-2 text-xs font-semibold text-gray-800">{product.name}</p>
-            <p className="mt-1 text-sm font-bold text-violet-700">{formatPrice(product.price)}</p>
+            <p className="mt-1 text-sm font-bold text-brand-700">{formatPrice(product.price)}</p>
             {product.positive_percentage != null && (
               <p className="mt-0.5 text-[11px] text-green-700">
                 👍 {product.positive_percentage}% positive
@@ -45,13 +45,13 @@ function ComparisonTable({ comparison, onNavigate }) {
   const { products, rows, verdict } = comparison;
   return (
     <div className="mt-3">
-      <div className="overflow-x-auto rounded-xl border border-violet-100">
+      <div className="overflow-x-auto rounded-xl border border-brand-100">
         <table className="w-full min-w-[420px] text-left text-xs">
-          <thead className="bg-violet-50">
+          <thead className="bg-brand-50">
             <tr>
               <th className="p-2.5 font-semibold text-gray-500" />
               {products.map((p) => (
-                <th key={p.id} className="p-2.5 font-semibold text-violet-800">
+                <th key={p.id} className="p-2.5 font-semibold text-brand-800">
                   <Link to={`/product/${p.id}`} onClick={onNavigate} className="hover:underline">
                     {p.name}
                   </Link>
@@ -59,7 +59,7 @@ function ComparisonTable({ comparison, onNavigate }) {
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-violet-50 bg-white">
+          <tbody className="divide-y divide-brand-50 bg-white">
             {rows.map((row) => (
               <tr key={row.label}>
                 <td className="whitespace-nowrap p-2.5 font-medium text-gray-500">{row.label}</td>
@@ -73,7 +73,7 @@ function ComparisonTable({ comparison, onNavigate }) {
           </tbody>
         </table>
       </div>
-      {verdict && <p className="mt-2 text-xs font-medium text-violet-800">💡 {verdict}</p>}
+      {verdict && <p className="mt-2 text-xs font-medium text-brand-800">💡 {verdict}</p>}
     </div>
   );
 }
@@ -82,10 +82,10 @@ function ChatMessage({ message, onNavigate }) {
   if (message.sender === "user") {
     return (
       <div className="flex justify-end gap-2">
-        <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-violet-700 px-4 py-2.5 text-sm text-white shadow-sm">
+        <div className="max-w-[80%] rounded-2xl rounded-br-sm bg-brand-700 px-4 py-2.5 text-sm text-white shadow-sm">
           {message.text}
         </div>
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-purple-200 text-purple-800">
+        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-200 text-brand-800">
           <User size={16} />
         </div>
       </div>
@@ -95,10 +95,10 @@ function ChatMessage({ message, onNavigate }) {
   const data = message.data || {};
   return (
     <div className="flex gap-2">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-violet-100 text-violet-700">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-100 text-brand-700">
         <Bot size={17} />
       </div>
-      <div className="min-w-0 max-w-[88%] rounded-2xl rounded-bl-sm border border-violet-100 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm">
+      <div className="min-w-0 max-w-[88%] rounded-2xl rounded-bl-sm border border-brand-100 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm">
         <p className="whitespace-pre-line leading-6">{data.text}</p>
 
         {data.details?.length > 0 && (
