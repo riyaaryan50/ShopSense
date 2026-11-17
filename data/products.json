@@ -185,7 +185,7 @@
     "image_url": "https://instamart-media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto/NI_CATALOG/IMAGES/ciw/2026/2/20/e4e20f8e-7254-4613-921c-9edcd995a3a4_3F22X1WA65_MN_19022026.png",
     "brand": "boAt",
     "original_price": null,
-    "marketplace": "boAt",
+    "marketplace": "boAt Official",
     "product_url": "https://www.boat-lifestyle.com/products/rockerz-430-headphone",
     "specifications": {
       "model": "Rockerz 430",
@@ -195,7 +195,8 @@
       "audio_mode": "BEAST Mode / low-latency mode (as listed)",
       "microphone": "Built-in microphone",
       "design": "Over-ear cushioned earcups; adjustable headband",
-      "price_note": "Official store listing price snapshot; offers may change."
+      "price_note": "Official store listing price snapshot; offers may change.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
     },
     "marketplace_links": {
       "boAt Official": "https://www.boat-lifestyle.com/products/rockerz-430-headphone"
@@ -817,11 +818,12 @@
     "price": 2499,
     "description": "Wireless headphones for lectures and library study; no active noise cancellation. Key configuration: Bluetooth 5.3; on-ear; up to 57 hours rated playback; USB-C charging. Confirm the exact variant and seller warranty before ordering.",
     "image_url": "",
-    "marketplace": "Amazon India search",
-    "product_url": "https://www.amazon.in/s?k=JBL%20Tune%20520BT",
+    "marketplace": "JBL India",
+    "product_url": "https://in.jbl.com/TUNE520BT.html",
     "marketplace_links": {
       "Amazon India search": "https://www.amazon.in/s?k=JBL%20Tune%20520BT",
-      "Flipkart search": "https://www.flipkart.com/search?q=JBL%20Tune%20520BT"
+      "Flipkart search": "https://www.flipkart.com/search?q=JBL%20Tune%20520BT",
+      "JBL India": "https://in.jbl.com/TUNE520BT.html"
     },
     "specifications": {
       "model": "JBL Tune 520BT",
@@ -830,7 +832,8 @@
       "feature_3": "up to 57 hours rated playback",
       "feature_4": "USB-C charging",
       "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
-      "image_note": "Product photograph pending verification; use application placeholder."
+      "image_note": "Product photograph pending verification; use application placeholder.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
     },
     "stock": 50,
     "original_price": null
@@ -893,11 +896,12 @@
     "price": 1299,
     "description": "Compact earbuds for commuting and recorded lectures. Key configuration: True wireless; charging case; microphone; USB-C charging. Confirm the exact variant and seller warranty before ordering.",
     "image_url": "",
-    "marketplace": "Amazon India search",
-    "product_url": "https://www.amazon.in/s?k=boAt%20Airdopes%20141",
+    "marketplace": "boAt Official",
+    "product_url": "https://www.boat-lifestyle.com/products/airdopes-141",
     "marketplace_links": {
       "Amazon India search": "https://www.amazon.in/s?k=boAt%20Airdopes%20141",
-      "Flipkart search": "https://www.flipkart.com/search?q=boAt%20Airdopes%20141"
+      "Flipkart search": "https://www.flipkart.com/search?q=boAt%20Airdopes%20141",
+      "boAt Official": "https://www.boat-lifestyle.com/products/airdopes-141"
     },
     "specifications": {
       "model": "boAt Airdopes 141",
@@ -906,7 +910,8 @@
       "feature_3": "microphone",
       "feature_4": "USB-C charging",
       "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
-      "image_note": "Product photograph pending verification; use application placeholder."
+      "image_note": "Product photograph pending verification; use application placeholder.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
     },
     "stock": 50,
     "original_price": null
@@ -1019,11 +1024,12 @@
     "price": 1595,
     "description": "For engineering and science calculations; confirm examination rules. Key configuration: Non-programmable scientific calculator; 540+ functions; solar and battery. Confirm the exact variant and seller warranty before ordering.",
     "image_url": "",
-    "marketplace": "Amazon India search",
-    "product_url": "https://www.amazon.in/s?k=Casio%20fx-991CW%20ClassWiz",
+    "marketplace": "Casio India",
+    "product_url": "https://www.casio.com/in/scientific-calculators/product.FX-991CW/",
     "marketplace_links": {
       "Amazon India search": "https://www.amazon.in/s?k=Casio%20fx-991CW%20ClassWiz",
-      "Flipkart search": "https://www.flipkart.com/search?q=Casio%20fx-991CW%20ClassWiz"
+      "Flipkart search": "https://www.flipkart.com/search?q=Casio%20fx-991CW%20ClassWiz",
+      "Casio India": "https://www.casio.com/in/scientific-calculators/product.FX-991CW/"
     },
     "specifications": {
       "model": "Casio fx-991CW ClassWiz",
@@ -1031,7 +1037,8 @@
       "feature_2": "540+ functions",
       "feature_3": "solar and battery",
       "price_note": "Indicative INR estimate or retailer snapshot; confirm live price. Search links are not verified individual listings.",
-      "image_note": "Product photograph pending verification; use application placeholder."
+      "image_note": "Product photograph pending verification; use application placeholder.",
+      "link_note": "Official product page matched; stock and checkout availability not guaranteed."
     },
     "stock": 50,
     "original_price": null
