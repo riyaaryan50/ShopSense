@@ -346,7 +346,8 @@ useEffect(() => {
 
             <dl className="mt-12 grid max-w-md grid-cols-3 divide-x divide-black/10">
               {[
-                [products.length || 20, "Curated products"],
+                // Show a neutral dash while the catalogue loads, never a made-up count.
+                [products.length || "—", "Curated products"],
                 ["4", "AI models"],
                 ["24/7", "Shopping assistant"],
               ].map(([value, label]) => (
